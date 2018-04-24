@@ -1,0 +1,6 @@
+book_filename: "R for Loss Data Analytics"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "
+

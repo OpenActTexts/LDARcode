@@ -1,0 +1,104 @@
+# Bootstrap Estimation
+
+*This file demonstrates both empirical and parametric boostrap simulation. When reviewing this code, you should open an **R** session, copy-and-paste the code, and see it perform. Then, you will be able to change parameters, look up commands, and so forth, as you go.*
+
+## Empirical Bootstrap {.tabset}
+
+Example: 90% confidence interval for the mean. Consider outcomes of rolling a fair die.
+
+### Random sample 
+
+Here we input a sample of 10 observations, which we are going to build our estimates off of.
+```{r comment=""}
+y <- c(1,3,2,5,4,5,5,6,6,6)
+n <- length(y)
+n
+```
+
+### Sample mean 
+
+Finding the mean of the random sample.
+```{r comment=""}
+xbar <- mean(y)
+xbar
+```
+
+### Random resamples from y
+#### Set bootstrap sample size
+
+We're going to generate 30 different observations using the original sample data, called the *boostrap sample*
+```{r comment=""}
+nboot <- 30
+tmpdata <- sample(y,n*nboot,replace=TRUE)
+bootstrap.sample <- matrix(tmpdata,nrow=n,ncol=nboot)
+```
+
+#### Compute sample mean for each bootstrap sample
+
+Here we find the mean for all 30 of our boostrap samples.
+```{r comment=""}
+bsmeans <- colMeans(bootstrap.sample)
+bsmeans
+```
+
+### 90% confidence interval
+
+Using the generated boostrap sample, we calculate a 90% confidence interval for our sample mean.
+```{r comment=""}
+CI <- c(quantile(bsmeans,prob=0.05), quantile(bsmeans,prob=0.95))
+CI
+```
+
+## Parametric Bootstrap {.tabset}
+
+Example: confidence interval for 1/theta. Consider y ~ exponential(theta=10).
+
+### random sample of size 250
+
+This time we generate a random sample of 250 observations from the exponential sampling distribution.
+```{r comment=""}
+y <- rexp(250,rate=0.1)
+n <- length(y)
+n
+```
+
+### The MLE for lambda: 1/xbar
+
+Remember from earlier that the MLE of theta for an exponential distribution is its mean.
+```{r comment=""}
+theta.mle <- mean(y)
+rate.hat <- 1/theta.mle
+```
+
+### Generate bootstrap samples
+
+Using the MLE we calculated we now generate 500 *bootstrap samples* of 250 observations each.
+```{r comment=""}
+nboot <- 500
+tmpdata <- rexp(n*nboot,rate=rate.hat)
+bootstrap.sample <- matrix(tmpdata,nrow=n,ncol=nboot)
+```
+
+### compute botstrap statistics
+
+We now find the rate parameter for each of our *boostrap samples*
+```{r comment=""}
+rate.star <- 1/colMeans(bootstrap.sample)
+```
+
+### calculate deviation from sample statistics
+
+Subtracting the original sample rate parameter from each of our simulated rate parameters, we can find the 5th and 95th percentiles of the differences.
+```{r comment=""}
+delta.star <- rate.star - rate.hat
+delta.lb <- quantile(delta.star,prob=0.05)
+delta.ub <- quantile(delta.star,prob=0.95)
+```
+
+### 90% confidence intervel
+
+We use the percentiles to create a 90% CI for the rate parameter.
+```{r comment=""}
+CI <- rate.hat - c(delta.ub,delta.lb)
+print(CI)
+```  

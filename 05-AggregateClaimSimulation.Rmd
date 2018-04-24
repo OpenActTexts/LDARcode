@@ -1,0 +1,115 @@
+# Aggregate Claim Simulation
+
+*This file demonstrates simulation of aggregate claim distributions. When reviewing this code, you should open an **R** session, copy-and-paste the code, and see it perform. Then, you will be able to change parameters, look up commands, and so forth, as you go.*
+
+## Collective Risk Model: without coverage modifications {.tabset}
+
+S = X_1 + ... + X_N
+
+Assume N ~ Poisson(lambda=2) and X ~ Pareto(alpha=3,theta=5000)
+
+### Set Parameters
+```{r comment=""}
+lambda <- 2
+alpha <- 3
+theta <- 5000
+```
+
+### Show frequency and severity distributions
+Graphing the our frequency (N) and severity (X) distributions
+
+```{r comment=""}
+par(mfrow=c(1,2))
+
+n <- 1:10
+fn <- dpois(1:10,lambda)
+
+plot(n,fn,ylim=c(0,0.3),main="Frequency: Poisson")
+abline(h=0,lty=2)
+
+x <- seq(1,25000,1)
+fx <- alpha*theta^alpha/(x+theta)^(alpha+1)
+
+plot(x,fx,type="l",main="Severity: Pareto")
+```
+
+### Set sample size for the simulation
+We're going to simulate 5000 observations of S
+
+```{r comment=""}
+set.seed(123)
+size <- 5000
+S <- rep(NA,size)
+N <- rpois(size,lambda)
+for (i in 1:size){
+  uu <- runif(N[i])
+  X <- theta*((1-uu)^(-1/alpha)-1)
+  S[i] <- sum(X)
+}
+```
+
+### Show distribution of aggregate loss S
+
+```{r comment=""}
+par(mfrow=c(1,2))
+hist(S,freq=F,breaks=100)
+plot(ecdf(S),xlab="S")
+```
+
+## Applications {.tabset}
+
+### Find descriptive statistics
+Here we show numerical descriptions of our simulated distribution S
+
+```{r comment=""}
+mean(S)                             # sample mean
+sd(S)                               # sample standard deviation
+quantile(S,prob=c(0.05,0.5,0.95))   # percentiles
+```
+
+### Calculate cdf
+
+```{r comment=""}
+sum((S==0))/size
+```
+Pr(S=0)
+
+```{r comment=""}
+sum(S<=mean(S))/size
+```
+Pr(S<=E(S))
+
+```{r comment=""}
+sum(S>mean(S))/size 
+```
+Pr(S>E(S))
+
+### Calculate risk measures
+<a href="#" data-toggle="tooltip" title="Conditional Tail Expectation", style="color:green;">CTE</a> is also known as <a href="#" data-toggle="tooltip" title="Tail Value at Risk", style="color:green;">TVaR</a>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
+```{r comment=""}
+VaR <- quantile(S,prob=0.99)         # significance level = 0.01
+CTE <- sum(S*(S>VaR))/sum((S>VaR))
+rm <- c(VaR,CTE)
+names(rm) <- c("VaR","CTE")
+print(rm)
+```
+
+### Pricing stop-loss insurance - Set deductible
+Here we plot how the premium for a stop-loss insurance product changes based on the size of the deductible
+
+```{r comment=""}
+par(mfrow=c(1,1))
+d <- seq(0,120000,1000)
+price <- rep(NA,length(d))
+for (i in 1:length(d)){
+  price[i] = sum((S-d[i])*(S>d[i]))/size
+}
+plot(d,price,xlab="Deductible",ylab="Stop-Loss Premium",type="b")
+```

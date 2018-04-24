@@ -1,0 +1,32 @@
+bookdown::gitbook:
+  includes:
+    in_header: header.html
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">R for Loss Data Analytics</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    download: ["pdf", "epub"]
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+bookdown::epub_book: default
+bookdown::html_book:
+  theme: default
+  toc: yes
+  css: toc.css
+  number_sections: true
+bookdown::html_document2:
+  includes:
+    in_header: header.html
+  theme: default
+  toc: yes
+  toc_float:
+    collapsed: true
+    smooth_scroll: false
+  number_sections: true

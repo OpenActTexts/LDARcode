@@ -1,0 +1,109 @@
+# Tweedie
+
+*This file contains illustrative **R** code for the Tweedie distribution. When reviewing this code, you should open an **R** session, copy-and-paste the code, and see it perform. Then, you will be able to change parameters, look up commands, and so forth, as you go. *
+
+## Tweedie distribution{.tabset}
+
+### Load Tweedie Package
+First bring in the package Tweedie (you may need to first install this package).
+```{r warning=FALSE , message=FALSE , comment=""}
+library(tweedie)
+```
+
+### Set Paramteres for Tweedie(p,mu,phi)
+Setting parameters p, mu and phi defines the specific features of the distribution.  
+
+Furthermore, setting a specific seed allows us to generate the same randomn numbers so we can produce identical distributions
+```{r warning=FALSE , message=FALSE , comment=""}
+set.seed(123)
+p <- 1.5
+mu <- exp(1) 
+phi <- exp(1)
+```
+
+### Set Sample Size
+Sample size is set to 500 for this example.
+"y" holds all 500 obserations from tweedie distribution with the given parameters.
+```{r warning=FALSE , message=FALSE , comment=""}
+n <- 500
+y <- rtweedie(n,p,mu,phi)
+```
+
+### Show Summary Statistics
+Here we calculate important statisitics like mean, median, standard deviation and quantiles.
+```{r warning=FALSE , message=FALSE , comment=""}
+summary(y)
+sd(y)
+quantile(y,seq(0,1,0.1))
+```
+
+### Show Histogram
+Histograms are useful for visually interpreting data.
+Sometime summary statistics aren't enough to see the full picture.
+```{r warning=FALSE , message=FALSE , comment=""}
+hist(y, prob=T,breaks=50)
+x <- seq(0,max(y),0.1)
+lines(x,dtweedie(x,p,mu,phi),col="red")
+```
+
+### QQ Plots for Different p Values
+A QQ plot is a plot of the quantiles of the first data set against the quantiles of the second data set.
+
+This is graphical technique for determining if two data sets come from populations with a common distribution.
+
+It appears here that a power of 1.5 matches the distribution best.
+```{r warning=FALSE , message=FALSE , comment=""}
+par(mfrow=c(2,2),mar=c(4,4,4,4))
+qqTweedie <- function(xi,pct,mu,phi) {
+  plot(qtweedie(pct,xi,mu,phi),quantile(y,probs=pct),
+       main=paste("Power = ",xi), xlab="Theoretical Quantile", ylab="Empirical Quantile")
+  abline(0,1)
+}
+pct <- seq(0.01,0.99,0.01)
+lapply(c(1,1.5,2,2.5),qqTweedie,pct=pct,mu=mu,phi=phi)
+```
+
+
+### Fit Tweedie Distribution
+Here we run a  <a href="#" data-toggle="tooltip" title="Generalized Linear Model", style="color:green;">"glm"</a> for the Tweedie distribution. 
+you may need to first install the "statmod" package
+```{r warning=FALSE , message=FALSE , comment=""}
+library(statmod)
+fit <- glm(y~1,family=tweedie(var.power=1.5,link.power=0))
+summary(fit)
+```
+
+### Show Parameter Estimates
+We now display the parameter estimates calculated in the glm.
+```{r warning=FALSE , message=FALSE , comment=""}
+summary(fit)$coefficient
+summary(fit)$dispersion
+```
+
+### Maximum Likelihood Estimation
+Here we run a <a href="#" data-toggle="tooltip" title="Maximum Likelihood Estimate", style="color:green;">"MLE"</a> to determine the most likely parameters of the Tweedie distribution.
+```{r warning=FALSE , message=FALSE , comment=""}
+loglik<-function(parms){ 
+  p=parms[1]
+  mu=exp(parms[2])
+  phi=exp(parms[3])
+  llk <- -sum(log(dtweedie(y, p, mu, phi)))
+  llk
+}
+ini <- c(1.5,1,1)
+zop <- nlminb(ini,loglik, lower =c(1+1e-6,-Inf,-Inf),upper =c(2-1e-6,Inf,Inf))
+print(zop)
+```
+
+### Obtain Standard Error
+Now we calculate the standard errors of our parameter estimates from the MLE.
+You may need to first install the "numDeriv" package.
+```{r warning=FALSE , message=FALSE , comment=""}
+library(numDeriv)
+est <- zop$par
+names(est) <- c("p","mu","phi")
+hess<-hessian(loglik,est)
+se <-sqrt(diag(solve(hess)))
+print(cbind(est,se))
+```
+
