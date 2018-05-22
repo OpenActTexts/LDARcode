@@ -1,3 +1,15 @@
+---
+output:
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float: true
+    pandoc_args: [
+      "--number-sections",
+      "--number-offset=1"
+    ]
+---
+
 # Frequency Distributions
 
 *This file contains illustrative **R** code for computing important count distributions. When reviewing this code, you should open an **R** session, copy-and-paste the code, and see it perform. Then, you will be able to change parameters, look up commands, and so forth, as you go.*
@@ -19,13 +31,13 @@ N<- seq(0,20, 1)
 plot(N,fn,xlab="n",ylab="f(n)") 
 ```
 
-A few quick notes on these commands.
+A few quick notes on these commands. 
 
-- <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="The assignment operator  is analogous to an equal sign in mathematics.", style="color:green;">`<-`</a>
-- `seq` is short-hand for sequence
+- <a href="javascript://"  title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="The assignment operator  is analogous to an equal sign in mathematics.", style="color:green;">`<-`</a>
+- `seq` is short-hand for sequence.
 - `dpois` is a built-in command in **R** for generating the "density" (actually the mass) function of the Poisson distribution. Use the online help (`help("dpois")`) to learn more about this function.
 - The open paren `(`, close paren `)` tells **R** to display the output of a calculation to the screen.
-- `plot` is a very handy command for displaying results graphically
+- `plot` is a very handy command for displaying results graphically.
 
 #### (Cumulative) Probability Distribution Function (cdf)
 ```{r  fig.width=6, fig.height=4}
@@ -37,7 +49,7 @@ plot(N,Fn,xlab="n",ylab="F(n)") # cdf
 
 ### Negative Binomial Distribution {.tabset}
 
-This section shows how to compute and graph probability mass and distribution function for the Poisson distribution. You will also learn how to plot two functions on the same graph.
+This section shows how to compute and graph probability mass and distribution function for the negative binomial distribution. You will also learn how to plot two functions on the same graph.
 
 #### Probability Mass Function (pmf)
 ```{r  fig.width=6, fig.height=4}
@@ -70,9 +82,9 @@ plot(N,fn1,xlab="n", ylab="f(n)")
 lines(N,fn2, col="red", type="p")
 ```
 
-A couple notes on these commands. 
+A couple notes on these commands: 
 
-- You can enter more than one command on a line; separate them using the `;` semi-colon
+- You can enter more than one command on a line; separate them using the `;` semi-colon.
 - `lines` is very handy for superimposing one graph on another.
 - When making complex graphs with more than one function, consider using different colors. The `col="red"` tells **R** to use the color red when plotting symbols.
 
@@ -115,7 +127,7 @@ dpois(seq(0,20, 1), lambda=3)
 
 A couple notes on these commands. 
 
-- There are many basic math command in **R** such as `exp` for exponentials
+- There are many basic math command in **R** such as `exp` for exponentials.
 - This demo illustrates the use of the `for` loop, one of many ways of doing recursive calculations.
 
 
@@ -135,21 +147,21 @@ attach(Singapore)  # attach dataset
 
 A few quick notes on these commands:
 
-* <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used to get or assign names of an object. In this illustration, it was used to get the variables names.", style="color:green;">`names()`</a>
+* <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used to get or assign names of an object. In this illustration, it was used to get the variables names.", style="color:green;">`names()`</a>
 * The `dim()` function is used to retrieve or set the dimension of an object. 
 * When you attach a dataset using the `attach()` function, variable names in the database can be accessed by simply giving their names.
 
 
-### Claim frequency distribution 
+### Claim Frequency Distribution 
 The table below gives the distribution of observed claims frequency. The `Clm_Count` variable is the number of automobile accidents per policyholder. 
 ```{r}
 table(Clm_Count) 
 (n <- length(Clm_Count))  # number of insurance policies 
 ```
 
-### Visualize the Loglikelihood function
+### Visualize The Loglikelihood Function
 
-Before maximizing, let us start by visualizing the logarithmic <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="A function of the parameters with the data fixed rather than a function of the data with the parameters fixed ", style="color:green;">likelihood function</a>. We will fit the claim counts for the Singapore data to the Poisson model. As an illustration, first assume that $\lambda = 0.5$. The claim count, likelihood, and its logarithmic version, for five observations is
+Before maximizing, let us start by visualizing the logarithmic <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="A function of the parameters with the data fixed rather than a function of the data with the parameters fixed.", style="color:green;">likelihood function</a>. We will fit the claim counts for the Singapore data to the Poisson model. As an illustration, first assume that $\lambda = 0.5$. The claim count, likelihood, and its logarithmic version, for five observations is
 
 ```{r}
 #  Five typical Observations
@@ -184,9 +196,11 @@ for (i in 1:length(lambdax))
 plot(lambdax,loglike)
 ```
 
-### The maximum likelihood estimate of Poisson distribution
+### The Maximum Likelihood Estimate of Poisson Distribution
 
-If we had to guess, from this plot we might say that the maximum value of the log likelihood was around 0.7. From calculus, we know that the maximum likelihood estimator <a href="#" data-toggle="popover" data-placement="top" title="Values of the parameters that are 'most likely' to have been produced by the data", style="color:green;">(*mle*)</a> of the Poisson distribution parameter equals the average claim count. For our data, this is
+If we had to guess, from this plot we might say that the maximum value of the log likelihood was around 0.7. From calculus, we know that the maximum likelihood estimator 
+<a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Values of the parameters that are 'most likely' to have been produced by the data.", style="color:green;">(*mle*)</a> of the Poisson distribution parameter equals the average claim count. For our data, this is
+
 
 ```{r}
 mean(Clm_Count)
@@ -218,13 +232,13 @@ summary(CountPoisson1)
 ```
 A few quick notes on these commands and results:
 
-* The `glm()`function is used to fit Generalized linear models. See `help(glm)` for other modeling options.In order to get the results we use the `summary() ` function.
+* The `glm()`function is used to fit generalized linear models. See `help(glm)` for other modeling options.In order to get the results we use the `summary() ` function.
 * In the output, `call` reminds us what model we ran and what options were specified.
 * The `Deviance Residuals` shows the distribution of the deviance residuals for individual cases used in the model. 
 * The next part of the output shows the coefficient (maximum likelihood estimate of $\log(\lambda)$), its standard error, the z-statistic and the associated p-value. 
-* To get the estimated $\lambda$ we take the $\exp$(coefficient)  `lambda_hat<-exp(CountPoisson1$coefficients)`
+* To get the estimated $\lambda$ we take the $\exp$(coefficient)  `lambda_hat<-exp(CountPoisson1$coefficients)`.
 
-### The maximum likelihood estimate of the Negative Binomial distribution
+### The Maximum Likelihood Estimate of The Negative Binomial Distribution
 
 In the same way, here is code for determining the maximum likelihood estimates for the negative binomial distribution.
 
@@ -246,7 +260,7 @@ print(zop.NB) # In output, $par = (MLE of r, MLE of beta), $objective = - loglik
 
 Two quick notes:
 
-* There are two parameters for this distribution, so that calculation by hand is not a good alternative
+* There are two parameters for this distribution, so that calculation by hand is not a good alternative.
 * The maximum likelihood estimator of *r*, `r zop.NB$par[1]`, is not an integer.
 
 ## Goodness of Fit {.tabset}
@@ -257,7 +271,7 @@ First, note that the variance for the *count* data is `r var(Clm_Count)` which i
 Second, we will compute the *Pearson goodness-of-fit statistic*.
 
 
-### Pearson goodness-of-fit statistic
+### Pearson Goodness-of-Fit Statistic
 The table below gives the distribution of fitted claims frequency using Poisson distribution $n \times p_k$
 
 ```{r}
@@ -275,7 +289,7 @@ rownames(table2p) <- c("Number","Actual", "Estimated Using Poisson")
 table2p
 ```
 
-For goodness of fit, consider Pearson’s chi-square statistic below. The degrees of freedom (*df*) equals the number of cells minus
+For goodness of fit, consider Pearson's chi-square statistic below. The degrees of freedom (*df*) equals the number of cells minus
 one minus the number of estimated parameters.
 
 ```{r}
@@ -288,7 +302,7 @@ diff = actual-table1p
 
 The large value of the goodness of fit statistic `r Pearson_p` or the small *p* value indicates that there is a large difference between actual counts and those anticipated under the Poisson model.
 
-### Negative binomial goodness-of-fit statistic
+### Negative Binomial Goodness-of-Fit Statistic
 
 Here is another way of determining the maximum likelihood estimator of the negative binomial distribution.
 
@@ -324,8 +338,6 @@ diff = actual-table1nb
 
 The small value of the goodness of fit statistic `r Pearson_nb` or the high *p* value `r 1-pchisq(Pearson_nb, df=5-2-1)` both indicate that the negative binomial provides a better fit to the data than the Poisson.
 
-*This file contains illustrative **R** code for computing important count distributions. When reviewing this code, you should open an **R** session, copy-and-paste the code, and see it perform. Then, you will be able to change parameters, look up commands, and so forth, as you go. This code uses the dataset `SingaporeAuto.csv`*
-
 ## Singapore Data {.tabset}
 This section loads the `SingaporeAuto.csv` dataset and check the name of variables and the dimension of the data. To have a glimpse at the data, the first 8 observations are listed. 
 
@@ -340,14 +352,14 @@ attach(Singapore)  # attach dataset
 
 A few quick notes on these commands:
 
-* <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used to get or assign names of an object. In this illustration, it was used to get the variables names.", style="color:green;">`names()`</a>
- <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used to retrieve or set the dimension of an object.", style="color:green;">`dim()`</a>
- <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="When you attach a dataset using the `attach()` function, variable names in the database can be accessed by simply giving their names.", style="color:green;">`attach()`</a>
+* <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used to get or assign names of an object. In this illustration, it was used to get the variables names.", style="color:green;">`names()`</a>
+ <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used to retrieve or set the dimension of an object.", style="color:green;">`dim()`</a>
+ <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="When you attach a dataset using the `attach()` function, variable names in the database can be accessed by simply giving their names.", style="color:green;">`attach()`</a>
 
-## Goodness of fit for Poisson distribution {.tabset}
+## Goodness of Fit for Poisson Distribution {.tabset}
 This sections shows how to check the adequacy of the Poisson model for the Singapore data by computing the Pearson goodness-of-fit statistic.
 
-### Claim frequency distribution 
+### Claim Frequency Distribution 
 The table below gives the distribution of observed claims frequency. The `Clm_Count` variable is the number of automobile accidents per policyholder. 
 ```{r}
 table(Clm_Count) 
@@ -356,7 +368,7 @@ n
 ```
 
 
-### The maximum likelihood estimate of $\lambda$
+### The Maximum Likelihood Estimate of $\lambda$
 
 ```{r}
 CountPoisson1 = glm(Clm_Count ~ 1,poisson(link=log))
@@ -366,15 +378,15 @@ lambda
 ```
 A few quick notes on these commands and results:
 
-* <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used to fit Generalized linear models.", style="color:green;">`glm()`</a>
- <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="See this for other modeling options.", style="color:green;">`help(glm)`</a>
- <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used in order to get the results.", style="color:green;">`summary()`</a>
- <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="In the output, this reminds us what model we ran and what options were specified.", style="color:green;">`call`</a>
- <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Shows the distribution of the deviance residuals for individual cases used in the model.", style="color:green;">`Deviance Residuals`</a>
+* <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used to fit generalized linear models.", style="color:green;">`glm()`</a>
+ <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="See this for other modeling options.", style="color:green;">`help(glm)`</a>
+ <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used in order to get the results.", style="color:green;">`summary()`</a>
+ <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="In the output, this reminds us what model we ran and what options were specified.", style="color:green;">`call`</a>
+ <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Shows the distribution of the deviance residuals for individual cases used in the model.", style="color:green;">`Deviance Residuals`</a>
 * The next part of the output shows the coefficient (maximum likelihood estimate of $\log(\lambda)$), its standard error, the z-statistic and the associated p-value. 
-* To get the estimated $\lambda$ we take the $\exp$(coefficient)  `lambda<-exp(CountPoisson1$coefficients)`
+* To get the estimated $\lambda$ we take the $\exp$(coefficient)  `lambda<-exp(CountPoisson1$coefficients)`.
 
-### Pearson goodness-of-fit statistic
+### Pearson Goodness-of-Fit Statistic
 The table below gives the distribution of fitted claims frequency using Poisson distribution $(np_k)$
 
 ```{r}
@@ -387,7 +399,7 @@ table2p<-rbind(c(0,1,2,3,"4+"),round(table1p, digits = 3))
 table2p
 ```
 
-For goodness of fit, consider Pearson’s chi-square statistic below. The degrees of freedom (df ) equals the number of cells minus
+For goodness of fit, consider Pearson's chi-square statistic below. The degrees of freedom (df ) equals the number of cells minus
 one minus the number of estimated parameters
 
 ```{r}
@@ -401,8 +413,10 @@ cbind(table1p,PearsonG)
 1-pchisq(PearsonG, df=5-1-1)
 ```
 
+
 <script>
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover(); 
 });
 </script>
+

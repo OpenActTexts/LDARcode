@@ -1,8 +1,20 @@
+---
+output: 
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float: true
+    pandoc_args: [
+      "--number-sections",
+      "--number-offset=4"
+    ]
+---
+
 # Simulation 
 
 *This file contains illustrative **R** code for computing important count distributions. When reviewing this code, you should open an **R** session, copy-and-paste the code, and see it perform. Then, you will be able to change parameters, look up commands, and so forth, as you go. *
 
-## Simulation - Inversion method
+## Simulation - Inversion Method
 This section shows how to use the inversion method to simulate claims from a gamma distribution. The results below are summary statistics from the simulated data. 
 
 ```{r}
@@ -40,7 +52,7 @@ A few quick notes on these commands:
 
 
 
-## Comparing moments from the simulated data to theoretical moments
+## Comparing Moments from The Simulated Data to Theoretical Moments
 
 ```{r}
 library(pander)
@@ -87,8 +99,9 @@ S4<-round(moment(Losses, order = k, central = FALSE),2)
 
 pander(rbind(c("k",0.5,1,2,3,4),c("Theoritical",T0.5,T1,T2,T3,T4),c("Simulated",S0.5,S1,S2,S3,S4)))
 ```
+<br/>
 A few quick notes on these commands:
 
-* The `momemt()` function computes all the sample moments of the chosen type up to a given order. In this illustration, we wanted the raw sample moments of the *kth* order
+* The `momemt()` function computes all the sample moments of the chosen type up to a given order. In this illustration, we wanted the raw sample moments of the *kth* order.
 * The `round()` function was used to round values. 
 

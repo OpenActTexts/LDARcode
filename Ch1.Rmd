@@ -1,0 +1,295 @@
+---
+output: 
+   html_document:
+    code_folding: hide
+    toc: true
+    toc_float: true
+    pandoc_args: [
+      "--number-sections",
+      "--number-offset=0,3"
+    ]
+---
+
+# Introduction to Loss Data Analytics 
+
+*This file contains illustrative **R** code for computing analysis on the Property Fund data. When reviewing this code, you should open an **R** session, copy-and-paste the code, and see it perform. Then, you will be able to change parameters, look up commands, and so forth, as you go. This code uses the dataset `PropertyFundInsample.csv`*
+
+## Case Study: Wisconsin Property Fund
+Read in Property Fund data. 
+```{r}
+Insample <- read.csv("Data/PropertyFundInsample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+Insample2010 <- subset(Insample, Year==2010)
+```
+
+A few quick notes on these commands:
+
+* `read.csv` reads a csv file and creates data frame from it, with cases corresponding to rows and variables to columns in the file.
+
+* The assignment operator `<-` is analogous to an equal sign in mathematics. The command `Insample <- read.csv("PropertyFundInsample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)` means we give the name `Insample` to the data read. 
+
+* `The subset()` function is used to select variables and observations. In this illustration, we selected observations from year 2010. 
+
+### Fund Claims Variables {.tabset}
+
+#### Claim Frequency Distribution {.tabset}
+In 2010 there were 1,110 policyholders in the property fund.  
+
+##### Property Fund Distribution for 2010
+Table 1.1 shows the distribution of the 1,377 claims. 
+
+Table 1.1    
+
+```{r pander}
+library(pander)
+Table<-as.data.frame(table(Insample2010$Freq))
+names(Table)<-c("Number of Claims", "Frequncy")
+pander(t(Table))
+```
+<br>    
+The average number of claims for this sample was 1.24 (=1377/1110). See table 1.2 below.
+
+Table 1.2
+```{r}
+pander(summary(Insample2010$Freq))
+```
+
+
+A few quick notes on these commands:
+
+* Many useful **R** functions come in packages and to use these functions you have to install them. One way to install a package is by  using the command line `install.packages("<the package's name>")`. In addition, to read more about a function you use the command `help("function name")`. 
+
+* The `pander` function is used here to create nicer tables than regular **R** output. To use this function you need to download the `pander` package. For the normal **R** output in the illustration above, use the command line `summary(Insample2010$Freq)`. 
+
+* The `names()` function is used to to get or assign names of an object . In this illustration, we assigned `Number of Claims` and `Frequency` to the two columns in the data frame. 
+* The `t()` function is used to transpose a dataframe or a matrix.
+
+#### Average Severity Distribution for 2010 {.tabset}
+Table 1.3 summarizes the sample distribution of average severity from the 403 policyholders; Figure 1.2 provides further information about the distribution of sample claims, showing a distribution that is dominated by this single large claim so that the histogram is not very helpful. Even when removing the large claim, you will find a distribution that is skewed to the right. A generally accepted technique is to work with claims in logarithmic units especially for graphical purposes; the corresponding figure in the right-hand panel is much easier to interpret.
+
+Table 1.3
+```{r}
+InsamplePos2010 <- subset(Insample2010, yAvg>0)
+pander(summary(InsamplePos2010$yAvg))
+length(InsamplePos2010$yAvg)
+```
+Note: The `length()` function sets the length of a vector (list) or other objects. 
+
+##### Plot of Average Claims
+Figure 1.2 
+```{r}
+par(mfrow=c(1, 2))
+hist(InsamplePos2010$yAvg, main="", xlab="Average Claims")
+hist(log(InsamplePos2010$yAvg), main="", xlab="Logarithmic Average Claims")
+```
+
+A few quick notes on these commands:
+
+* The `par(mfrow)` function is handy for creating a simple multi-paneled plot. `mfrow` is a vector of length 2, where the first argument specifies the number of rows and the second the number of columns of plots.
+
+* The `hist()` computes a histogram of the given data values. You put the name of your dataset in between the parentheses of this function. 
+
+
+
+
+### Rating Variables {.tabset}
+
+Earlier we considered a sample of 1,110 observations which may seem like a lot. However, as we will seen in our forthcoming applications, because of the preponderance of zeros and the skewed nature of claims, actuaries typically yearn for more data. One common approach that we adopt here is to examine outcomes from multiple years, thus increasing the sample size.
+
+
+#### Average Claims Over Time
+Table 1.4 shows that the average claim varies over time.
+
+Table 1.4
+```{r }
+library(doBy)
+T1A <- summaryBy(Freq ~ Year, data = Insample,   
+                 FUN = function(x) { c(m = mean(x), num=length(x)) } )
+T1B <- summaryBy(yAvg    ~ Year, data = Insample,   
+                 FUN = function(x) { c(m = mean(x), num=length(x)) } )
+T1C <- summaryBy(BCcov    ~ Year, data = Insample,   
+                 FUN = function(x) { c(m = mean(x), num=length(x)) } )
+Table1In <- cbind(T1A[1],T1A[2],T1B[2],T1C[2],T1A[3])
+names(Table1In) <- c("Year", "Average Freq","Average Sev", "Average Coverage","No. of Policyholders")
+pander(Table1In)
+```
+
+
+A few quick notes on these commands:
+
+* The `summaryBy()` function provides summary statistics of a variable across different groups. You need to install the `doBy` package to use the command.
+
+* The `cbind()` combines vector, matrix or data frame by columns. The row number of the two datasets must be equal. 
+
+* The `c()` function combines its arguments to form a vector. 
+
+
+
+
+#### Frequency and Claims Statistics of Full Data
+For a different look at this five-year sample, Table 1.5 summarizes the distribution of our two outcomes, frequency and claims amount. In each case, the average exceeds the median, suggesting that the distributions are right-skewed. 
+
+Table 1.5  
+``` {r }
+BCcov.div1000 <- (Insample$BCcov)/1000
+
+t1<- summaryBy(Freq ~ 1, data = Insample,
+               FUN = function(x) { c(ma=min(x), m1=median(x),m=mean(x),mb=max(x)) } )
+names(t1) <- c("Minimum", "Median","Average", "Maximum")
+t2 <- summaryBy(yAvg ~ 1, data = Insample, 
+                FUN = function(x) { c(ma=min(x), m1=median(x), m=mean(x),mb=max(x)) } )
+names(t2) <- c("Minimum", "Median","Average", "Maximum")
+t3 <- summaryBy(Deduct ~ 1, data = Insample, 
+                FUN = function(x) { c(ma=min(x), m1=median(x), m=mean(x),mb=max(x)) } )
+names(t3) <- c("Minimum", "Median","Average", "Maximum")
+t4 <- summaryBy(BCcov.div1000 ~ 1, data = Insample, 
+                FUN = function(x) { c(ma=min(x), m1=median(x), m=mean(x),mb=max(x)) } )
+names(t4) <- c("Minimum", "Median","Average", "Maximum")
+Table2 <- rbind(t1,t2,t3,t4)
+Table2a <- round(Table2,3)
+Rowlable <- rbind("Claim Frequency","Claim Severity","Deductible","Coverage (000's)")
+Table2aa <- cbind(Rowlable,as.matrix(Table2a))
+pander(Table2aa)
+```
+
+
+A few quick notes on these commands:
+
+* The `rbind()` combines vector, matrix or data frame by rows. The column of the two datasets must be same. 
+
+* The `round()` function rounds the values in its first argument to the specified number of decimal places (default 0). 
+
+
+
+
+#### Rating Variable Description
+Table 1.6 describes the rating variables considered in this chapter. To handle the skewness, we henceforth focus on logarithmic transformations of coverage and deductibles. 
+See table 1.6 below for variables and variable description.
+
+Table 1.6 
+
+```{r }
+des <- read.table(header=TRUE, text='
+ Variable Description
+  "BCcov"  "Total building and content coverage in dollars"
+  "Deduct"	"Deductible in dollars"
+"Entity Type"	"Categorical variable that is one of six types: (Village, City, County, Misc, School, or Town)"
+"AlarmCredit"	"Categorical variable that is one of four types: (0%, 5%, 10%, or 15%), for automatic smoke alarms in main rooms"
+"NoClaimCredit"	"Binary variable to indicate no claims in the past two years"
+"Fire5"	"Binary variable to indicate the fire class is below 5. (The range of fire class is 0~10)" ')
+
+```
+
+```{r}
+pander(des)
+```
+
+#### Frequency and Claims by Rating Variables 
+To get a sense of the relationship between the non-continuous rating variables and claims, Table 1.7 relates the claims outcomes to these categorical variables.
+Table 1.7 shows claims summary by Entity Type, Fire Class, and No Claim Credit.
+
+Table 1.7
+
+```{r }
+# Table 1.7
+ByVarSumm<-function(datasub){
+  tempA <- summaryBy(Freq    ~ 1 , data = datasub,   
+                     FUN = function(x) { c(m = mean(x), num=length(x)) } )
+  datasub1<-  subset(datasub, yAvg>0)
+  tempB <- summaryBy(yAvg   ~ 1, data = datasub1,
+                     FUN = function(x) { c(m = mean(x)) } )
+  tempC <- merge(tempA,tempB,all.x=T)[c(2,1,3)]
+  tempC1 <- as.matrix(tempC)
+  return(tempC1)
+}
+
+datasub <-  subset(Insample, TypeVillage == 1);   
+t1 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, TypeCity == 1);      
+t2 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, TypeCounty == 1);   
+t3 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, TypeMisc == 1);      
+t4 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, TypeSchool == 1);    
+t5 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, TypeTown == 1);      
+t6 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, Fire5 == 0);                      
+t7 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, Fire5 == 1);                      
+t8 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, Insample$NoClaimCredit == 0);
+t9 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, Insample$NoClaimCredit == 1);
+t10 <- ByVarSumm(datasub)
+t11 <- ByVarSumm(Insample)
+
+Tablea <- rbind(t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11)
+Tableaa <- round(Tablea,3)
+Rowlable <- rbind("Village","City","County","Misc","School",
+                  "Town","Fire5--No","Fire5--Yes","NoClaimCredit--No",
+                  "NoClaimCredit--Yes","Total")
+Table4 <- cbind(Rowlable,as.matrix(Tableaa))
+
+```
+
+```{r}
+pander(Table4)
+```
+
+Table 1.8 shows claims summary by Entity Type and Alarm Credit
+
+Table 1.8
+
+```{r }
+ByVarSumm<-function(datasub){
+  tempA <- summaryBy(Freq    ~ AC00 , data = datasub,   
+                     FUN = function(x) { c(m = mean(x), num=length(x)) } )
+  datasub1 <-  subset(datasub, yAvg>0)
+  if(nrow(datasub1)==0) { n<-nrow(datasub)
+    return(c(0,0,n))
+  } else 
+  {
+    tempB <- summaryBy(yAvg   ~ AC00, data = datasub1,
+                       FUN = function(x) { c(m = mean(x)) } )
+    tempC <- merge(tempA,tempB,all.x=T)[c(2,4,3)]
+    tempC1 <- as.matrix(tempC)
+    return(tempC1)
+  }
+}
+AlarmC <- 1*(Insample$AC00==1) + 2*(Insample$AC05==1)+ 3*(Insample$AC10==1)+ 4*(Insample$AC15==1)
+ByVarCredit<-function(ACnum){
+datasub <-  subset(Insample, TypeVillage == 1 & AlarmC == ACnum); 
+  t1 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, TypeCity == 1 & AlarmC == ACnum);      
+  t2 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, TypeCounty == 1 & AlarmC == ACnum);   
+  t3 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, TypeMisc == 1 & AlarmC == ACnum);
+  t4 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, TypeSchool == 1 & AlarmC == ACnum);    
+  t5 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, TypeTown == 1 & AlarmC ==ACnum);      
+  t6 <- ByVarSumm(datasub)
+datasub <-  subset(Insample, AlarmC == ACnum);  
+  t7 <- ByVarSumm(datasub)
+Tablea <- rbind(t1,t2,t3,t4,t5,t6,t7)
+Tableaa <- round(Tablea,3)
+Rowlable <- rbind("Village","City","County","Misc","School",
+                  "Town","Total")
+Table4 <- cbind(Rowlable,as.matrix(Tableaa))
+}
+Table4a <- ByVarCredit(1)    #Claims Summary by Entity Type and Alarm Credit==00
+Table4b <- ByVarCredit(2)    #Claims Summary by Entity Type and Alarm Credit==05 
+Table4c <- ByVarCredit(3)    #Claims Summary by Entity Type and Alarm Credit==10
+Table4d <- ByVarCredit(4)    #Claims Summary by Entity Type and Alarm Credit==15
+
+```
+
+```{r}
+pander(Table4a) #Claims Summary by Entity Type and Alarm Credit==00
+pander(Table4b) #Claims Summary by Entity Type and Alarm Credit==05 
+pander(Table4c) #Claims Summary by Entity Type and Alarm Credit==10
+pander(Table4d) #Claims Summary by Entity Type and Alarm Credit==15
+```
+

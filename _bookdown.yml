@@ -1,5 +1,7 @@
 book_filename: "R for Loss Data Analytics"
-delete_merged_file: true
+rmd_files: ["index.Rmd", "Prerequisites.Rmd", "Ch1.Rmd", "Ch2DiscreteDist.Rmd", "Ch3ContinousDistn.Rmd",
+"Ch4MLEGroupData.Rmd", "Ch5SimulationCoverageModification.Rmd", "AggregateClaimSimulation.Rmd", 
+"FreqSev.Rmd", "Tweedie.Rmd", "Bootstrap.Rmd"]
 language:
   ui:
     chapter_name: "Chapter "
