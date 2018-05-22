@@ -1,1 +1,5 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "Get Started" at https://bookdown.org/ for how to compile this example.
+# R Codes for Loss Data Analytics - fork
+This is a fork to propose changes to the original repository R Codes for Loss Data Analytics by Professor Edward Frees (ewfrees.github.io).  
+
+URL for development - reflects most recent changes:  
+https://rawgit.com/alyaanuval/LDARcode/master/R_for_Loss_Data_Analytics.html
