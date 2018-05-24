@@ -8,7 +8,7 @@ Before we can do any analysis we must import the data.
 ### read data "MassAuto.csv"
 Import the excel file into R.
 ```{r warning=FALSE , message=FALSE , comment=""}
-dat <- read.csv(file = "MassAuto.csv",header=TRUE)
+dat <- read.csv(file = "Data/MassAuto.csv",header=TRUE)
 ```
 
 ### Check Variable Names

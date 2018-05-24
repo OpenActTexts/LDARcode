@@ -2,8 +2,7 @@
 title: "R for Loss Data Analytics"
 author: "An open text authored by the Actuarial Community"
 date: "`r Sys.Date()`"
-description: This is a minimal example of using the bookdown package to write a book.
-  The output format for this example is bookdown::gitbook.
+description: This site provides files that generate R codes to support the online text Loss Data Analytics.
 documentclass: book
 link-citations: yes
 bibliography:

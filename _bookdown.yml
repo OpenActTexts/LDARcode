@@ -1,8 +1,11 @@
 book_filename: "R for Loss Data Analytics"
-rmd_files: ["index.Rmd", "Prerequisites.Rmd", "Ch1.Rmd", "Ch2DiscreteDist.Rmd", "Ch3ContinousDistn.Rmd",
-"Ch4MLEGroupData.Rmd", "Ch5SimulationCoverageModification.Rmd", "AggregateClaimSimulation.Rmd", 
-"FreqSev.Rmd", "Tweedie.Rmd", "Bootstrap.Rmd"]
+rmd_files: ["index.Rmd", "Chapters/Prerequisites.Rmd", "Chapters/Ch1.Rmd", 
+"Chapters/Ch2DiscreteDist.Rmd", "Chapters/Ch3ContinousDistn.Rmd",
+"Chapters/Ch4MLEGroupData.Rmd", "Chapters/Ch5SimulationCoverageModification.Rmd", 
+"Chapters/AggregateClaimSimulation.Rmd", "Chapters/FreqSev.Rmd", "Chapters/Tweedie.Rmd", 
+"Chapters/Bootstrap.Rmd"]
 language:
   ui:
     chapter_name: "Chapter "
+
 
