@@ -38,14 +38,13 @@ In 2010 there were 1,110 policyholders in the property fund.
 Table 1.1 shows the distribution of the 1,377 claims. 
 
 Table 1.1    
-
 ```{r pander}
 library(pander)
 Table<-as.data.frame(table(Insample2010$Freq))
-names(Table)<-c("Number of Claims", "Frequncy")
+names(Table)<-c("Number of Claims", "Frequency")
 pander(t(Table))
 ```
-<br>    
+ 
 The average number of claims for this sample was 1.24 (=1377/1110). See table 1.2 below.
 
 Table 1.2
