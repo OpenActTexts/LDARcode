@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-05-24}
+  \date{2018-05-26}
 
 \usepackage{booktabs}
 
@@ -265,12 +265,12 @@ A few quick notes on these commands:
 
 \begin{itemize}
 \item
-  \texttt{read.csv} reads a csv file and creates data frame from it,
+  \texttt{read.csv} reads a csv file and creates a data frame from it,
   with cases corresponding to rows and variables to columns in the file.
 \item
   The assignment operator \texttt{\textless{}-} is analogous to an equal
   sign in mathematics. The command
-  \texttt{Insample\ \textless{}-\ read.csv("PropertyFundInsample.csv",\ header=T,\ na.strings=c("."),\ stringsAsFactors=FALSE)}
+  \texttt{Insample\ \textless{}-\ read.csv("Data/PropertyFundInsample.csv",\ header=T,\ na.strings=c("."),\ stringsAsFactors=FALSE)}
   means we give the name \texttt{Insample} to the data read.
 \item
   \texttt{The\ subset()} function is used to select variables and
@@ -481,7 +481,7 @@ A few quick notes on these commands:
   object . In this illustration, we assigned \texttt{Number\ of\ Claims}
   and \texttt{Frequency} to the two columns in the data frame.
 \item
-  The \texttt{t()} function is used to transpose a dataframe or a
+  The \texttt{t()} function is used to transpose a data frame or a
   matrix.
 \end{itemize}
 
@@ -692,8 +692,8 @@ A few quick notes on these commands:
   variable across different groups. You need to install the
   \texttt{doBy} package to use the command.
 \item
-  The \texttt{cbind()} combines vector, matrix or data frame by columns.
-  The row number of the two datasets must be equal.
+  The \texttt{cbind()} combines vector, matrix or data frame arguments
+  by columns. The row number of the two datasets must be equal.
 \item
   The \texttt{c()} function combines its arguments to form a vector.
 \end{itemize}
@@ -726,8 +726,8 @@ Table 1.5
 \KeywordTok{names}\NormalTok{(t4) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Minimum"}\NormalTok{, }\StringTok{"Median"}\NormalTok{,}\StringTok{"Average"}\NormalTok{, }\StringTok{"Maximum"}\NormalTok{)}
 \NormalTok{Table2 <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(t1,t2,t3,t4)}
 \NormalTok{Table2a <-}\StringTok{ }\KeywordTok{round}\NormalTok{(Table2,}\DecValTok{3}\NormalTok{)}
-\NormalTok{Rowlable <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\StringTok{"Claim Frequency"}\NormalTok{,}\StringTok{"Claim Severity"}\NormalTok{,}\StringTok{"Deductible"}\NormalTok{,}\StringTok{"Coverage (000's)"}\NormalTok{)}
-\NormalTok{Table2aa <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(Rowlable,}\KeywordTok{as.matrix}\NormalTok{(Table2a))}
+\NormalTok{Rowlabel <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\StringTok{"Claim Frequency"}\NormalTok{,}\StringTok{"Claim Severity"}\NormalTok{,}\StringTok{"Deductible"}\NormalTok{,}\StringTok{"Coverage (000's)"}\NormalTok{)}
+\NormalTok{Table2aa <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(Rowlabel,}\KeywordTok{as.matrix}\NormalTok{(Table2a))}
 \KeywordTok{pander}\NormalTok{(Table2aa)}
 \end{Highlighting}
 \end{Shaded}
@@ -798,8 +798,8 @@ A few quick notes on these commands:
 
 \begin{itemize}
 \item
-  The \texttt{rbind()} combines vector, matrix or data frame by rows.
-  The column of the two datasets must be same.
+  The \texttt{rbind()} combines vector, matrix or data frame arguments
+  by rows. The column of the two datasets must be same.
 \item
   The \texttt{round()} function rounds the values in its first argument
   to the specified number of decimal places (default 0).
@@ -811,7 +811,7 @@ Description}\label{rating-variable-description}
 Table 1.6 describes the rating variables considered in this chapter. To
 handle the skewness, we henceforth focus on logarithmic transformations
 of coverage and deductibles. See table 1.6 below for variables and
-variable description.
+variable descriptions.
 
 Table 1.6
 
@@ -927,10 +927,10 @@ Table 1.7
 
 \NormalTok{Tablea <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11)}
 \NormalTok{Tableaa <-}\StringTok{ }\KeywordTok{round}\NormalTok{(Tablea,}\DecValTok{3}\NormalTok{)}
-\NormalTok{Rowlable <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\StringTok{"Village"}\NormalTok{,}\StringTok{"City"}\NormalTok{,}\StringTok{"County"}\NormalTok{,}\StringTok{"Misc"}\NormalTok{,}\StringTok{"School"}\NormalTok{,}
+\NormalTok{Rowlabel <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\StringTok{"Village"}\NormalTok{,}\StringTok{"City"}\NormalTok{,}\StringTok{"County"}\NormalTok{,}\StringTok{"Misc"}\NormalTok{,}\StringTok{"School"}\NormalTok{,}
                   \StringTok{"Town"}\NormalTok{,}\StringTok{"Fire5--No"}\NormalTok{,}\StringTok{"Fire5--Yes"}\NormalTok{,}\StringTok{"NoClaimCredit--No"}\NormalTok{,}
                   \StringTok{"NoClaimCredit--Yes"}\NormalTok{,}\StringTok{"Total"}\NormalTok{)}
-\NormalTok{Table4 <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(Rowlable,}\KeywordTok{as.matrix}\NormalTok{(Tableaa))}
+\NormalTok{Table4 <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(Rowlabel,}\KeywordTok{as.matrix}\NormalTok{(Tableaa))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1094,9 +1094,9 @@ Table 1.8
 \NormalTok{  t7 <-}\StringTok{ }\KeywordTok{ByVarSumm}\NormalTok{(datasub)}
 \NormalTok{Tablea <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(t1,t2,t3,t4,t5,t6,t7)}
 \NormalTok{Tableaa <-}\StringTok{ }\KeywordTok{round}\NormalTok{(Tablea,}\DecValTok{3}\NormalTok{)}
-\NormalTok{Rowlable <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\StringTok{"Village"}\NormalTok{,}\StringTok{"City"}\NormalTok{,}\StringTok{"County"}\NormalTok{,}\StringTok{"Misc"}\NormalTok{,}\StringTok{"School"}\NormalTok{,}
+\NormalTok{Rowlabel <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\StringTok{"Village"}\NormalTok{,}\StringTok{"City"}\NormalTok{,}\StringTok{"County"}\NormalTok{,}\StringTok{"Misc"}\NormalTok{,}\StringTok{"School"}\NormalTok{,}
                   \StringTok{"Town"}\NormalTok{,}\StringTok{"Total"}\NormalTok{)}
-\NormalTok{Table4 <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(Rowlable,}\KeywordTok{as.matrix}\NormalTok{(Tableaa))}
+\NormalTok{Table4 <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(Rowlabel,}\KeywordTok{as.matrix}\NormalTok{(Tableaa))}
 \NormalTok{\}}
 \NormalTok{Table4a <-}\StringTok{ }\KeywordTok{ByVarCredit}\NormalTok{(}\DecValTok{1}\NormalTok{)    }\CommentTok{#Claims Summary by Entity Type and Alarm Credit==00}
 \NormalTok{Table4b <-}\StringTok{ }\KeywordTok{ByVarCredit}\NormalTok{(}\DecValTok{2}\NormalTok{)    }\CommentTok{#Claims Summary by Entity Type and Alarm Credit==05 }
@@ -1474,7 +1474,7 @@ forth, as you go.}
 \subsection{Poisson Distribution}\label{poisson-distribution}
 
 This sections shows how to compute and graph probability mass and
-distribution function for the Poisson distribution.
+distribution functions for the Poisson distribution.
 
 \subsubsection{Probability Mass Function
 (pmf)}\label{probability-mass-function-pmf}
@@ -1556,7 +1556,7 @@ A few quick notes on these commands.
 Distribution}\label{negative-binomial-distribution}
 
 This section shows how to compute and graph probability mass and
-distribution function for the negative binomial distribution. You will
+distribution functions for the negative binomial distribution. You will
 also learn how to plot two functions on the same graph.
 
 \subsubsection{Probability Mass Function
@@ -1592,6 +1592,39 @@ also learn how to plot two functions on the same graph.
 
 \begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-15-1} \end{center}
 
+\paragraph{Plot Two Functions on The Same
+Graph}\label{plot-two-functions-on-the-same-graph}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Plot Different Negative Binomial Distributions on the same Figure}
+\NormalTok{alpha1 <-}\StringTok{ }\DecValTok{3}
+\NormalTok{alpha2 <-}\StringTok{ }\DecValTok{5}
+\NormalTok{theta <-}\StringTok{ }\DecValTok{2}\NormalTok{; prob <-}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{theta)}
+\NormalTok{fn1 <-}\StringTok{ }\KeywordTok{dnbinom}\NormalTok{(N, alpha1,prob)}
+\NormalTok{fn2 <-}\StringTok{ }\KeywordTok{dnbinom}\NormalTok{(N, alpha2,prob)}
+\KeywordTok{plot}\NormalTok{(N,fn1,}\DataTypeTok{xlab=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"f(n)"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(N,fn2, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"p"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-16-1} \end{center}
+
+A couple notes on these commands:
+
+\begin{itemize}
+\tightlist
+\item
+  You can enter more than one command on a line; separate them using the
+  \texttt{;} semi-colon.
+\item
+  \texttt{lines} is very handy for superimposing one graph on another.
+\item
+  When making complex graphs with more than one function, consider using
+  different colors. The \texttt{col="red"} tells \textbf{R} to use the
+  color red when plotting symbols.
+\end{itemize}
+
 \subsubsection{(Cumulative) Probability Distribution Function
 (cdf)}\label{cumulative-probability-distribution-function-cdf-1}
 
@@ -1617,45 +1650,19 @@ also learn how to plot two functions on the same graph.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-16-1} \end{center}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Plot Different Negative Binomial Distributions on the same Figure}
-\NormalTok{alpha1 <-}\StringTok{ }\DecValTok{3}
-\NormalTok{alpha2 <-}\StringTok{ }\DecValTok{5}
-\NormalTok{theta <-}\StringTok{ }\DecValTok{2}\NormalTok{; prob <-}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{theta)}
-\NormalTok{fn1 <-}\StringTok{ }\KeywordTok{dnbinom}\NormalTok{(N, alpha1,prob)}
-\NormalTok{fn2 <-}\StringTok{ }\KeywordTok{dnbinom}\NormalTok{(N, alpha2,prob)}
-\KeywordTok{plot}\NormalTok{(N,fn1,}\DataTypeTok{xlab=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"f(n)"}\NormalTok{)}
-\KeywordTok{lines}\NormalTok{(N,fn2, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"p"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-17-1} \end{center}
-
-A couple notes on these commands:
-
-\begin{itemize}
-\tightlist
-\item
-  You can enter more than one command on a line; separate them using the
-  \texttt{;} semi-colon.
-\item
-  \texttt{lines} is very handy for superimposing one graph on another.
-\item
-  When making complex graphs with more than one function, consider using
-  different colors. The \texttt{col="red"} tells \textbf{R} to use the
-  color red when plotting symbols.
-\end{itemize}
 
 \subsection{Binomial Distribution}\label{binomial-distribution}
 
 This section shows how to compute and graph probability mass and
-distribution function for the binomial distribution.
+distribution functions for the binomial distribution.
+
+\subsubsection{Probability Mass Function
+(pmf)}\label{probability-mass-function-pmf-2}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{#Plot Different Binomial Distributions on the same Figure}
 \NormalTok{size<-}\StringTok{ }\DecValTok{30}
 \NormalTok{prob<-}\StringTok{ }\FloatTok{0.6}
 \NormalTok{N<-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{30}\NormalTok{, }\DecValTok{1}\NormalTok{)}
@@ -1667,6 +1674,34 @@ distribution function for the binomial distribution.
 \end{Shaded}
 
 \begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-18-1} \end{center}
+
+\subsubsection{(Cumulative) Probability Distribution Function
+(cdf)}\label{cumulative-probability-distribution-function-cdf-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#get the distribution function using "pbinom"}
+\NormalTok{(Fn <-}\StringTok{ }\KeywordTok{pbinom}\NormalTok{(N, size,prob))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] 1.152922e-12 5.303439e-11 1.181456e-09 1.697936e-08 1.769332e-07
+ [6] 1.424573e-06 9.222321e-06 4.932503e-05 2.222679e-04 8.563920e-04
+[11] 2.853883e-03 8.301584e-03 2.123988e-02 4.811171e-02 9.705684e-02
+[16] 1.753691e-01 2.854956e-01 4.215343e-01 5.689095e-01 7.085281e-01
+[21] 8.237135e-01 9.059888e-01 9.564759e-01 9.828170e-01 9.943412e-01
+[26] 9.984899e-01 9.996867e-01 9.999526e-01 9.999954e-01 9.999998e-01
+[31] 1.000000e+00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(N,Fn,}\DataTypeTok{xlab=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{"F(n)"}\NormalTok{) }\CommentTok{# cdf}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-19-1} \end{center}
 
 \section{\texorpdfstring{(\emph{a},\emph{b},0) Class of
 Distributions}{(a,b,0) Class of Distributions}}\label{ab0-class-of-distributions}
@@ -1721,7 +1756,7 @@ A couple notes on these commands.
 \begin{itemize}
 \tightlist
 \item
-  There are many basic math command in \textbf{R} such as \texttt{exp}
+  There are many basic math commands in \textbf{R} such as \texttt{exp}
   for exponentials.
 \item
   This demo illustrates the use of the \texttt{for} loop, one of many
@@ -1733,14 +1768,14 @@ Distributions}\label{estimating-frequency-distributions}
 
 \subsection{Singapore Data}\label{singapore-data}
 
-This section loads the \texttt{SingaporeAuto.csv} dataset and check the
-name of variables and the dimension of the data. To have a glimpse at
+This section loads the \texttt{SingaporeAuto.csv} dataset and checks the
+names of variables and the dimensions of the data. To have a glimpse at
 the data, the first 8 observations are listed.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{Singapore =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"Data/SingaporeAuto.csv"}\NormalTok{,  }\DataTypeTok{quote =} \StringTok{""}\NormalTok{,}\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{)}
-\CommentTok{#  Check the names, dimension in the file and list the first 8 observations ;}
+\CommentTok{#  Check the names, dimensions in the file and list the first 8 observations ;}
 \KeywordTok{names}\NormalTok{(Singapore)}
 \end{Highlighting}
 \end{Shaded}
@@ -1793,7 +1828,7 @@ A few quick notes on these commands:
 \item
   \texttt{names()}
 \item
-  The \texttt{dim()} function is used to retrieve or set the dimension
+  The \texttt{dim()} function is used to retrieve or set the dimensions
   of an object.
 \item
   When you attach a dataset using the \texttt{attach()} function,
@@ -1863,7 +1898,7 @@ version, for five observations is
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Logarithmic Probabilies}
+\CommentTok{# Logarithmic Probabilities}
 \KeywordTok{log}\NormalTok{(}\KeywordTok{dpois}\NormalTok{(Clm_Count[}\DecValTok{2245}\OperatorTok{:}\DecValTok{2249}\NormalTok{],}\DataTypeTok{lambda=}\FloatTok{0.5}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -1907,7 +1942,7 @@ plots the function for several choices of \(\lambda\):
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-24-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-25-1} \end{center}
 
 \subsection{The Maximum Likelihood Estimate of Poisson
 Distribution}\label{the-maximum-likelihood-estimate-of-poisson-distribution}
@@ -2273,247 +2308,6 @@ The small value of the goodness of fit statistic 1.9502395 or the high
 \emph{p} value 0.3771472 both indicate that the negative binomial
 provides a better fit to the data than the Poisson.
 
-\section{Singapore Data}\label{singapore-data-1}
-
-This section loads the \texttt{SingaporeAuto.csv} dataset and check the
-name of variables and the dimension of the data. To have a glimpse at
-the data, the first 8 observations are listed.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{Singapore =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/SingaporeAuto.csv"}\NormalTok{,  }\DataTypeTok{quote =} \StringTok{""}\NormalTok{,}\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{)}
-\CommentTok{#  Check the names, dimension in the file and list the first 8 observations ;}
-\KeywordTok{names}\NormalTok{(Singapore)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
- [1] "SexInsured"  "Female"      "VehicleType" "PC"          "Clm_Count"  
- [6] "Exp_weights" "LNWEIGHT"    "NCD"         "AgeCat"      "AutoAge0"   
-[11] "AutoAge1"    "AutoAge2"    "AutoAge"     "VAgeCat"     "VAgecat1"   
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{dim}\NormalTok{(Singapore)  }\CommentTok{# check number of observations and variables in the data}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-[1] 7483   15
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{Singapore[}\DecValTok{1}\OperatorTok{:}\DecValTok{8}\NormalTok{,]  }\CommentTok{# list the first 8 observations}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-  SexInsured Female VehicleType PC Clm_Count Exp_weights    LNWEIGHT NCD
-1          U      0           T  0         0   0.6680356 -0.40341383  30
-2          U      0           T  0         0   0.5667351 -0.56786326  30
-3          U      0           T  0         0   0.5037645 -0.68564629  30
-4          U      0           T  0         0   0.9144422 -0.08944106  20
-5          U      0           T  0         0   0.5366188 -0.62246739  20
-6          U      0           T  0         0   0.7529090 -0.28381095  20
-7          U      0           M  0         0   0.6707734 -0.39932384  20
-8          U      0           M  0         0   0.8377823 -0.17699695  20
-  AgeCat AutoAge0 AutoAge1 AutoAge2 AutoAge VAgeCat VAgecat1
-1      0        0        0        0       0       0        2
-2      0        0        0        0       0       0        2
-3      0        0        0        0       0       0        2
-4      0        0        0        0       0       0        2
-5      0        0        0        0       0       0        2
-6      0        0        0        0       0       0        2
-7      0        0        0        0       0       6        6
-8      0        0        0        0       0       6        6
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{attach}\NormalTok{(Singapore)  }\CommentTok{# attach dataset}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-The following objects are masked from Singapore (pos = 4):
-
-    AgeCat, AutoAge, AutoAge0, AutoAge1, AutoAge2, Clm_Count,
-    Exp_weights, Female, LNWEIGHT, NCD, PC, SexInsured, VAgeCat,
-    VAgecat1, VehicleType
-\end{verbatim}
-
-A few quick notes on these commands:
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{names()} \texttt{dim()} \texttt{attach()}
-\end{itemize}
-
-\section{Goodness of Fit for Poisson
-Distribution}\label{goodness-of-fit-for-poisson-distribution}
-
-This sections shows how to check the adequacy of the Poisson model for
-the Singapore data by computing the Pearson goodness-of-fit statistic.
-
-\subsection{Claim Frequency
-Distribution}\label{claim-frequency-distribution-2}
-
-The table below gives the distribution of observed claims frequency. The
-\texttt{Clm\_Count} variable is the number of automobile accidents per
-policyholder.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{table}\NormalTok{(Clm_Count) }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-Clm_Count
-   0    1    2    3 
-6996  455   28    4 
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{n<-}\KeywordTok{length}\NormalTok{(Clm_Count)  }\CommentTok{# number of insurance policies }
-\NormalTok{n}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-[1] 7483
-\end{verbatim}
-
-\subsection{\texorpdfstring{The Maximum Likelihood Estimate of
-\(\lambda\)}{The Maximum Likelihood Estimate of \textbackslash{}lambda}}\label{the-maximum-likelihood-estimate-of-lambda}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{CountPoisson1 =}\StringTok{ }\KeywordTok{glm}\NormalTok{(Clm_Count }\OperatorTok{~}\StringTok{ }\DecValTok{1}\NormalTok{,}\KeywordTok{poisson}\NormalTok{(}\DataTypeTok{link=}\NormalTok{log))}
-\KeywordTok{summary}\NormalTok{(CountPoisson1)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-
-Call:
-glm(formula = Clm_Count ~ 1, family = poisson(link = log))
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--0.3739  -0.3739  -0.3739  -0.3739   4.0861  
-
-Coefficients:
-            Estimate Std. Error z value Pr(>|z|)    
-(Intercept) -2.66081    0.04373  -60.85   <2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for poisson family taken to be 1)
-
-    Null deviance: 2887.2  on 7482  degrees of freedom
-Residual deviance: 2887.2  on 7482  degrees of freedom
-AIC: 3884.4
-
-Number of Fisher Scoring iterations: 6
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{lambda<-}\KeywordTok{exp}\NormalTok{(CountPoisson1}\OperatorTok{$}\NormalTok{coefficients)}
-\NormalTok{lambda}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-(Intercept) 
- 0.06989175 
-\end{verbatim}
-
-A few quick notes on these commands and results:
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{glm()} \texttt{help(glm)} \texttt{summary()} \texttt{call}
-  \texttt{Deviance\ Residuals}
-\item
-  The next part of the output shows the coefficient (maximum likelihood
-  estimate of \(\log(\lambda)\)), its standard error, the z-statistic
-  and the associated p-value.
-\item
-  To get the estimated \(\lambda\) we take the \(\exp\)(coefficient)
-  \texttt{lambda\textless{}-exp(CountPoisson1\$coefficients)}.
-\end{itemize}
-
-\subsection{Pearson Goodness-of-Fit
-Statistic}\label{pearson-goodness-of-fit-statistic-1}
-
-The table below gives the distribution of fitted claims frequency using
-Poisson distribution \((np_k)\)
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{table1p =}\StringTok{ }\KeywordTok{cbind}\NormalTok{(n}\OperatorTok{*}\NormalTok{(}\KeywordTok{dpois}\NormalTok{(}\DecValTok{0}\NormalTok{,lambda)),}
-\NormalTok{                n}\OperatorTok{*}\NormalTok{(}\KeywordTok{dpois}\NormalTok{(}\DecValTok{1}\NormalTok{,lambda)),}
-\NormalTok{                n}\OperatorTok{*}\NormalTok{(}\KeywordTok{dpois}\NormalTok{(}\DecValTok{2}\NormalTok{,lambda)),}
-\NormalTok{                n}\OperatorTok{*}\NormalTok{(}\KeywordTok{dpois}\NormalTok{(}\DecValTok{3}\NormalTok{,lambda)),}
-\NormalTok{                n}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\KeywordTok{ppois}\NormalTok{(}\DecValTok{3}\NormalTok{,lambda))) }\CommentTok{# or n*(1-dpois(0,lambda)-dpois(1,lambda)-dpois(2,lambda)-dpois(3,lambda)))}
-\NormalTok{table2p<-}\KeywordTok{rbind}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\StringTok{"4+"}\NormalTok{),}\KeywordTok{round}\NormalTok{(table1p, }\DataTypeTok{digits =} \DecValTok{3}\NormalTok{))}
-\NormalTok{table2p}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-     [,1]       [,2]      [,3]     [,4]    [,5]   
-[1,] "0"        "1"       "2"      "3"     "4+"   
-[2,] "6977.858" "487.695" "17.043" "0.397" "0.007"
-\end{verbatim}
-
-For goodness of fit, consider Pearson's chi-square statistic below. The
-degrees of freedom (df ) equals the number of cells minus one minus the
-number of estimated parameters
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#  PEARSON GOODNESS-OF-FIT STATISTIC}
-\NormalTok{actual =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{table}\NormalTok{(Clm_Count))[,}\DecValTok{2}\NormalTok{];}
-\NormalTok{actual[}\DecValTok{5}\NormalTok{] =}\StringTok{ }\DecValTok{0}  \CommentTok{# assign 0 to claim counts greater than or equal to 4 in observed data}
-\NormalTok{diff =}\StringTok{ }\NormalTok{actual}\OperatorTok{-}\NormalTok{table1p}
-\NormalTok{(}\DataTypeTok{PearsonG =} \KeywordTok{sum}\NormalTok{(diff}\OperatorTok{*}\NormalTok{diff}\OperatorTok{/}\NormalTok{table1p))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-[1] 41.98438
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{cbind}\NormalTok{(table1p,PearsonG)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-                                                      PearsonG
-[1,] 6977.858 487.6948 17.04292 0.3970532 0.007035805 41.98438
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#  p-value}
-\DecValTok{1}\OperatorTok{-}\KeywordTok{pchisq}\NormalTok{(PearsonG, }\DataTypeTok{df=}\DecValTok{5}\OperatorTok{-}\DecValTok{1}\OperatorTok{-}\DecValTok{1}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-[1] 4.042861e-09
-\end{verbatim}
-
 \chapter{Modeling Loss Severities}\label{modeling-loss-severities}
 
 \emph{This file contains illustrative \textbf{R} code for computing
@@ -2563,7 +2357,7 @@ parameters \((\alpha)\)
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-39-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-35-1} \end{center}
 
 A few quick notes on these commands :
 
@@ -2596,7 +2390,7 @@ parameters \((\theta)\)
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-40-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-36-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2634,7 +2428,7 @@ parameters \((\alpha)\)
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-42-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-38-1} \end{center}
 
 \subsection{Varying The Scale
 Parameter}\label{varying-the-scale-parameter-1}
@@ -2655,7 +2449,7 @@ parameters \((\theta)\)
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-43-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-39-1} \end{center}
 
 \section{Weibull Distribution}\label{weibull-distribution}
 
@@ -2687,7 +2481,7 @@ parameters \((\alpha)\)
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-44-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-40-1} \end{center}
 
 \subsection{Varying The Scale
 Parameter}\label{varying-the-scale-parameter-2}
@@ -2707,7 +2501,7 @@ parameters \((\theta)\)
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-45-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-41-1} \end{center}
 
 \section{Generalized Beta Distribution of The Second Kind
 (GB2)}\label{generalized-beta-distribution-of-the-second-kind-gb2}
@@ -2753,7 +2547,7 @@ The graph shows the GB2 density function with varying scale parameter
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-46-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-42-1} \end{center}
 
 Note: Here we wrote our own function for the density function of the GB2
 density function.
@@ -2790,7 +2584,7 @@ that follow a gamma distribution.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-47-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-43-1} \end{center}
 
 \subsection{Density Obtained Through
 Splicing}\label{density-obtained-through-splicing}
@@ -2817,7 +2611,7 @@ an exponential distribution on \((0,c)\) with a Pareto distribution on
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-48-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-44-1} \end{center}
 
 \section{Coverage Modifications}\label{coverage-modifications}
 
@@ -2888,7 +2682,7 @@ of the modified probability density function is below.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-50-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-46-1} \end{center}
 
 A few quick notes on these commands:
 
@@ -2955,7 +2749,7 @@ Deductible}\label{payment-per-payment-with-ordinary-deductible}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-51-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-47-1} \end{center}
 
 \subsubsection{Per Payment Variable with Policy Limit, Coinsurance and
 Inflation}\label{per-payment-variable-with-policy-limit-coinsurance-and-inflation}
@@ -2991,7 +2785,7 @@ Inflation}\label{per-payment-variable-with-policy-limit-coinsurance-and-inflatio
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-52-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-48-1} \end{center}
 
 \subsection{Franchise Deductible}\label{franchise-deductible}
 
@@ -3077,7 +2871,7 @@ Deductible}\label{payment-per-loss-with-franchise-deductible}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-53-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-49-1} \end{center}
 
 Note : to use the franchise deductible , we have to add the option
 \texttt{franchise\ =\ TRUE} in the coverage function.
@@ -3147,7 +2941,7 @@ Deductible}\label{payment-per-payment-with-franchise-deductible}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-54-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-50-1} \end{center}
 
 \chapter{Model Selection}\label{model-selection}
 
@@ -3270,7 +3064,7 @@ sample claims.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-57-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-53-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3594,7 +3388,7 @@ No Hauck-Donner effect found in any of the estimates
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-59-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-55-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4088,9 +3882,9 @@ uses the maximum likelihood technique for parameter estimation.
 \section{Plotting the Fit Using Densities (on a Logarithmic
 Scale)}\label{plotting-the-fit-using-densities-on-a-logarithmic-scale}
 
-This section plots on logarithmic scale, the smooth (nonparametric)
-density of claims and overlay the densities the distributions considered
-above.
+This section plots on a logarithmic scale, the smooth (nonparametric)
+density of claims and overlays the densities of the distributions
+considered above.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4123,7 +3917,7 @@ above.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-63-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-59-1} \end{center}
 
 \section{Nonparametric Inference}\label{nonparametric-inference}
 
@@ -4190,7 +3984,7 @@ The graph below gives the empirical distribution function
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-65-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-61-1} \end{center}
 
 \subsubsection{Quantiles}\label{quantiles}
 
@@ -4238,7 +4032,7 @@ triangular kernel.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-67-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-63-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4246,7 +4040,7 @@ triangular kernel.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-67-2} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-63-2} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4254,7 +4048,7 @@ triangular kernel.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-67-3} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-63-3} \end{center}
 
 \subsection{Property Fund Data}\label{property-fund-data}
 
@@ -4289,7 +4083,7 @@ claims and claims in logarithmic units.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-68-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-64-1} \end{center}
 
 \subsubsection{Density Comparison}\label{density-comparison}
 
@@ -4308,7 +4102,7 @@ rule based on the sample size and volatility of the data.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-69-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-65-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4479,7 +4273,7 @@ function. Pareto distribution provides a better fit.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-71-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-67-1} \end{center}
 
 \subsubsection{P-P Plots}\label{p-p-plots}
 
@@ -4500,7 +4294,7 @@ provides a better fit again.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-72-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-68-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4533,7 +4327,7 @@ the analyst to see where a fitted distribution is deficient.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-73-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-69-1} \end{center}
 
 \subsubsection{Goodness of Fit
 Statistics}\label{goodness-of-fit-statistics}
@@ -4716,7 +4510,7 @@ Calculate the maximum likelihood estimate of \(\theta\).
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-75-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-71-1} \end{center}
 
 \chapter{Simulation}\label{simulation}
 
@@ -4844,7 +4638,7 @@ Moments}\label{comparing-moments-from-the-simulated-data-to-theoretical-moments}
 \CommentTok{#Simulated data raw moments}
 \NormalTok{S4<-}\KeywordTok{round}\NormalTok{(}\KeywordTok{moment}\NormalTok{(Losses, }\DataTypeTok{order =}\NormalTok{ k, }\DataTypeTok{central =} \OtherTok{FALSE}\NormalTok{),}\DecValTok{2}\NormalTok{)}
 
-\KeywordTok{pander}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"k"}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\StringTok{"Theoritical"}\NormalTok{,T0.}\DecValTok{5}\NormalTok{,T1,T2,T3,T4),}\KeywordTok{c}\NormalTok{(}\StringTok{"Simulated"}\NormalTok{,S0.}\DecValTok{5}\NormalTok{,S1,S2,S3,S4)))}
+\KeywordTok{pander}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"k"}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\StringTok{"Theoretical"}\NormalTok{,T0.}\DecValTok{5}\NormalTok{,T1,T2,T3,T4),}\KeywordTok{c}\NormalTok{(}\StringTok{"Simulated"}\NormalTok{,S0.}\DecValTok{5}\NormalTok{,S1,S2,S3,S4)))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4864,7 +4658,7 @@ k\strut
 4\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-Theoritical\strut
+Theoretical\strut
 \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
 13.29\strut
 \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
@@ -4892,12 +4686,12 @@ Simulated\strut
 \bottomrule
 \end{longtable}
 
- A few quick notes on these commands:
+A few quick notes on these commands:
 
 \begin{itemize}
 \tightlist
 \item
-  The \texttt{momemt()} function computes all the sample moments of the
+  The \texttt{moment()} function computes all the sample moments of the
   chosen type up to a given order. In this illustration, we wanted the
   raw sample moments of the \emph{kth} order.
 \item
@@ -4951,7 +4745,7 @@ Graphing the our frequency (N) and severity (X) distributions
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-79-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-75-1} \end{center}
 
 \subsection{Set sample size for the
 simulation}\label{set-sample-size-for-the-simulation}
@@ -4983,7 +4777,7 @@ S}\label{show-distribution-of-aggregate-loss-s}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-81-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-77-1} \end{center}
 
 \section{Applications}\label{applications}
 
@@ -5098,7 +4892,7 @@ based on the size of the deductible
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-87-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-83-1} \end{center}
 
 \chapter{FreqSev}\label{freqsev}
 
@@ -5805,7 +5599,7 @@ prepare the display window parameters to properly fit the histograms
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-116-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-112-1} \end{center}
 
 \subsubsection{Pareto}\label{pareto}
 
@@ -5819,7 +5613,7 @@ prepare the display window parameters to properly fit the histograms
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-117-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-113-1} \end{center}
 
 \subsection{qq Plots}\label{qq-plots}
 
@@ -5842,7 +5636,7 @@ Pareto}\label{define-quantile-function-of-pareto}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-118-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-114-1} \end{center}
 
 \chapter{Tweedie}\label{tweedie}
 
@@ -5946,7 +5740,7 @@ statistics aren't enough to see the full picture.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-123-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-119-1} \end{center}
 
 \subsection{QQ Plots for Different p
 Values}\label{qq-plots-for-different-p-values}
@@ -5972,7 +5766,7 @@ It appears here that a power of 1.5 matches the distribution best.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-124-1} \end{center}
+\begin{center}\includegraphics{R_for_Loss_Data_Analytics_files/figure-latex/unnamed-chunk-120-1} \end{center}
 
 \begin{verbatim}
 [[1]]
