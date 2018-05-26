@@ -240,7 +240,7 @@ gb2density <- function(x){
 
 ## Plotting the Fit Using Densities (on a Logarithmic Scale) {.tabset}
 
-This section plots on logarithmic scale, the smooth (nonparametric) density of claims and overlay the densities the distributions considered above. 
+This section plots on a logarithmic scale, the smooth (nonparametric) density of claims and overlays the densities of the distributions considered above. 
 
 ```{r}
 # None of these distributions is doing a great job....

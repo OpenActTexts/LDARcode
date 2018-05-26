@@ -97,11 +97,11 @@ T4<-((theta^k)*gamma(alpha+k))/gamma(alpha)
 #Simulated data raw moments
 S4<-round(moment(Losses, order = k, central = FALSE),2)
 
-pander(rbind(c("k",0.5,1,2,3,4),c("Theoritical",T0.5,T1,T2,T3,T4),c("Simulated",S0.5,S1,S2,S3,S4)))
+pander(rbind(c("k",0.5,1,2,3,4),c("Theoretical",T0.5,T1,T2,T3,T4),c("Simulated",S0.5,S1,S2,S3,S4)))
 ```
-<br/>
+
 A few quick notes on these commands:
 
-* The `momemt()` function computes all the sample moments of the chosen type up to a given order. In this illustration, we wanted the raw sample moments of the *kth* order.
+* The `moment()` function computes all the sample moments of the chosen type up to a given order. In this illustration, we wanted the raw sample moments of the *kth* order.
 * The `round()` function was used to round values. 
 
