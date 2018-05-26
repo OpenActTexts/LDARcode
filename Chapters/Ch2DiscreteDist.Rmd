@@ -51,7 +51,7 @@ plot(N,Fn,xlab="n",ylab="F(n)") # cdf
 
 This section shows how to compute and graph probability mass and distribution functions for the negative binomial distribution. You will also learn how to plot two functions on the same graph.
 
-#### Probability Mass Function (pmf)
+#### Probability Mass Function (pmf) {.tabset}
 ```{r  fig.width=6, fig.height=4}
 alpha<- 3
 theta<- 2
@@ -63,7 +63,7 @@ N<- seq(0,30, 1)
 plot(N,fn,xlab="n",ylab="f(n)") # pmf
 ```
 
-**Plot Two Functions on The Same Graph**  
+##### Plot Two Functions on The Same Graph 
 ```{r  fig.width=6, fig.height=4}
 #Plot Different Negative Binomial Distributions on the same Figure
 alpha1 <- 3
