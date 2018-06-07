@@ -205,9 +205,11 @@ for (i in 1:length(lambdax))
 plot(lambdax,loglike)
 ```
 
+If we had to guess, from this plot we might say that the maximum value of the log likelihood was around 0.07. 
+
 ### The Maximum Likelihood Estimate of Poisson Distribution
 
-If we had to guess, from this plot we might say that the maximum value of the log likelihood was around 0.7. From calculus, we know that the maximum likelihood estimator 
+From calculus, we know that the maximum likelihood estimator 
 <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Values of the parameters that are 'most likely' to have been produced by the data.", style="color:green;">(*mle*)</a> of the Poisson distribution parameter equals the average claim count. For our data, this is
 
 
@@ -241,7 +243,7 @@ summary(CountPoisson1)
 ```
 A few quick notes on these commands and results:
 
-* The `glm()`function is used to fit generalized linear models. See `help(glm)` for other modeling options.In order to get the results we use the `summary() ` function.
+* The `glm()`function is used to fit generalized linear models. See `help(glm)` for other modeling options. In order to get the results we use the `summary() ` function.
 * In the output, `call` reminds us what model we ran and what options were specified.
 * The `Deviance Residuals` shows the distribution of the deviance residuals for individual cases used in the model. 
 * The next part of the output shows the coefficient (maximum likelihood estimate of $\log(\lambda)$), its standard error, the z-statistic and the associated p-value. 

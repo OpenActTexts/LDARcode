@@ -69,7 +69,7 @@ legend("topright", c(expression(theta~'=100'), expression(theta~'=150'), express
 title(substitute(paste("Pdf Gamma Density with"," ",alpha,"=2"," ", "and Varying Scale")))
 ```
 
-```{r}
+```{r echo=FALSE}
 knitr::include_app("https://luyang.shinyapps.io/gamma/", 
   height = "600px")
 ```
@@ -324,7 +324,7 @@ curve(f(x, 3), from = 0.1, to = 1, col = "blue", add = TRUE) # 0 < x < 1
 legend("topright", c("Original pdf", "Modified pdf"), lty=1, cex=0.6,col = c("black","blue"))
 ```
 
-Note : to use the franchise deductible , we have to add the option `franchise = TRUE` in the coverage function. 
+Note : To use the franchise deductible , we have to add the option `franchise = TRUE` in the coverage function. 
 
 #### Payment Per Payment with Franchise Deductible
 ```{r}

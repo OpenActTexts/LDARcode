@@ -173,9 +173,9 @@ coef(fit.pareto)
 exp(coef(fit.pareto))
 
 confint(fit.pareto, level=0.95)  # confidence intervals for model parameters 
-logLik(fit.pareto)               #loglikelihood for pareto
-AIC(fit.pareto)                  #AIC for pareto
-BIC(fit.pareto)                  #BIC for pareto
+logLik(fit.pareto)               #loglikelihood for Pareto
+AIC(fit.pareto)                  #AIC for Pareto
+BIC(fit.pareto)                  #BIC for Pareto
 vcov(fit.pareto)                 # covariance matrix for model parameters 
 ```
 
@@ -323,12 +323,12 @@ plot(density(xExample, kernel = "triangular"), main="", xlab="x") # Change the k
 ### Property Fund Data {.tabset}
 This section employs non-parametric estimation tools for model selection for the claims data of the Property Fund.
 
-#### Empirical Distribution Function of Property fund
+#### Empirical Distribution Function of Property Fund
 The results below gives the empirical distribution function of the claims and claims in logarithmic units. 
 ```{r}
 ClaimLev <- read.csv("DATA/CLAIMLEVEL.csv", header=TRUE); nrow(ClaimLev); # 6258
 ClaimData<-subset(ClaimLev,Year==2010);     #2010 subset 
-##Empirical distribution function of Property fund
+##Empirical distribution function of Property Fund
 par(mfrow=c(1, 2))
 Percentiles  <- ecdf(ClaimData$Claim)
 LogPercentiles  <- ecdf(log(ClaimData$Claim))
