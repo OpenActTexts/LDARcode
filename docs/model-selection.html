@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Loss Data Analytics</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="description" content="This site provides files that generate R codes to support the online text Loss Data Analytics.">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Loss Data Analytics" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta property="og:description" content="This site provides files that generate R codes to support the online text Loss Data Analytics." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="R for Loss Data Analytics" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:description" content="This site provides files that generate R codes to support the online text Loss Data Analytics." />
   
 
 <meta name="author" content="An open text authored by the Actuarial Community">
 
 
-<meta name="date" content="2018-05-24">
+<meta name="date" content="2018-06-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -479,12 +479,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.4.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#pearson-goodness-of-fit-statistic"><i class="fa fa-check"></i><b>3.4.1</b> Pearson Goodness-of-Fit Statistic</a></li>
 <li class="chapter" data-level="3.4.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#negative-binomial-goodness-of-fit-statistic"><i class="fa fa-check"></i><b>3.4.2</b> Negative Binomial Goodness-of-Fit Statistic</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="frequency-distributions.html"><a href="frequency-distributions.html#singapore-data-1"><i class="fa fa-check"></i><b>3.5</b> Singapore Data</a></li>
-<li class="chapter" data-level="3.6" data-path="frequency-distributions.html"><a href="frequency-distributions.html#goodness-of-fit-for-poisson-distribution"><i class="fa fa-check"></i><b>3.6</b> Goodness of Fit for Poisson Distribution</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#claim-frequency-distribution-2"><i class="fa fa-check"></i><b>3.6.1</b> Claim Frequency Distribution</a></li>
-<li class="chapter" data-level="3.6.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#the-maximum-likelihood-estimate-of-lambda"><i class="fa fa-check"></i><b>3.6.2</b> The Maximum Likelihood Estimate of <span class="math inline">\(\lambda\)</span></a></li>
-<li class="chapter" data-level="3.6.3" data-path="frequency-distributions.html"><a href="frequency-distributions.html#pearson-goodness-of-fit-statistic-1"><i class="fa fa-check"></i><b>3.6.3</b> Pearson Goodness-of-Fit Statistic</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html"><i class="fa fa-check"></i><b>4</b> Modeling Loss Severities</a><ul>
 <li class="chapter" data-level="4.1" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#required-packages"><i class="fa fa-check"></i><b>4.1</b> Required packages</a></li>
@@ -678,7 +672,7 @@ NTot</code></pre></div>
 <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">hist</span>(ClaimData<span class="op">$</span>Claim, <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Claims&quot;</span>)
 <span class="kw">hist</span>(<span class="kw">log</span>(ClaimData<span class="op">$</span>Claim), <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Logarithmic Claims&quot;</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-57-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#dev.off()</span></code></pre></div>
 </div>
 </div>
@@ -825,7 +819,7 @@ No Hauck-Donner effect found in any of the estimates</code></pre>
 x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">15</span>,<span class="dt">by=</span><span class="fl">0.01</span>)
 fgamma_ex =<span class="st"> </span><span class="kw">dgamma</span>(<span class="kw">exp</span>(x), <span class="dt">shape =</span> alpha, <span class="dt">scale=</span>theta)<span class="op">*</span><span class="kw">exp</span>(x)
 <span class="kw">lines</span>(x,fgamma_ex,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-59-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(fit.gamma, <span class="dt">level=</span><span class="fl">0.95</span>)  <span class="co"># confidence intervals for model parameters </span></code></pre></div>
 <pre><code>                  2.5 %    97.5 %
 (Intercept):1 10.091533 10.287498
@@ -935,11 +929,11 @@ No Hauck-Donner effect found in any of the estimates</code></pre>
 <pre><code>                   2.5 %    97.5 %
 (Intercept):1  7.5499914 7.9158507
 (Intercept):2 -0.1064471 0.1046966</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">logLik</span>(fit.pareto)               <span class="co">#loglikelihood for pareto</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">logLik</span>(fit.pareto)               <span class="co">#loglikelihood for Pareto</span></code></pre></div>
 <pre><code>[1] -13404.64</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">AIC</span>(fit.pareto)                  <span class="co">#AIC for pareto</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">AIC</span>(fit.pareto)                  <span class="co">#AIC for Pareto</span></code></pre></div>
 <pre><code>[1] 26813.29</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">BIC</span>(fit.pareto)                  <span class="co">#BIC for pareto</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">BIC</span>(fit.pareto)                  <span class="co">#BIC for Pareto</span></code></pre></div>
 <pre><code>[1] 26823.74</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vcov</span>(fit.pareto)                 <span class="co"># covariance matrix for model parameters </span></code></pre></div>
 <pre><code>              (Intercept):1 (Intercept):2
@@ -1058,7 +1052,7 @@ gb2density &lt;-<span class="st"> </span><span class="cf">function</span>(x){
 </div>
 <div id="plotting-the-fit-using-densities-on-a-logarithmic-scale" class="section level2 tabset">
 <h2><span class="header-section-number">5.3</span> Plotting the Fit Using Densities (on a Logarithmic Scale)</h2>
-<p>This section plots on logarithmic scale, the smooth (nonparametric) density of claims and overlay the densities the distributions considered above.</p>
+<p>This section plots on a logarithmic scale, the smooth (nonparametric) density of claims and overlays the densities of the distributions considered above.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># None of these distributions is doing a great job....</span>
 <span class="kw">plot</span>(<span class="kw">density</span>(<span class="kw">log</span>(ClaimData<span class="op">$</span>Claim)), <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Log Expenditures&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.37</span>))
 x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">15</span>,<span class="dt">by=</span><span class="fl">0.01</span>)
@@ -1085,7 +1079,7 @@ fGB2_ex =<span class="st"> </span><span class="kw">gb2density</span>(<span class
 <span class="kw">lines</span>(x,fGB2_ex, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>)
 
 <span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;log(ClaimData$Claim)&quot;</span>,<span class="st">&quot;Exponential&quot;</span>, <span class="st">&quot;Gamma&quot;</span>, <span class="st">&quot;Pareto&quot;</span>,<span class="st">&quot;lognormal&quot;</span>,<span class="st">&quot;GB2&quot;</span>), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>,<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;purple&quot;</span>,<span class="st">&quot;lightblue&quot;</span>,<span class="st">&quot;green&quot;</span>))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-63-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-59-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="nonparametric-inference" class="section level2">
 <h2><span class="header-section-number">5.4</span> Nonparametric Inference</h2>
@@ -1112,7 +1106,7 @@ fGB2_ex =<span class="st"> </span><span class="kw">gb2density</span>(<span class
 
 ###Empirical Distribution Function
 <span class="kw">plot</span>(PercentilesxExample, <span class="dt">main=</span><span class="st">&quot;&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-65-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="quantiles" class="section level4">
 <h4><span class="header-section-number">5.4.1.3</span> Quantiles</h4>
@@ -1132,29 +1126,29 @@ fGB2_ex =<span class="st"> </span><span class="kw">gb2density</span>(<span class
 <p>The results below gives the density plots using the uniform kernel and triangular kernel.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##density plot 
 <span class="kw">plot</span>(<span class="kw">density</span>(xExample), <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-67-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-63-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(xExample, <span class="dt">bw=</span>.<span class="dv">33</span>), <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>) <span class="co"># Change the bandwidth</span></code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-67-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-63-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(xExample, <span class="dt">kernel =</span> <span class="st">&quot;triangular&quot;</span>), <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>) <span class="co"># Change the kernel</span></code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-67-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-63-3.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="property-fund-data" class="section level3 tabset">
 <h3><span class="header-section-number">5.4.2</span> Property Fund Data</h3>
 <p>This section employs non-parametric estimation tools for model selection for the claims data of the Property Fund.</p>
 <div id="empirical-distribution-function-of-property-fund" class="section level4">
-<h4><span class="header-section-number">5.4.2.1</span> Empirical Distribution Function of Property fund</h4>
+<h4><span class="header-section-number">5.4.2.1</span> Empirical Distribution Function of Property Fund</h4>
 <p>The results below gives the empirical distribution function of the claims and claims in logarithmic units.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ClaimLev &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;DATA/CLAIMLEVEL.csv&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>); <span class="kw">nrow</span>(ClaimLev); <span class="co"># 6258</span></code></pre></div>
 <pre><code>[1] 6258</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ClaimData&lt;-<span class="kw">subset</span>(ClaimLev,Year<span class="op">==</span><span class="dv">2010</span>);     <span class="co">#2010 subset </span>
-##Empirical distribution function of Property fund
+##Empirical distribution function of Property Fund
 <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 Percentiles  &lt;-<span class="st"> </span><span class="kw">ecdf</span>(ClaimData<span class="op">$</span>Claim)
 LogPercentiles  &lt;-<span class="st"> </span><span class="kw">ecdf</span>(<span class="kw">log</span>(ClaimData<span class="op">$</span>Claim))
 <span class="kw">plot</span>(Percentiles,  <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Claims&quot;</span>)
 <span class="kw">plot</span>(LogPercentiles, <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Logarithmic Claims&quot;</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-68-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-64-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="density-comparison" class="section level4">
 <h4><span class="header-section-number">5.4.2.2</span> Density Comparison</h4>
@@ -1164,7 +1158,7 @@ LogPercentiles  &lt;-<span class="st"> </span><span class="kw">ecdf</span>(<span
 <span class="kw">lines</span>(<span class="kw">density</span>(<span class="kw">log</span>(ClaimData<span class="op">$</span>Claim)), <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">lwd=</span><span class="fl">2.5</span>)
 <span class="kw">lines</span>(<span class="kw">density</span>(<span class="kw">log</span>(ClaimData<span class="op">$</span>Claim), <span class="dt">bw=</span><span class="dv">1</span>), <span class="dt">col=</span><span class="st">&quot;green&quot;</span>)
 <span class="kw">lines</span>(<span class="kw">density</span>(<span class="kw">log</span>(ClaimData<span class="op">$</span>Claim), <span class="dt">bw=</span>.<span class="dv">1</span>), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lty=</span><span class="dv">3</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-69-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-65-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">density</span>(<span class="kw">log</span>(ClaimData<span class="op">$</span>Claim))<span class="op">$</span>bw   ##default bandwidth</code></pre></div>
 <pre><code>[1] 0.3255908</code></pre>
 </div>
@@ -1269,7 +1263,7 @@ fgamma_ex =<span class="st"> </span><span class="kw">dgamma</span>(<span class="
 fpareto_ex =<span class="st"> </span><span class="kw">dparetoII</span>(<span class="kw">exp</span>(x),<span class="dt">loc=</span><span class="dv">0</span>,<span class="dt">shape =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(fit.pareto)[<span class="dv">2</span>]), <span class="dt">scale =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(fit.pareto)[<span class="dv">1</span>]))<span class="op">*</span><span class="kw">exp</span>(x)
 <span class="kw">lines</span>(x,fpareto_ex,<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>)
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;log(claims)&quot;</span>, <span class="st">&quot;Gamma&quot;</span>,<span class="st">&quot;Pareto&quot;</span>), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.6</span>,<span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;purple&quot;</span>))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-71-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-67-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="p-p-plots" class="section level4">
 <h4><span class="header-section-number">5.4.3.3</span> P-P Plots</h4>
@@ -1282,7 +1276,7 @@ Fgamma_ex =<span class="st"> </span><span class="kw">pgamma</span>(ClaimData<spa
 Fpareto_ex =<span class="st"> </span><span class="kw">pparetoII</span>(ClaimData<span class="op">$</span>Claim,<span class="dt">loc=</span><span class="dv">0</span>,<span class="dt">shape =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(fit.pareto)[<span class="dv">2</span>]), <span class="dt">scale =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(fit.pareto)[<span class="dv">1</span>]))
 <span class="kw">plot</span>(<span class="kw">Percentiles</span>(ClaimData<span class="op">$</span>Claim),Fpareto_ex, <span class="dt">xlab=</span><span class="st">&quot;Empirical DF&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Pareto DF&quot;</span>,<span class="dt">cex=</span><span class="fl">0.4</span>)
 <span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-72-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-68-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#dev.off()</span></code></pre></div>
 </div>
 <div id="q-q-plots" class="section level4">
@@ -1302,7 +1296,7 @@ Paretoquant =<span class="st"> </span><span class="kw">qparetoII</span>(xseq,<sp
 <span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>)
 <span class="kw">plot</span>(<span class="kw">log</span>(empquant), <span class="kw">log</span>(Paretoquant), <span class="dt">xlab=</span><span class="st">&quot;Log Emp Quantile&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Log Pareto Quantile&quot;</span>)
 <span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-73-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-69-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="goodness-of-fit-statistics" class="section level4">
 <h4><span class="header-section-number">5.4.3.5</span> Goodness of Fit Statistics</h4>
@@ -1413,7 +1407,7 @@ vllh =<span class="st"> </span><span class="kw">Vectorize</span>(likgrp,<span cl
 theta=<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>, <span class="dt">by=</span><span class="fl">0.01</span>)
 <span class="kw">plot</span>(theta, <span class="kw">vllh</span>(theta), <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">main =</span><span class="st">&quot;Negative Log-Likelihood Function&quot;</span> , <span class="dt">cex=</span>.<span class="dv">25</span>, 
      <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;L(&quot;</span>,theta,<span class="st">&quot;)&quot;</span>)))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-75-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-71-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

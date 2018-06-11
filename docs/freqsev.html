@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Loss Data Analytics</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="description" content="This site provides files that generate R codes to support the online text Loss Data Analytics.">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Loss Data Analytics" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta property="og:description" content="This site provides files that generate R codes to support the online text Loss Data Analytics." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="R for Loss Data Analytics" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:description" content="This site provides files that generate R codes to support the online text Loss Data Analytics." />
   
 
 <meta name="author" content="An open text authored by the Actuarial Community">
 
 
-<meta name="date" content="2018-05-24">
+<meta name="date" content="2018-06-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -478,12 +478,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.4" data-path="frequency-distributions.html"><a href="frequency-distributions.html#goodness-of-fit"><i class="fa fa-check"></i><b>3.4</b> Goodness of Fit</a><ul>
 <li class="chapter" data-level="3.4.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#pearson-goodness-of-fit-statistic"><i class="fa fa-check"></i><b>3.4.1</b> Pearson Goodness-of-Fit Statistic</a></li>
 <li class="chapter" data-level="3.4.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#negative-binomial-goodness-of-fit-statistic"><i class="fa fa-check"></i><b>3.4.2</b> Negative Binomial Goodness-of-Fit Statistic</a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="frequency-distributions.html"><a href="frequency-distributions.html#singapore-data-1"><i class="fa fa-check"></i><b>3.5</b> Singapore Data</a></li>
-<li class="chapter" data-level="3.6" data-path="frequency-distributions.html"><a href="frequency-distributions.html#goodness-of-fit-for-poisson-distribution"><i class="fa fa-check"></i><b>3.6</b> Goodness of Fit for Poisson Distribution</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#claim-frequency-distribution-2"><i class="fa fa-check"></i><b>3.6.1</b> Claim Frequency Distribution</a></li>
-<li class="chapter" data-level="3.6.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#the-maximum-likelihood-estimate-of-lambda"><i class="fa fa-check"></i><b>3.6.2</b> The Maximum Likelihood Estimate of <span class="math inline">\(\lambda\)</span></a></li>
-<li class="chapter" data-level="3.6.3" data-path="frequency-distributions.html"><a href="frequency-distributions.html#pearson-goodness-of-fit-statistic-1"><i class="fa fa-check"></i><b>3.6.3</b> Pearson Goodness-of-Fit Statistic</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html"><i class="fa fa-check"></i><b>4</b> Modeling Loss Severities</a><ul>
@@ -1043,7 +1037,7 @@ x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</
 mu &lt;-<span class="st"> </span>zop.LN<span class="op">$</span>par[<span class="dv">1</span>]
 sigma &lt;-<span class="st"> </span>zop.LN<span class="op">$</span>par[<span class="dv">2</span>]
 <span class="kw">lines</span>(x,<span class="kw">dlnorm</span>(x,mu,sigma),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-116-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-112-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="pareto" class="section level4">
 <h4><span class="header-section-number">8.3.4.2</span> Pareto</h4>
@@ -1052,7 +1046,7 @@ x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</
 theta &lt;-<span class="st"> </span>zop.P<span class="op">$</span>par[<span class="dv">1</span>]
 alpha &lt;-<span class="st"> </span>zop.P<span class="op">$</span>par[<span class="dv">2</span>]
 <span class="kw">lines</span>(x,<span class="kw">dpareto</span>(x,theta,alpha),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-117-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-113-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="qq-plots" class="section level3 tabset">
@@ -1070,7 +1064,7 @@ pct &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0
      <span class="dt">main=</span><span class="st">&quot;Pareto&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Theoretical Quantile&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Empirical Quantile&quot;</span>,
      <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">7.5e4</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">7.5e4</span>))
 <span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-118-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-114-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Loss Data Analytics</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="description" content="This site provides files that generate R codes to support the online text Loss Data Analytics.">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Loss Data Analytics" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta property="og:description" content="This site provides files that generate R codes to support the online text Loss Data Analytics." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="R for Loss Data Analytics" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:description" content="This site provides files that generate R codes to support the online text Loss Data Analytics." />
   
 
 <meta name="author" content="An open text authored by the Actuarial Community">
 
 
-<meta name="date" content="2018-05-24">
+<meta name="date" content="2018-06-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -479,12 +479,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.4.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#pearson-goodness-of-fit-statistic"><i class="fa fa-check"></i><b>3.4.1</b> Pearson Goodness-of-Fit Statistic</a></li>
 <li class="chapter" data-level="3.4.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#negative-binomial-goodness-of-fit-statistic"><i class="fa fa-check"></i><b>3.4.2</b> Negative Binomial Goodness-of-Fit Statistic</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="frequency-distributions.html"><a href="frequency-distributions.html#singapore-data-1"><i class="fa fa-check"></i><b>3.5</b> Singapore Data</a></li>
-<li class="chapter" data-level="3.6" data-path="frequency-distributions.html"><a href="frequency-distributions.html#goodness-of-fit-for-poisson-distribution"><i class="fa fa-check"></i><b>3.6</b> Goodness of Fit for Poisson Distribution</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#claim-frequency-distribution-2"><i class="fa fa-check"></i><b>3.6.1</b> Claim Frequency Distribution</a></li>
-<li class="chapter" data-level="3.6.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#the-maximum-likelihood-estimate-of-lambda"><i class="fa fa-check"></i><b>3.6.2</b> The Maximum Likelihood Estimate of <span class="math inline">\(\lambda\)</span></a></li>
-<li class="chapter" data-level="3.6.3" data-path="frequency-distributions.html"><a href="frequency-distributions.html#pearson-goodness-of-fit-statistic-1"><i class="fa fa-check"></i><b>3.6.3</b> Pearson Goodness-of-Fit Statistic</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html"><i class="fa fa-check"></i><b>4</b> Modeling Loss Severities</a><ul>
 <li class="chapter" data-level="4.1" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#required-packages"><i class="fa fa-check"></i><b>4.1</b> Required packages</a></li>
@@ -632,7 +626,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">3.1</span> Basic Distributions</h2>
 <div id="poisson-distribution" class="section level3 tabset">
 <h3><span class="header-section-number">3.1.1</span> Poisson Distribution</h3>
-<p>This sections shows how to compute and graph probability mass and distribution function for the Poisson distribution.</p>
+<p>This sections shows how to compute and graph probability mass and distribution functions for the Poisson distribution.</p>
 <div id="probability-mass-function-pmf" class="section level4">
 <h4><span class="header-section-number">3.1.1.1</span> Probability Mass Function (pmf)</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lambda &lt;-<span class="st"> </span><span class="dv">3</span>
@@ -671,8 +665,8 @@ N&lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</s
 </div>
 <div id="negative-binomial-distribution" class="section level3 tabset">
 <h3><span class="header-section-number">3.1.2</span> Negative Binomial Distribution</h3>
-<p>This section shows how to compute and graph probability mass and distribution function for the negative binomial distribution. You will also learn how to plot two functions on the same graph.</p>
-<div id="probability-mass-function-pmf-1" class="section level4">
+<p>This section shows how to compute and graph probability mass and distribution functions for the negative binomial distribution. You will also learn how to plot two functions on the same graph.</p>
+<div id="probability-mass-function-pmf-1" class="section level4 tabset">
 <h4><span class="header-section-number">3.1.2.1</span> Probability Mass Function (pmf)</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha&lt;-<span class="st"> </span><span class="dv">3</span>
 theta&lt;-<span class="st"> </span><span class="dv">2</span>
@@ -690,6 +684,24 @@ N&lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</s
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># visualize the probability mass function</span>
 <span class="kw">plot</span>(N,fn,<span class="dt">xlab=</span><span class="st">&quot;n&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;f(n)&quot;</span>) <span class="co"># pmf</span></code></pre></div>
 <p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div id="plot-two-functions-on-the-same-graph" class="section level5">
+<h5><span class="header-section-number">3.1.2.1.1</span> Plot Two Functions on The Same Graph</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Plot Different Negative Binomial Distributions on the same Figure</span>
+alpha1 &lt;-<span class="st"> </span><span class="dv">3</span>
+alpha2 &lt;-<span class="st"> </span><span class="dv">5</span>
+theta &lt;-<span class="st"> </span><span class="dv">2</span>; prob &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>theta)
+fn1 &lt;-<span class="st"> </span><span class="kw">dnbinom</span>(N, alpha1,prob)
+fn2 &lt;-<span class="st"> </span><span class="kw">dnbinom</span>(N, alpha2,prob)
+<span class="kw">plot</span>(N,fn1,<span class="dt">xlab=</span><span class="st">&quot;n&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;f(n)&quot;</span>)
+<span class="kw">lines</span>(N,fn2, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">type=</span><span class="st">&quot;p&quot;</span>)</code></pre></div>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>A couple notes on these commands:</p>
+<ul>
+<li>You can enter more than one command on a line; separate them using the <code>;</code> semi-colon.</li>
+<li><code>lines</code> is very handy for superimposing one graph on another.</li>
+<li>When making complex graphs with more than one function, consider using different colors. The <code>col=&quot;red&quot;</code> tells <strong>R</strong> to use the color red when plotting symbols.</li>
+</ul>
+</div>
 </div>
 <div id="cumulative-probability-distribution-function-cdf-1" class="section level4">
 <h4><span class="header-section-number">3.1.2.2</span> (Cumulative) Probability Distribution Function (cdf)</h4>
@@ -702,28 +714,16 @@ N&lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</s
 [25] 0.99820030 0.99871513 0.99908475 0.99934942 0.99953846 0.99967319
 [31] 0.99976899</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(N,Fn,<span class="dt">xlab=</span><span class="st">&quot;n&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;F(n)&quot;</span>) <span class="co"># cdf</span></code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Plot Different Negative Binomial Distributions on the same Figure</span>
-alpha1 &lt;-<span class="st"> </span><span class="dv">3</span>
-alpha2 &lt;-<span class="st"> </span><span class="dv">5</span>
-theta &lt;-<span class="st"> </span><span class="dv">2</span>; prob &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>theta)
-fn1 &lt;-<span class="st"> </span><span class="kw">dnbinom</span>(N, alpha1,prob)
-fn2 &lt;-<span class="st"> </span><span class="kw">dnbinom</span>(N, alpha2,prob)
-<span class="kw">plot</span>(N,fn1,<span class="dt">xlab=</span><span class="st">&quot;n&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;f(n)&quot;</span>)
-<span class="kw">lines</span>(N,fn2, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">type=</span><span class="st">&quot;p&quot;</span>)</code></pre></div>
 <p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>A couple notes on these commands:</p>
-<ul>
-<li>You can enter more than one command on a line; separate them using the <code>;</code> semi-colon.</li>
-<li><code>lines</code> is very handy for superimposing one graph on another.</li>
-<li>When making complex graphs with more than one function, consider using different colors. The <code>col=&quot;red&quot;</code> tells <strong>R</strong> to use the color red when plotting symbols.</li>
-</ul>
 </div>
 </div>
 <div id="binomial-distribution" class="section level3 tabset">
 <h3><span class="header-section-number">3.1.3</span> Binomial Distribution</h3>
-<p>This section shows how to compute and graph probability mass and distribution function for the binomial distribution.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">size&lt;-<span class="st"> </span><span class="dv">30</span>
+<p>This section shows how to compute and graph probability mass and distribution functions for the binomial distribution.</p>
+<div id="probability-mass-function-pmf-2" class="section level4">
+<h4><span class="header-section-number">3.1.3.1</span> Probability Mass Function (pmf)</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Plot Different Binomial Distributions on the same Figure</span>
+size&lt;-<span class="st"> </span><span class="dv">30</span>
 prob&lt;-<span class="st"> </span><span class="fl">0.6</span>
 N&lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">30</span>, <span class="dv">1</span>)
 fn &lt;-<span class="st"> </span><span class="kw">dbinom</span>(N,size ,prob)
@@ -731,6 +731,21 @@ fn &lt;-<span class="st"> </span><span class="kw">dbinom</span>(N,size ,prob)
 fn2 &lt;-<span class="st"> </span><span class="kw">dbinom</span>(N,size ,<span class="fl">0.7</span>)
 <span class="kw">lines</span>(N,fn2, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">type=</span><span class="st">&quot;p&quot;</span>)</code></pre></div>
 <p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cumulative-probability-distribution-function-cdf-2" class="section level4">
+<h4><span class="header-section-number">3.1.3.2</span> (Cumulative) Probability Distribution Function (cdf)</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#get the distribution function using &quot;pbinom&quot;</span>
+(Fn &lt;-<span class="st"> </span><span class="kw">pbinom</span>(N, size,prob))</code></pre></div>
+<pre><code> [1] 1.152922e-12 5.303439e-11 1.181456e-09 1.697936e-08 1.769332e-07
+ [6] 1.424573e-06 9.222321e-06 4.932503e-05 2.222679e-04 8.563920e-04
+[11] 2.853883e-03 8.301584e-03 2.123988e-02 4.811171e-02 9.705684e-02
+[16] 1.753691e-01 2.854956e-01 4.215343e-01 5.689095e-01 7.085281e-01
+[21] 8.237135e-01 9.059888e-01 9.564759e-01 9.828170e-01 9.943412e-01
+[26] 9.984899e-01 9.996867e-01 9.999526e-01 9.999954e-01 9.999998e-01
+[31] 1.000000e+00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(N,Fn,<span class="dt">xlab=</span><span class="st">&quot;n&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;F(n)&quot;</span>) <span class="co"># cdf</span></code></pre></div>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 </div>
 <div id="ab0-class-of-distributions" class="section level2 tabset">
@@ -761,7 +776,7 @@ p</code></pre></div>
 [21] 7.135379e-11</code></pre>
 <p>A couple notes on these commands.</p>
 <ul>
-<li>There are many basic math command in <strong>R</strong> such as <code>exp</code> for exponentials.</li>
+<li>There are many basic math commands in <strong>R</strong> such as <code>exp</code> for exponentials.</li>
 <li>This demo illustrates the use of the <code>for</code> loop, one of many ways of doing recursive calculations.</li>
 </ul>
 </div>
@@ -769,9 +784,9 @@ p</code></pre></div>
 <h2><span class="header-section-number">3.3</span> Estimating Frequency Distributions</h2>
 <div id="singapore-data" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> Singapore Data</h3>
-<p>This section loads the <code>SingaporeAuto.csv</code> dataset and check the name of variables and the dimension of the data. To have a glimpse at the data, the first 8 observations are listed.</p>
+<p>This section loads the <code>SingaporeAuto.csv</code> dataset and checks the names of variables and the dimensions of the data. To have a glimpse at the data, the first 8 observations are listed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Singapore =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/SingaporeAuto.csv&quot;</span>,  <span class="dt">quote =</span> <span class="st">&quot;&quot;</span>,<span class="dt">header=</span><span class="ot">TRUE</span>)
-<span class="co">#  Check the names, dimension in the file and list the first 8 observations ;</span>
+<span class="co">#  Check the names, dimensions in the file and list the first 8 observations ;</span>
 <span class="kw">names</span>(Singapore)</code></pre></div>
 <pre><code> [1] &quot;SexInsured&quot;  &quot;Female&quot;      &quot;VehicleType&quot; &quot;PC&quot;          &quot;Clm_Count&quot;  
  [6] &quot;Exp_weights&quot; &quot;LNWEIGHT&quot;    &quot;NCD&quot;         &quot;AgeCat&quot;      &quot;AutoAge0&quot;   
@@ -793,7 +808,7 @@ p</code></pre></div>
 <p>A few quick notes on these commands:</p>
 <ul>
 <li><a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used to get or assign names of an object. In this illustration, it was used to get the variables names.", style="color:green;"><code>names()</code></a></li>
-<li>The <code>dim()</code> function is used to retrieve or set the dimension of an object.</li>
+<li>The <code>dim()</code> function is used to retrieve or set the dimensions of an object.</li>
 <li>When you attach a dataset using the <code>attach()</code> function, variable names in the database can be accessed by simply giving their names.</li>
 </ul>
 </div>
@@ -816,7 +831,7 @@ Clm_Count[<span class="dv">2245</span><span class="op">:</span><span class="dv">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Probabilities</span>
 <span class="kw">dpois</span>(Clm_Count[<span class="dv">2245</span><span class="op">:</span><span class="dv">2249</span>],<span class="dt">lambda=</span><span class="fl">0.5</span>)</code></pre></div>
 <pre><code>[1] 0.01263606 0.60653066 0.30326533 0.60653066 0.01263606</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Logarithmic Probabilies</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Logarithmic Probabilities</span>
 <span class="kw">log</span>(<span class="kw">dpois</span>(Clm_Count[<span class="dv">2245</span><span class="op">:</span><span class="dv">2249</span>],<span class="dt">lambda=</span><span class="fl">0.5</span>))</code></pre></div>
 <pre><code>[1] -4.371201 -0.500000 -1.193147 -0.500000 -4.371201</code></pre>
 <p>By hand, you can check that the sum of log likelihoods for these five observations is -10.9355492. In the same way, the sum of all 7483 observations is</p>
@@ -835,11 +850,12 @@ loglike &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">
   loglike[i] &lt;-<span class="st"> </span><span class="kw">loglikPois</span>(lambdax[i])
 }
 <span class="kw">plot</span>(lambdax,loglike)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>If we had to guess, from this plot we might say that the maximum value of the log likelihood was around 0.07.</p>
 </div>
 <div id="the-maximum-likelihood-estimate-of-poisson-distribution" class="section level3">
 <h3><span class="header-section-number">3.3.4</span> The Maximum Likelihood Estimate of Poisson Distribution</h3>
-<p>If we had to guess, from this plot we might say that the maximum value of the log likelihood was around 0.7. From calculus, we know that the maximum likelihood estimator <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Values of the parameters that are 'most likely' to have been produced by the data.", style="color:green;">(<em>mle</em>)</a> of the Poisson distribution parameter equals the average claim count. For our data, this is</p>
+<p>From calculus, we know that the maximum likelihood estimator <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Values of the parameters that are 'most likely' to have been produced by the data.", style="color:green;">(<em>mle</em>)</a> of the Poisson distribution parameter equals the average claim count. For our data, this is</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(Clm_Count)</code></pre></div>
 <pre><code>[1] 0.06989175</code></pre>
 <p>As an alternative, let us use an optimization routine <code>nlminb</code>. Most optimization routines try to minimize functions instead of maximize them, so we first define the <em>negative</em> loglikelihood function.</p>
@@ -899,7 +915,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
  0.06989175 </code></pre>
 <p>A few quick notes on these commands and results:</p>
 <ul>
-<li>The <code>glm()</code>function is used to fit generalized linear models. See <code>help(glm)</code> for other modeling options.In order to get the results we use the <code>summary()</code> function.</li>
+<li>The <code>glm()</code>function is used to fit generalized linear models. See <code>help(glm)</code> for other modeling options. In order to get the results we use the <code>summary()</code> function.</li>
 <li>In the output, <code>call</code> reminds us what model we ran and what options were specified.</li>
 <li>The <code>Deviance Residuals</code> shows the distribution of the deviance residuals for individual cases used in the model.</li>
 <li>The next part of the output shows the coefficient (maximum likelihood estimate of <span class="math inline">\(\log(\lambda)\)</span>), its standard error, the z-statistic and the associated p-value.</li>
@@ -1039,125 +1055,6 @@ diff =<span class="st"> </span>actual<span class="op">-</span>table1nb
 <span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(Pearson_nb, <span class="dt">df=</span><span class="dv">5</span><span class="op">-</span><span class="dv">2</span><span class="op">-</span><span class="dv">1</span>)</code></pre></div>
 <pre><code>[1] 0.3771472</code></pre>
 <p>The small value of the goodness of fit statistic 1.9502395 or the high <em>p</em> value 0.3771472 both indicate that the negative binomial provides a better fit to the data than the Poisson.</p>
-</div>
-</div>
-<div id="singapore-data-1" class="section level2 tabset">
-<h2><span class="header-section-number">3.5</span> Singapore Data</h2>
-<p>This section loads the <code>SingaporeAuto.csv</code> dataset and check the name of variables and the dimension of the data. To have a glimpse at the data, the first 8 observations are listed.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Singapore =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/SingaporeAuto.csv&quot;</span>,  <span class="dt">quote =</span> <span class="st">&quot;&quot;</span>,<span class="dt">header=</span><span class="ot">TRUE</span>)
-<span class="co">#  Check the names, dimension in the file and list the first 8 observations ;</span>
-<span class="kw">names</span>(Singapore)</code></pre></div>
-<pre><code> [1] &quot;SexInsured&quot;  &quot;Female&quot;      &quot;VehicleType&quot; &quot;PC&quot;          &quot;Clm_Count&quot;  
- [6] &quot;Exp_weights&quot; &quot;LNWEIGHT&quot;    &quot;NCD&quot;         &quot;AgeCat&quot;      &quot;AutoAge0&quot;   
-[11] &quot;AutoAge1&quot;    &quot;AutoAge2&quot;    &quot;AutoAge&quot;     &quot;VAgeCat&quot;     &quot;VAgecat1&quot;   </code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(Singapore)  <span class="co"># check number of observations and variables in the data</span></code></pre></div>
-<pre><code>[1] 7483   15</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Singapore[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,]  <span class="co"># list the first 8 observations</span></code></pre></div>
-<pre><code>  SexInsured Female VehicleType PC Clm_Count Exp_weights    LNWEIGHT NCD
-1          U      0           T  0         0   0.6680356 -0.40341383  30
-2          U      0           T  0         0   0.5667351 -0.56786326  30
-3          U      0           T  0         0   0.5037645 -0.68564629  30
-4          U      0           T  0         0   0.9144422 -0.08944106  20
-5          U      0           T  0         0   0.5366188 -0.62246739  20
-6          U      0           T  0         0   0.7529090 -0.28381095  20
-7          U      0           M  0         0   0.6707734 -0.39932384  20
-8          U      0           M  0         0   0.8377823 -0.17699695  20
-  AgeCat AutoAge0 AutoAge1 AutoAge2 AutoAge VAgeCat VAgecat1
-1      0        0        0        0       0       0        2
-2      0        0        0        0       0       0        2
-3      0        0        0        0       0       0        2
-4      0        0        0        0       0       0        2
-5      0        0        0        0       0       0        2
-6      0        0        0        0       0       0        2
-7      0        0        0        0       0       6        6
-8      0        0        0        0       0       6        6</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attach</span>(Singapore)  <span class="co"># attach dataset</span></code></pre></div>
-<pre><code>The following objects are masked from Singapore (pos = 4):
-
-    AgeCat, AutoAge, AutoAge0, AutoAge1, AutoAge2, Clm_Count,
-    Exp_weights, Female, LNWEIGHT, NCD, PC, SexInsured, VAgeCat,
-    VAgecat1, VehicleType</code></pre>
-<p>A few quick notes on these commands:</p>
-<ul>
-<li><a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used to get or assign names of an object. In this illustration, it was used to get the variables names.", style="color:green;"><code>names()</code></a> <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used to retrieve or set the dimension of an object.", style="color:green;"><code>dim()</code></a> <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="When you attach a dataset using the `attach()` function, variable names in the database can be accessed by simply giving their names.", style="color:green;"><code>attach()</code></a></li>
-</ul>
-</div>
-<div id="goodness-of-fit-for-poisson-distribution" class="section level2 tabset">
-<h2><span class="header-section-number">3.6</span> Goodness of Fit for Poisson Distribution</h2>
-<p>This sections shows how to check the adequacy of the Poisson model for the Singapore data by computing the Pearson goodness-of-fit statistic.</p>
-<div id="claim-frequency-distribution-2" class="section level3">
-<h3><span class="header-section-number">3.6.1</span> Claim Frequency Distribution</h3>
-<p>The table below gives the distribution of observed claims frequency. The <code>Clm_Count</code> variable is the number of automobile accidents per policyholder.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(Clm_Count) </code></pre></div>
-<pre><code>Clm_Count
-   0    1    2    3 
-6996  455   28    4 </code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n&lt;-<span class="kw">length</span>(Clm_Count)  <span class="co"># number of insurance policies </span>
-n</code></pre></div>
-<pre><code>[1] 7483</code></pre>
-</div>
-<div id="the-maximum-likelihood-estimate-of-lambda" class="section level3">
-<h3><span class="header-section-number">3.6.2</span> The Maximum Likelihood Estimate of <span class="math inline">\(\lambda\)</span></h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CountPoisson1 =<span class="st"> </span><span class="kw">glm</span>(Clm_Count <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,<span class="kw">poisson</span>(<span class="dt">link=</span>log))
-<span class="kw">summary</span>(CountPoisson1)</code></pre></div>
-<pre><code>
-Call:
-glm(formula = Clm_Count ~ 1, family = poisson(link = log))
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--0.3739  -0.3739  -0.3739  -0.3739   4.0861  
-
-Coefficients:
-            Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept) -2.66081    0.04373  -60.85   &lt;2e-16 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-(Dispersion parameter for poisson family taken to be 1)
-
-    Null deviance: 2887.2  on 7482  degrees of freedom
-Residual deviance: 2887.2  on 7482  degrees of freedom
-AIC: 3884.4
-
-Number of Fisher Scoring iterations: 6</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lambda&lt;-<span class="kw">exp</span>(CountPoisson1<span class="op">$</span>coefficients)
-lambda</code></pre></div>
-<pre><code>(Intercept) 
- 0.06989175 </code></pre>
-<p>A few quick notes on these commands and results:</p>
-<ul>
-<li><a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used to fit generalized linear models.", style="color:green;"><code>glm()</code></a> <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="See this for other modeling options.", style="color:green;"><code>help(glm)</code></a> <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Function used in order to get the results.", style="color:green;"><code>summary()</code></a> <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="In the output, this reminds us what model we ran and what options were specified.", style="color:green;"><code>call</code></a> <a href="javascript://" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Shows the distribution of the deviance residuals for individual cases used in the model.", style="color:green;"><code>Deviance Residuals</code></a></li>
-<li>The next part of the output shows the coefficient (maximum likelihood estimate of <span class="math inline">\(\log(\lambda)\)</span>), its standard error, the z-statistic and the associated p-value.</li>
-<li>To get the estimated <span class="math inline">\(\lambda\)</span> we take the <span class="math inline">\(\exp\)</span>(coefficient) <code>lambda&lt;-exp(CountPoisson1$coefficients)</code>.</li>
-</ul>
-</div>
-<div id="pearson-goodness-of-fit-statistic-1" class="section level3">
-<h3><span class="header-section-number">3.6.3</span> Pearson Goodness-of-Fit Statistic</h3>
-<p>The table below gives the distribution of fitted claims frequency using Poisson distribution <span class="math inline">\((np_k)\)</span></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table1p =<span class="st"> </span><span class="kw">cbind</span>(n<span class="op">*</span>(<span class="kw">dpois</span>(<span class="dv">0</span>,lambda)),
-                n<span class="op">*</span>(<span class="kw">dpois</span>(<span class="dv">1</span>,lambda)),
-                n<span class="op">*</span>(<span class="kw">dpois</span>(<span class="dv">2</span>,lambda)),
-                n<span class="op">*</span>(<span class="kw">dpois</span>(<span class="dv">3</span>,lambda)),
-                n<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span><span class="kw">ppois</span>(<span class="dv">3</span>,lambda))) <span class="co"># or n*(1-dpois(0,lambda)-dpois(1,lambda)-dpois(2,lambda)-dpois(3,lambda)))</span>
-table2p&lt;-<span class="kw">rbind</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="st">&quot;4+&quot;</span>),<span class="kw">round</span>(table1p, <span class="dt">digits =</span> <span class="dv">3</span>))
-table2p</code></pre></div>
-<pre><code>     [,1]       [,2]      [,3]     [,4]    [,5]   
-[1,] &quot;0&quot;        &quot;1&quot;       &quot;2&quot;      &quot;3&quot;     &quot;4+&quot;   
-[2,] &quot;6977.858&quot; &quot;487.695&quot; &quot;17.043&quot; &quot;0.397&quot; &quot;0.007&quot;</code></pre>
-<p>For goodness of fit, consider Pearson’s chi-square statistic below. The degrees of freedom (df ) equals the number of cells minus one minus the number of estimated parameters</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#  PEARSON GOODNESS-OF-FIT STATISTIC</span>
-actual =<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">table</span>(Clm_Count))[,<span class="dv">2</span>];
-actual[<span class="dv">5</span>] =<span class="st"> </span><span class="dv">0</span>  <span class="co"># assign 0 to claim counts greater than or equal to 4 in observed data</span>
-diff =<span class="st"> </span>actual<span class="op">-</span>table1p
-(<span class="dt">PearsonG =</span> <span class="kw">sum</span>(diff<span class="op">*</span>diff<span class="op">/</span>table1p))</code></pre></div>
-<pre><code>[1] 41.98438</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(table1p,PearsonG)</code></pre></div>
-<pre><code>                                                      PearsonG
-[1,] 6977.858 487.6948 17.04292 0.3970532 0.007035805 41.98438</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#  p-value</span>
-<span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(PearsonG, <span class="dt">df=</span><span class="dv">5</span><span class="op">-</span><span class="dv">1</span><span class="op">-</span><span class="dv">1</span>)</code></pre></div>
-<pre><code>[1] 4.042861e-09</code></pre>
 <script>
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover(); 

@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Loss Data Analytics</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="description" content="This site provides files that generate R codes to support the online text Loss Data Analytics.">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Loss Data Analytics" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta property="og:description" content="This site provides files that generate R codes to support the online text Loss Data Analytics." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="R for Loss Data Analytics" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:description" content="This site provides files that generate R codes to support the online text Loss Data Analytics." />
   
 
 <meta name="author" content="An open text authored by the Actuarial Community">
 
 
-<meta name="date" content="2018-05-24">
+<meta name="date" content="2018-06-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -479,12 +479,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.4.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#pearson-goodness-of-fit-statistic"><i class="fa fa-check"></i><b>3.4.1</b> Pearson Goodness-of-Fit Statistic</a></li>
 <li class="chapter" data-level="3.4.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#negative-binomial-goodness-of-fit-statistic"><i class="fa fa-check"></i><b>3.4.2</b> Negative Binomial Goodness-of-Fit Statistic</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="frequency-distributions.html"><a href="frequency-distributions.html#singapore-data-1"><i class="fa fa-check"></i><b>3.5</b> Singapore Data</a></li>
-<li class="chapter" data-level="3.6" data-path="frequency-distributions.html"><a href="frequency-distributions.html#goodness-of-fit-for-poisson-distribution"><i class="fa fa-check"></i><b>3.6</b> Goodness of Fit for Poisson Distribution</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#claim-frequency-distribution-2"><i class="fa fa-check"></i><b>3.6.1</b> Claim Frequency Distribution</a></li>
-<li class="chapter" data-level="3.6.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#the-maximum-likelihood-estimate-of-lambda"><i class="fa fa-check"></i><b>3.6.2</b> The Maximum Likelihood Estimate of <span class="math inline">\(\lambda\)</span></a></li>
-<li class="chapter" data-level="3.6.3" data-path="frequency-distributions.html"><a href="frequency-distributions.html#pearson-goodness-of-fit-statistic-1"><i class="fa fa-check"></i><b>3.6.3</b> Pearson Goodness-of-Fit Statistic</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html"><i class="fa fa-check"></i><b>4</b> Modeling Loss Severities</a><ul>
 <li class="chapter" data-level="4.1" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#required-packages"><i class="fa fa-check"></i><b>4.1</b> Required packages</a></li>
@@ -670,7 +664,7 @@ y &lt;-<span class="st"> </span><span class="kw">rtweedie</span>(n,p,mu,phi)</co
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(y, <span class="dt">prob=</span>T,<span class="dt">breaks=</span><span class="dv">50</span>)
 x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="kw">max</span>(y),<span class="fl">0.1</span>)
 <span class="kw">lines</span>(x,<span class="kw">dtweedie</span>(x,p,mu,phi),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-123-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-119-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="qq-plots-for-different-p-values" class="section level3">
 <h3><span class="header-section-number">9.1.6</span> QQ Plots for Different p Values</h3>
@@ -685,7 +679,7 @@ qqTweedie &lt;-<span class="st"> </span><span class="cf">function</span>(xi,pct,
 }
 pct &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0.01</span>,<span class="fl">0.99</span>,<span class="fl">0.01</span>)
 <span class="kw">lapply</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">1.5</span>,<span class="dv">2</span>,<span class="fl">2.5</span>),qqTweedie,<span class="dt">pct=</span>pct,<span class="dt">mu=</span>mu,<span class="dt">phi=</span>phi)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-124-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-120-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>[[1]]
 NULL
 

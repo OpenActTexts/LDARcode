@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Loss Data Analytics</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="description" content="This site provides files that generate R codes to support the online text Loss Data Analytics.">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Loss Data Analytics" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta property="og:description" content="This site provides files that generate R codes to support the online text Loss Data Analytics." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="R for Loss Data Analytics" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:description" content="This site provides files that generate R codes to support the online text Loss Data Analytics." />
   
 
 <meta name="author" content="An open text authored by the Actuarial Community">
 
 
-<meta name="date" content="2018-05-24">
+<meta name="date" content="2018-06-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -479,12 +479,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.4.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#pearson-goodness-of-fit-statistic"><i class="fa fa-check"></i><b>3.4.1</b> Pearson Goodness-of-Fit Statistic</a></li>
 <li class="chapter" data-level="3.4.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#negative-binomial-goodness-of-fit-statistic"><i class="fa fa-check"></i><b>3.4.2</b> Negative Binomial Goodness-of-Fit Statistic</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="frequency-distributions.html"><a href="frequency-distributions.html#singapore-data-1"><i class="fa fa-check"></i><b>3.5</b> Singapore Data</a></li>
-<li class="chapter" data-level="3.6" data-path="frequency-distributions.html"><a href="frequency-distributions.html#goodness-of-fit-for-poisson-distribution"><i class="fa fa-check"></i><b>3.6</b> Goodness of Fit for Poisson Distribution</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#claim-frequency-distribution-2"><i class="fa fa-check"></i><b>3.6.1</b> Claim Frequency Distribution</a></li>
-<li class="chapter" data-level="3.6.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#the-maximum-likelihood-estimate-of-lambda"><i class="fa fa-check"></i><b>3.6.2</b> The Maximum Likelihood Estimate of <span class="math inline">\(\lambda\)</span></a></li>
-<li class="chapter" data-level="3.6.3" data-path="frequency-distributions.html"><a href="frequency-distributions.html#pearson-goodness-of-fit-statistic-1"><i class="fa fa-check"></i><b>3.6.3</b> Pearson Goodness-of-Fit Statistic</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html"><i class="fa fa-check"></i><b>4</b> Modeling Loss Severities</a><ul>
 <li class="chapter" data-level="4.1" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#required-packages"><i class="fa fa-check"></i><b>4.1</b> Required packages</a></li>
@@ -655,7 +649,7 @@ shapeparam &lt;-<span class="st"> </span><span class="dv">2</span><span class="o
 }
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="kw">expression</span>(alpha<span class="op">~</span><span class="st">&#39;=2&#39;</span>), <span class="kw">expression</span>(alpha<span class="op">~</span><span class="st">&#39;=3&#39;</span>), <span class="kw">expression</span>(alpha<span class="op">~</span><span class="st">&#39;=4&#39;</span>), <span class="kw">expression</span>(alpha<span class="op">~</span><span class="st">&#39;=5&#39;</span>)), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)
 <span class="kw">title</span>(<span class="kw">substitute</span>(<span class="kw">paste</span>(<span class="st">&quot;Pdf Gamma Density with&quot;</span>,<span class="st">&quot; &quot;</span>,theta,<span class="st">&quot;=100&quot;</span>,<span class="st">&quot; &quot;</span>, <span class="st">&quot;and Varying Shape&quot;</span>)))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>A few quick notes on these commands :</p>
 <ul>
 <li><code>dgamma</code> function is used for density of the gamma distribution with shape and scale parameters .</li>
@@ -674,9 +668,7 @@ shapeparam &lt;-<span class="st"> </span><span class="dv">2</span><span class="o
 
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=100&#39;</span>), <span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=150&#39;</span>), <span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=200&#39;</span>), <span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=250&#39;</span>)), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)
 <span class="kw">title</span>(<span class="kw">substitute</span>(<span class="kw">paste</span>(<span class="st">&quot;Pdf Gamma Density with&quot;</span>,<span class="st">&quot; &quot;</span>,alpha,<span class="st">&quot;=2&quot;</span>,<span class="st">&quot; &quot;</span>, <span class="st">&quot;and Varying Scale&quot;</span>)))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_app</span>(<span class="st">&quot;https://luyang.shinyapps.io/gamma/&quot;</span>, 
-  <span class="dt">height =</span> <span class="st">&quot;600px&quot;</span>)</code></pre></div>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
 <iframe src="https://luyang.shinyapps.io/gamma/?showcase=0" width="672" height="600px">
 </iframe>
 </div>
@@ -700,7 +692,7 @@ shapeparam &lt;-<span class="st"> </span><span class="dv">1</span><span class="o
 }
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="kw">expression</span>(alpha<span class="op">~</span><span class="st">&#39;=1&#39;</span>), <span class="kw">expression</span>(alpha<span class="op">~</span><span class="st">&#39;=2&#39;</span>), <span class="kw">expression</span>(alpha<span class="op">~</span><span class="st">&#39;=3&#39;</span>), <span class="kw">expression</span>(alpha<span class="op">~</span><span class="st">&#39;=4&#39;</span>)), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)
 <span class="kw">title</span>(<span class="kw">substitute</span>(<span class="kw">paste</span>(<span class="st">&quot;Pdf Pareto Density with&quot;</span>,<span class="st">&quot; &quot;</span>,theta,<span class="st">&quot;=2000&quot;</span>,<span class="st">&quot; &quot;</span>, <span class="st">&quot;and Varying Shape&quot;</span>)))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="varying-the-scale-parameter-1" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> Varying The Scale Parameter</h3>
@@ -713,7 +705,7 @@ shapeparam &lt;-<span class="st"> </span><span class="dv">1</span><span class="o
 
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=2000&#39;</span>), <span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=2500&#39;</span>), <span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=3000&#39;</span>), <span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=3500&#39;</span>)), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)
 <span class="kw">title</span>(<span class="kw">substitute</span>(<span class="kw">paste</span>(<span class="st">&quot;Pdf Pareto Density with&quot;</span>,<span class="st">&quot; &quot;</span>,alpha,<span class="st">&quot;=3&quot;</span>,<span class="st">&quot; &quot;</span>, <span class="st">&quot;and Varying Scale&quot;</span>)))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="weibull-distribution" class="section level2 tabset">
@@ -736,7 +728,7 @@ shapeparam &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class
 
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,  <span class="kw">c</span>(<span class="kw">expression</span>(alpha<span class="op">~</span><span class="st">&#39;=1.5&#39;</span>), <span class="kw">expression</span>(alpha<span class="op">~</span><span class="st">&#39;=2&#39;</span>), <span class="kw">expression</span>(alpha<span class="op">~</span><span class="st">&#39;=2.5&#39;</span>), <span class="kw">expression</span>(alpha<span class="op">~</span><span class="st">&#39;=3&#39;</span>)), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)
 <span class="kw">title</span>(<span class="kw">substitute</span>(<span class="kw">paste</span>(<span class="st">&quot;Pdf Weibull Density with&quot;</span>,<span class="st">&quot; &quot;</span>,theta,<span class="st">&quot;=100&quot;</span>,<span class="st">&quot; &quot;</span>, <span class="st">&quot;and Varying Shape&quot;</span>)))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-44-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="varying-the-scale-parameter-2" class="section level3">
 <h3><span class="header-section-number">4.4.2</span> Varying The Scale Parameter</h3>
@@ -748,7 +740,7 @@ shapeparam &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class
 }
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=50&#39;</span>), <span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=100&#39;</span>), <span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=150&#39;</span>), <span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=200&#39;</span>)), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)
 <span class="kw">title</span>(<span class="kw">substitute</span>(<span class="kw">paste</span>(<span class="st">&quot;Pdf Weibull Density with&quot;</span>,<span class="st">&quot; &quot;</span>,alpha,<span class="st">&quot;=3&quot;</span>,<span class="st">&quot; &quot;</span>, <span class="st">&quot;and Varying Scale&quot;</span>)))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-45-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-41-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="generalized-beta-distribution-of-the-second-kind-gb2" class="section level2 tabset">
@@ -784,7 +776,7 @@ theta &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv"
   <span class="kw">lines</span>(x,<span class="kw">gb2density</span>(x,<span class="dt">shape1=</span>alpha1,<span class="dt">shape2=</span>alpha2,<span class="dt">shape3=</span>gamma, <span class="dt">scale =</span> theta[k]), <span class="dt">col =</span> k)
 }
 <span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">c</span>(<span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=150&#39;</span>), <span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=200&#39;</span>), <span class="kw">expression</span>(theta<span class="op">~</span><span class="st">&#39;=250&#39;</span>)), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.6</span>,<span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Note: Here we wrote our own function for the density function of the GB2 density function.</p>
 </div>
 </div>
@@ -811,7 +803,7 @@ theta2 &lt;-<span class="st"> </span><span class="dv">7</span>
 MixGammadens &lt;-<span class="st"> </span><span class="kw">MixtureGammaDensity</span>(w, a1,a2,alpha1, theta1, alpha2, theta2)
 
 <span class="kw">plot</span>(w, MixGammadens, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="density-obtained-through-splicing" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Density Obtained Through Splicing</h3>
@@ -829,7 +821,7 @@ x &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">as.ma
 spliceValues &lt;-<span class="st"> </span><span class="kw">apply</span>(x,<span class="dv">2</span>,SpliceExpPar, <span class="dt">c =</span> <span class="dv">100</span>, <span class="dt">v =</span> <span class="fl">0.6</span>, <span class="dt">theta =</span> <span class="dv">100</span>, <span class="dt">gamma =</span> <span class="dv">200</span>, <span class="dt">alpha =</span> <span class="dv">4</span>)
 
 <span class="kw">plot</span>(x,spliceValues, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-44-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="coverage-modifications" class="section level2">
@@ -858,7 +850,7 @@ spliceValues &lt;-<span class="st"> </span><span class="kw">apply</span>(x,<span
 <span class="kw">curve</span>(<span class="kw">f</span>(x, <span class="dv">3</span>), <span class="dt">from =</span> <span class="fl">0.01</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd=</span><span class="dv">2</span>) <span class="co"># modified</span>
 <span class="kw">points</span>(<span class="dv">0</span>, <span class="kw">f</span>(<span class="dv">0</span>, <span class="dv">3</span>), <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Original pdf&quot;</span>, <span class="st">&quot;Modified pdf&quot;</span>), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.6</span>,<span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;blue&quot;</span>))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>A few quick notes on these commands:</p>
 <ul>
 <li>The <code>coverage()</code> function computes probability density function or cumulative distribution function of the payment per payment or payment per loss random variable under any combination of the following coverage modifications: deductible, limit, coinsurance, inflation. In this illustration we used it to compute the probability density function of the payment per loss random variable with a deductible of 1.</li>
@@ -880,7 +872,7 @@ spliceValues &lt;-<span class="st"> </span><span class="kw">apply</span>(x,<span
 <span class="kw">curve</span>(<span class="kw">dgamma</span>(x, <span class="dv">3</span>), <span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">10</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>), <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">lwd=</span><span class="dv">2</span>) 
 <span class="kw">curve</span>(<span class="kw">f</span>(x, <span class="dv">3</span>), <span class="dt">from =</span> <span class="fl">0.01</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>,<span class="dt">lwd=</span><span class="dv">2</span>)     <span class="co"># modified pdf</span>
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Original pdf&quot;</span>, <span class="st">&quot;Modified pdf&quot;</span>), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.6</span>,<span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;blue&quot;</span>))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="per-payment-variable-with-policy-limit-coinsurance-and-inflation" class="section level4">
 <h4><span class="header-section-number">4.7.2.3</span> Per Payment Variable with Policy Limit, Coinsurance and Inflation</h4>
@@ -894,7 +886,7 @@ spliceValues &lt;-<span class="st"> </span><span class="kw">apply</span>(x,<span
 <span class="kw">curve</span>(<span class="kw">dgamma</span>(x, <span class="dv">3</span>), <span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">10</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>), <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
 <span class="kw">curve</span>(<span class="kw">f</span>(x, <span class="dv">3</span>), <span class="dt">from =</span> <span class="fl">0.01</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>,<span class="dt">lwd=</span><span class="dv">2</span>)     <span class="co"># modified pdf</span>
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Original pdf&quot;</span>, <span class="st">&quot;Modified pdf&quot;</span>), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.6</span>,<span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;blue&quot;</span>))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="franchise-deductible" class="section level3 tabset">
@@ -923,8 +915,8 @@ f &lt;-<span class="st"> </span><span class="kw">coverage</span>(dgamma, pgamma,
 <span class="kw">points</span>(<span class="dv">0</span>, <span class="kw">f</span>(<span class="dv">0</span>, <span class="dv">3</span>), <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>) <span class="co"># mass at 0</span>
 <span class="kw">curve</span>(<span class="kw">f</span>(x, <span class="dv">3</span>), <span class="dt">from =</span> <span class="fl">0.1</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>) <span class="co"># 0 &lt; x &lt; 1</span>
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Original pdf&quot;</span>, <span class="st">&quot;Modified pdf&quot;</span>), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.6</span>,<span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;blue&quot;</span>))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Note : to use the franchise deductible , we have to add the option <code>franchise = TRUE</code> in the coverage function.</p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Note : To use the franchise deductible , we have to add the option <code>franchise = TRUE</code> in the coverage function.</p>
 </div>
 <div id="payment-per-payment-with-franchise-deductible" class="section level4">
 <h4><span class="header-section-number">4.7.3.2</span> Payment Per Payment with Franchise Deductible</h4>
@@ -945,7 +937,7 @@ f &lt;-<span class="st"> </span><span class="kw">coverage</span>(dgamma, pgamma,
 <span class="kw">curve</span>(<span class="kw">f</span>(x, <span class="dv">3</span>), <span class="dt">from =</span> <span class="fl">1.1</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)        <span class="co"># modified</span>
 <span class="kw">curve</span>(<span class="kw">f</span>(x, <span class="dv">3</span>), <span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)  <span class="co"># 0 &lt; x &lt; 1</span>
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Original pdf&quot;</span>, <span class="st">&quot;Modified pdf&quot;</span>), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.6</span>,<span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;blue&quot;</span>))</code></pre></div>
-<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" /></p>
 <script>
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover(); 
