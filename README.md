@@ -1,5 +1,3 @@
-# R Codes for Loss Data Analytics - fork
-This is a fork to propose changes to the original repository R Codes for Loss Data Analytics by Professor Edward Frees (ewfrees.github.io).  
+# R Codes for Loss Data Analytics
 
-URL for development - reflects most recent changes:  
-https://rawgit.com/alyaanuval/LDARcode/master/R_for_Loss_Data_Analytics.html
+This site provides files that generate *R* codes to support the online text **Loss Data Analytics**. To get an idea of what the files will generate for users, see the [Online Version from R Code Support](https://rawgit.com/alyaanuval/LDARcode/master/docs/index.html)
