@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="R for Loss Data Analytics" />
+<meta property="og:type" content="book" />
+
+
+<meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+
+
+<meta name="author" content="Jed Frees" />
+
+<meta name="date" content="2018-04-20" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+
+<title>R for Loss Data Analytics</title>
+
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="toc.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="has-sub"><a href="index.html#introduction-to-loss-data-analytics"><span class="toc-section-number">1</span> Introduction to Loss Data Analytics</a><ul>
+<li class="has-sub"><a href="1-1-case-study-wisconsin-property-fund.html#case-study-wisconsin-property-fund"><span class="toc-section-number">1.1</span> Case Study: Wisconsin Property Fund</a><ul>
+<li><a href="1-1-case-study-wisconsin-property-fund.html#read-in-property-fund-data"><span class="toc-section-number">1.1.1</span> Read in Property Fund Data</a></li>
+<li><a href="1-1-case-study-wisconsin-property-fund.html#claim-frequency-distribution"><span class="toc-section-number">1.1.2</span> Claim Frequency Distribution</a></li>
+<li><a href="1-1-case-study-wisconsin-property-fund.html#average-severity-distribution-for-2010"><span class="toc-section-number">1.1.3</span> Average Severity Distribution for 2010</a></li>
+<li><a href="1-1-case-study-wisconsin-property-fund.html#plot-of-average-claims"><span class="toc-section-number">1.1.4</span> Plot of average claims</a></li>
+</ul></li>
+<li class="has-sub"><a href="1-2-rating-variables.html#rating-variables"><span class="toc-section-number">1.2</span> Rating Variables</a><ul>
+<li><a href="1-2-rating-variables.html#average-claims-over-time"><span class="toc-section-number">1.2.1</span> Average claims over time</a></li>
+<li><a href="1-2-rating-variables.html#frequency-and-claims-statistics-of-full-data"><span class="toc-section-number">1.2.2</span> Frequency and claims statistics of full data</a></li>
+<li><a href="1-2-rating-variables.html#rating-variable-description"><span class="toc-section-number">1.2.3</span> Rating variable description</a></li>
+<li><a href="1-2-rating-variables.html#frequency-and-claims-by-rating-variables"><span class="toc-section-number">1.2.4</span> Frequency and claims by rating variables</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="2-frequency-distributions.html#frequency-distributions"><span class="toc-section-number">2</span> Frequency Distributions</a><ul>
+<li class="has-sub"><a href="2-1-basic-distributions.html#basic-distributions"><span class="toc-section-number">2.1</span> Basic Distributions</a><ul>
+<li><a href="2-1-basic-distributions.html#poisson-distribution"><span class="toc-section-number">2.1.1</span> Poisson Distribution</a></li>
+<li><a href="2-1-basic-distributions.html#negative-binomial-distribution"><span class="toc-section-number">2.1.2</span> Negative Binomial Distribution</a></li>
+<li><a href="2-1-basic-distributions.html#binomial-distribution"><span class="toc-section-number">2.1.3</span> Binomial Distribution</a></li>
+</ul></li>
+<li><a href="2-2-ab0-class-of-distributions.html#ab0-class-of-distributions"><span class="toc-section-number">2.2</span> (<em>a</em>,<em>b</em>,0) Class of Distributions</a></li>
+<li class="has-sub"><a href="2-3-estimating-frequency-distributions.html#estimating-frequency-distributions"><span class="toc-section-number">2.3</span> Estimating Frequency Distributions</a><ul>
+<li><a href="2-3-estimating-frequency-distributions.html#singapore-data"><span class="toc-section-number">2.3.1</span> Singapore Data</a></li>
+<li><a href="2-3-estimating-frequency-distributions.html#claim-frequency-distribution-1"><span class="toc-section-number">2.3.2</span> Claim frequency distribution</a></li>
+<li><a href="2-3-estimating-frequency-distributions.html#visualize-the-loglikelihood-function"><span class="toc-section-number">2.3.3</span> Visualize the Loglikelihood function</a></li>
+<li><a href="2-3-estimating-frequency-distributions.html#the-maximum-likelihood-estimate-of-poisson-distribution"><span class="toc-section-number">2.3.4</span> The maximum likelihood estimate of Poisson distribution</a></li>
+<li><a href="2-3-estimating-frequency-distributions.html#the-maximum-likelihood-estimate-of-the-negative-binomial-distribution"><span class="toc-section-number">2.3.5</span> The maximum likelihood estimate of the Negative Binomial distribution</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-4-goodness-of-fit.html#goodness-of-fit"><span class="toc-section-number">2.4</span> Goodness of Fit</a><ul>
+<li><a href="2-4-goodness-of-fit.html#pearson-goodness-of-fit-statistic"><span class="toc-section-number">2.4.1</span> Pearson goodness-of-fit statistic</a></li>
+<li><a href="2-4-goodness-of-fit.html#negative-binomial-goodness-of-fit-statistic"><span class="toc-section-number">2.4.2</span> Negative binomial goodness-of-fit statistic</a></li>
+</ul></li>
+<li><a href="2-5-singapore-data-1.html#singapore-data-1"><span class="toc-section-number">2.5</span> Singapore Data</a></li>
+<li class="has-sub"><a href="2-6-goodness-of-fit-for-poisson-distribution.html#goodness-of-fit-for-poisson-distribution"><span class="toc-section-number">2.6</span> Goodness of fit for Poisson distribution</a><ul>
+<li><a href="2-6-goodness-of-fit-for-poisson-distribution.html#claim-frequency-distribution-2"><span class="toc-section-number">2.6.1</span> Claim frequency distribution</a></li>
+<li><a href="2-6-goodness-of-fit-for-poisson-distribution.html#the-maximum-likelihood-estimate-of-lambda"><span class="toc-section-number">2.6.2</span> The maximum likelihood estimate of <span class="math inline">\(\lambda\)</span></a></li>
+<li><a href="2-6-goodness-of-fit-for-poisson-distribution.html#pearson-goodness-of-fit-statistic-1"><span class="toc-section-number">2.6.3</span> Pearson goodness-of-fit statistic</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="3-modeling-loss-severities.html#modeling-loss-severities"><span class="toc-section-number">3</span> Modeling Loss Severities</a><ul>
+<li><a href="3-1-required-packages.html#required-packages"><span class="toc-section-number">3.1</span> Required packages</a></li>
+<li class="has-sub"><a href="3-2-gamma-distribution.html#gamma-distribution"><span class="toc-section-number">3.2</span> Gamma Distribution</a><ul>
+<li><a href="3-2-gamma-distribution.html#varying-the-shape-parameter"><span class="toc-section-number">3.2.1</span> Varying the shape parameter</a></li>
+<li><a href="3-2-gamma-distribution.html#varying-the-scale-parameter"><span class="toc-section-number">3.2.2</span> Varying the scale parameter</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-3-pareto-distribution.html#pareto-distribution"><span class="toc-section-number">3.3</span> Pareto Distribution</a><ul>
+<li><a href="3-3-pareto-distribution.html#varying-the-shape-parameter-1"><span class="toc-section-number">3.3.1</span> Varying the shape parameter</a></li>
+<li><a href="3-3-pareto-distribution.html#varying-the-scale-parameter-1"><span class="toc-section-number">3.3.2</span> Varying the scale parameter</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-4-weibull-distribution.html#weibull-distribution"><span class="toc-section-number">3.4</span> Weibull Distribution</a><ul>
+<li><a href="3-4-weibull-distribution.html#varying-the-shape-parameter-2"><span class="toc-section-number">3.4.1</span> Varying the shape parameter</a></li>
+<li><a href="3-4-weibull-distribution.html#varying-the-scale-parameter-2"><span class="toc-section-number">3.4.2</span> Varying the scale parameter</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-5-the-generalized-beta-distribution-of-the-second-kind-gb2.html#the-generalized-beta-distribution-of-the-second-kind-gb2"><span class="toc-section-number">3.5</span> The Generalized Beta Distribution of the Second Kind (GB2)</a><ul>
+<li><a href="3-5-the-generalized-beta-distribution-of-the-second-kind-gb2.html#varying-the-scale-parameter-3"><span class="toc-section-number">3.5.1</span> Varying the scale parameter</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-6-methods-of-creating-new-distributions.html#methods-of-creating-new-distributions"><span class="toc-section-number">3.6</span> Methods of creating new distributions</a><ul>
+<li><a href="3-6-methods-of-creating-new-distributions.html#mixture-distributions"><span class="toc-section-number">3.6.1</span> Mixture distributions</a></li>
+<li><a href="3-6-methods-of-creating-new-distributions.html#density-obtained-through-splicing"><span class="toc-section-number">3.6.2</span> Density obtained through splicing</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-7-coverage-modifications.html#coverage-modifications"><span class="toc-section-number">3.7</span> Coverage Modifications</a><ul>
+<li><a href="3-7-coverage-modifications.html#load-required-package"><span class="toc-section-number">3.7.1</span> Load required package</a></li>
+<li><a href="3-7-coverage-modifications.html#ordinary-deductible"><span class="toc-section-number">3.7.2</span> Ordinary deductible</a></li>
+<li><a href="3-7-coverage-modifications.html#franchise-deductible"><span class="toc-section-number">3.7.3</span> Franchise deductible</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-8-mle-for-grouped-data.html#mle-for-grouped-data"><span class="toc-section-number">3.8</span> MLE for grouped data</a><ul>
+<li><a href="3-8-mle-for-grouped-data.html#mle-for-grouped-data--soa-exam-c-276"><span class="toc-section-number">3.8.1</span> MLE for grouped data- SOA Exam C # 276</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-9-nonparametric-inference.html#nonparametric-inference"><span class="toc-section-number">3.9</span> Nonparametric Inference</a><ul>
+<li><a href="3-9-nonparametric-inference.html#nonparametric-estimation-tools"><span class="toc-section-number">3.9.1</span> Nonparametric Estimation Tools</a></li>
+<li><a href="3-9-nonparametric-inference.html#property-fund-data"><span class="toc-section-number">3.9.2</span> Property Fund Data</a></li>
+<li><a href="3-9-nonparametric-inference.html#nonparametric-estimation-tools-for-model-selection"><span class="toc-section-number">3.9.3</span> Nonparametric Estimation Tools For Model Selection</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="4-model-selection.html#model-selection"><span class="toc-section-number">4</span> Model Selection</a><ul>
+<li class="has-sub"><a href="4-1-claim-level-data-of-property-fund.html#claim-level-data-of-property-fund"><span class="toc-section-number">4.1</span> Claim level data of Property Fund</a><ul>
+<li><a href="4-1-claim-level-data-of-property-fund.html#claims-data"><span class="toc-section-number">4.1.1</span> Claims data</a></li>
+<li><a href="4-1-claim-level-data-of-property-fund.html#summary-of-claims"><span class="toc-section-number">4.1.2</span> Summary of claims</a></li>
+<li><a href="4-1-claim-level-data-of-property-fund.html#plot-of-claims"><span class="toc-section-number">4.1.3</span> Plot of claims</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-2-fitting-distributions.html#fitting-distributions"><span class="toc-section-number">4.2</span> Fitting distributions</a><ul>
+<li><a href="4-2-fitting-distributions.html#inference-assuming-a-lognormal-distribution"><span class="toc-section-number">4.2.1</span> Inference assuming a lognormal distribution</a></li>
+<li><a href="4-2-fitting-distributions.html#inference-assuming-a-gamma-distribution"><span class="toc-section-number">4.2.2</span> Inference assuming a gamma distribution</a></li>
+<li><a href="4-2-fitting-distributions.html#inference-assuming-a-pareto-distribution"><span class="toc-section-number">4.2.3</span> Inference assuming a Pareto Distribution</a></li>
+<li><a href="4-2-fitting-distributions.html#inference-assuming-an-exponential-distribution"><span class="toc-section-number">4.2.4</span> Inference assuming an exponential distribution</a></li>
+<li><a href="4-2-fitting-distributions.html#inference-assuming-an-exponential-distribution-1"><span class="toc-section-number">4.2.5</span> Inference assuming an exponential distribution</a></li>
+</ul></li>
+<li><a href="4-3-plotting-the-fit-using-densities-on-a-logarithmic-scale.html#plotting-the-fit-using-densities-on-a-logarithmic-scale"><span class="toc-section-number">4.3</span> Plotting the fit using densities (on a logarithmic scale)</a></li>
+</ul></li>
+<li class="has-sub"><a href="5-simulation.html#simulation"><span class="toc-section-number">5</span> Simulation</a><ul>
+<li><a href="5-1-simulation-inversion-method.html#simulation---inversion-method"><span class="toc-section-number">5.1</span> Simulation - Inversion method</a></li>
+<li><a href="5-2-comparing-moments-from-the-simulated-data-to-theoretical-moments.html#comparing-moments-from-the-simulated-data-to-theoretical-moments"><span class="toc-section-number">5.2</span> Comparing moments from the simulated data to theoretical moments</a></li>
+</ul></li>
+<li class="has-sub"><a href="6-collective-risk-model-without-coverage-modifications.html#collective-risk-model-without-coverage-modifications"><span class="toc-section-number">6</span> Collective Risk Model: without coverage modifications</a><ul>
+<li><a href="6-1-set-parameters.html#set-parameters"><span class="toc-section-number">6.1</span> Set Parameters</a></li>
+<li><a href="6-2-show-frequency-and-severity-distributions.html#show-frequency-and-severity-distributions"><span class="toc-section-number">6.2</span> Show frequency and severity distributions</a></li>
+<li><a href="6-3-set-sample-size-for-the-simulation.html#set-sample-size-for-the-simulation"><span class="toc-section-number">6.3</span> Set sample size for the simulation</a></li>
+<li><a href="6-4-show-distribution-of-aggregate-loss-s.html#show-distribution-of-aggregate-loss-s"><span class="toc-section-number">6.4</span> Show distribution of aggregate loss S</a></li>
+</ul></li>
+<li class="has-sub"><a href="7-applications.html#applications"><span class="toc-section-number">7</span> Applications</a><ul>
+<li><a href="7-1-find-descriptive-statistics.html#find-descriptive-statistics"><span class="toc-section-number">7.1</span> Find descriptive statistics</a></li>
+<li><a href="7-2-calculate-cdf.html#calculate-cdf"><span class="toc-section-number">7.2</span> Calculate cdf</a></li>
+<li><a href="7-3-calculate-risk-measures.html#calculate-risk-measures"><span class="toc-section-number">7.3</span> Calculate risk measures</a></li>
+<li><a href="7-4-pricing-stop-loss-insurance-set-deductible.html#pricing-stop-loss-insurance---set-deductible"><span class="toc-section-number">7.4</span> Pricing stop-loss insurance - Set deductible</a></li>
+</ul></li>
+<li class="has-sub"><a href="8-tweedie-distribution.html#tweedie-distribution"><span class="toc-section-number">8</span> Tweedie distribution</a><ul>
+<li><a href="8-1-load-tweedie-package.html#load-tweedie-package"><span class="toc-section-number">8.1</span> Load Tweedie Package</a></li>
+<li><a href="8-2-set-paramteres-for-tweediepmuphi.html#set-paramteres-for-tweediepmuphi"><span class="toc-section-number">8.2</span> Set Paramteres for Tweedie(p,mu,phi)</a></li>
+<li><a href="8-3-set-sample-size.html#set-sample-size"><span class="toc-section-number">8.3</span> Set Sample Size</a></li>
+<li><a href="8-4-show-summary-statistics.html#show-summary-statistics"><span class="toc-section-number">8.4</span> Show Summary Statistics</a></li>
+<li><a href="8-5-show-histogram.html#show-histogram"><span class="toc-section-number">8.5</span> Show Histogram</a></li>
+<li><a href="8-6-qq-plots-for-different-p-values.html#qq-plots-for-different-p-values"><span class="toc-section-number">8.6</span> QQ Plots for Different p Values</a></li>
+<li><a href="8-7-fit-tweedie-distribution.html#fit-tweedie-distribution"><span class="toc-section-number">8.7</span> Fit Tweedie Distribution</a></li>
+<li><a href="8-8-show-parameter-estimates.html#show-parameter-estimates"><span class="toc-section-number">8.8</span> Show Parameter Estimates</a></li>
+<li><a href="8-9-maximum-likelihood-estimation.html#maximum-likelihood-estimation"><span class="toc-section-number">8.9</span> Maximum Likelihood Estimation</a></li>
+<li><a href="8-10-obtain-standard-error.html#obtain-standard-error"><span class="toc-section-number">8.10</span> Obtain Standard Error</a></li>
+</ul></li>
+<li class="has-sub"><a href="9-empirical-bootstrap.html#empirical-bootstrap"><span class="toc-section-number">9</span> Empirical Bootstrap</a><ul>
+<li><a href="9-1-random-sample.html#random-sample"><span class="toc-section-number">9.1</span> Random sample</a></li>
+<li><a href="9-2-sample-mean.html#sample-mean"><span class="toc-section-number">9.2</span> Sample mean</a></li>
+<li class="has-sub"><a href="9-3-random-resamples-from-y.html#random-resamples-from-y"><span class="toc-section-number">9.3</span> Random resamples from y</a><ul>
+<li><a href="9-3-random-resamples-from-y.html#set-bootstrap-sample-size"><span class="toc-section-number">9.3.1</span> Set bootstrap sample size</a></li>
+<li><a href="9-3-random-resamples-from-y.html#compute-sample-mean-for-each-bootstrap-sample"><span class="toc-section-number">9.3.2</span> Compute sample mean for each bootstrap sample</a></li>
+</ul></li>
+<li><a href="9-4-confidence-interval.html#confidence-interval"><span class="toc-section-number">9.4</span> 90% confidence interval</a></li>
+</ul></li>
+<li class="has-sub"><a href="10-parametric-bootstrap.html#parametric-bootstrap"><span class="toc-section-number">10</span> Parametric Bootstrap</a><ul>
+<li><a href="10-1-random-sample-of-size-250.html#random-sample-of-size-250"><span class="toc-section-number">10.1</span> random sample of size 250</a></li>
+<li><a href="10-2-the-mle-for-lambda-1xbar.html#the-mle-for-lambda-1xbar"><span class="toc-section-number">10.2</span> The MLE for lambda: 1/xbar</a></li>
+<li><a href="10-3-generate-bootstrap-samples.html#generate-bootstrap-samples"><span class="toc-section-number">10.3</span> Generate bootstrap samples</a></li>
+<li><a href="10-4-compute-botstrap-statistics.html#compute-botstrap-statistics"><span class="toc-section-number">10.4</span> compute botstrap statistics</a></li>
+<li><a href="10-5-calculate-deviation-from-sample-statistics.html#calculate-deviation-from-sample-statistics"><span class="toc-section-number">10.5</span> calculate deviation from sample statistics</a></li>
+<li><a href="10-6-confidence-intervel.html#confidence-intervel"><span class="toc-section-number">10.6</span> 90% confidence intervel</a></li>
+</ul></li>
+<li class="has-sub"><a href="11-getting-the-data.html#getting-the-data"><span class="toc-section-number">11</span> Getting the Data</a><ul>
+<li><a href="11-1-read-data-massauto-csv.html#read-data-massauto.csv"><span class="toc-section-number">11.1</span> read data “MassAuto.csv”</a></li>
+<li><a href="11-2-check-variable-names.html#check-variable-names"><span class="toc-section-number">11.2</span> Check Variable Names</a></li>
+<li><a href="11-3-calculate-total-losses-in-dat.html#calculate-total-losses-in-dat"><span class="toc-section-number">11.3</span> Calculate Total Losses in “dat”</a></li>
+</ul></li>
+<li class="has-sub"><a href="12-fit-frequency-models.html#fit-frequency-models"><span class="toc-section-number">12</span> Fit Frequency Models</a><ul>
+<li><a href="12-1-prepare-data-for-frequency-models.html#prepare-data-for-frequency-models"><span class="toc-section-number">12.1</span> Prepare Data for Frequency Models</a></li>
+<li class="has-sub"><a href="12-2-fit-poisson-distribution.html#fit-poisson-distribution"><span class="toc-section-number">12.2</span> Fit Poisson distribution</a><ul>
+<li><a href="12-2-fit-poisson-distribution.html#define-the-pmf-for-the-poisson-distribution"><span class="toc-section-number">12.2.1</span> Define the pmf for the Poisson Distribution</a></li>
+<li><a href="12-2-fit-poisson-distribution.html#obtain-standard-error-1"><span class="toc-section-number">12.2.2</span> Obtain Standard Error</a></li>
+</ul></li>
+<li class="has-sub"><a href="12-3-fit-negative-binomial-distribution.html#fit-negative-binomial-distribution"><span class="toc-section-number">12.3</span> Fit Negative Binomial Distribution</a><ul>
+<li><a href="12-3-fit-negative-binomial-distribution.html#define-pmf-for-negative-binomial"><span class="toc-section-number">12.3.1</span> Define pmf for Negative Binomial</a></li>
+<li><a href="12-3-fit-negative-binomial-distribution.html#obtain-standard-error-2"><span class="toc-section-number">12.3.2</span> Obtain Standard Error</a></li>
+</ul></li>
+<li class="has-sub"><a href="12-4-goodness-of-fit-1.html#goodness-of-fit-1"><span class="toc-section-number">12.4</span> Goodness-of-Fit</a><ul>
+<li><a href="12-4-goodness-of-fit-1.html#set-parameters-1"><span class="toc-section-number">12.4.1</span> Set Parameters</a></li>
+<li><a href="12-4-goodness-of-fit-1.html#empirical-model"><span class="toc-section-number">12.4.2</span> Empirical Model</a></li>
+<li><a href="12-4-goodness-of-fit-1.html#poisson-model"><span class="toc-section-number">12.4.3</span> Poisson Model</a></li>
+<li><a href="12-4-goodness-of-fit-1.html#negative-binomial-model"><span class="toc-section-number">12.4.4</span> Negative Binomial Model</a></li>
+<li><a href="12-4-goodness-of-fit-1.html#output"><span class="toc-section-number">12.4.5</span> Output</a></li>
+</ul></li>
+<li><a href="12-5-chi-square-statistics.html#chi-square-statistics"><span class="toc-section-number">12.5</span> Chi Square Statistics</a></li>
+</ul></li>
+<li class="has-sub"><a href="13-fit-severity-models.html#fit-severity-models"><span class="toc-section-number">13</span> Fit Severity Models</a><ul>
+<li><a href="13-1-prepare-data-for-severity-models.html#prepare-data-for-severity-models"><span class="toc-section-number">13.1</span> Prepare Data for Severity Models</a></li>
+<li class="has-sub"><a href="13-2-log-normal-distribution.html#log-normal-distribution"><span class="toc-section-number">13.2</span> Log-normal distribution</a><ul>
+<li><a href="13-2-log-normal-distribution.html#use-vgam-library-for-estimation-of-parameters"><span class="toc-section-number">13.2.1</span> Use “VGAM” Library for Estimation of Parameters</a></li>
+<li><a href="13-2-log-normal-distribution.html#user-defined-likelihood-function"><span class="toc-section-number">13.2.2</span> User-Defined Likelihood Function</a></li>
+<li><a href="13-2-log-normal-distribution.html#obtain-standard-error-3"><span class="toc-section-number">13.2.3</span> Obtain Standard Error</a></li>
+</ul></li>
+<li class="has-sub"><a href="13-3-pareto-distribution-1.html#pareto-distribution-1"><span class="toc-section-number">13.3</span> Pareto Distribution</a><ul>
+<li><a href="13-3-pareto-distribution-1.html#use-vgam-library-for-estimation-of-parameters-1"><span class="toc-section-number">13.3.1</span> Use “VGAM” Library for Estimation of Parameters</a></li>
+<li><a href="13-3-pareto-distribution-1.html#user-defined-likelihood-function-1"><span class="toc-section-number">13.3.2</span> User-Defined Likelihood Function</a></li>
+<li><a href="13-3-pareto-distribution-1.html#obtain-standard-error-4"><span class="toc-section-number">13.3.3</span> Obtain Standard Error</a></li>
+</ul></li>
+<li class="has-sub"><a href="13-4-histogram.html#histogram"><span class="toc-section-number">13.4</span> Histogram</a><ul>
+<li><a href="13-4-histogram.html#ln"><span class="toc-section-number">13.4.1</span> LN</a></li>
+<li><a href="13-4-histogram.html#pareto"><span class="toc-section-number">13.4.2</span> Pareto</a></li>
+</ul></li>
+<li class="has-sub"><a href="13-5-qq-plots.html#qq-plots"><span class="toc-section-number">13.5</span> qq Plots</a><ul>
+<li><a href="13-5-qq-plots.html#define-quantile-function-of-pareto"><span class="toc-section-number">13.5.1</span> Define Quantile Function of Pareto</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="show-distribution-of-aggregate-loss-s" class="section level2">
+<h2><span class="header-section-number">6.4</span> Show distribution of aggregate loss S</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
+<span class="kw">hist</span>(S,<span class="dt">freq=</span>F,<span class="dt">breaks=</span><span class="dv">100</span>)
+<span class="kw">plot</span>(<span class="kw">ecdf</span>(S),<span class="dt">xlab=</span><span class="st">&quot;S&quot;</span>)</code></pre></div>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+</div>
+<!-- </div> -->
+<p style="text-align: center;">
+<a href="6-3-set-sample-size-for-the-simulation.html"><button class="btn btn-default">Previous</button></a>
+<a href="7-applications.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

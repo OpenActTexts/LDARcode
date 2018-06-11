@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R for Loss Data Analytics</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R for Loss Data Analytics" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R for Loss Data Analytics" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="An open text authored by the Actuarial Community">
+
+
+<meta name="date" content="2018-05-24">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="prerequisites.html">
+<link rel="next" href="frequency-distributions.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script>
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</script>
+<script>
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</script>
+<script>
+window.initializeCodeFolding = function(show) {
+
+  // handlers for show-all and hide all
+  $("#rmd-show-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('show');
+    });
+  });
+  $("#rmd-hide-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('hide');
+    });
+  });
+
+  // index for unique code element ids
+  var currentIndex = 1;
+
+  // select all R code blocks
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan, pre.js');
+  rCodeBlocks.each(function() {
+
+    // create a collapsable div to wrap the code in
+    var div = $('<div class="collapse r-code-collapse"></div>');
+    if (show)
+      div.addClass('in');
+    var id = 'rcode-643E0F36' + currentIndex++;
+    div.attr('id', id);
+    $(this).before(div);
+    $(this).detach().appendTo(div);
+
+    // add a show code button right above
+    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
+    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
+    showCodeButton.append(showCodeText);
+    showCodeButton
+        .attr('data-toggle', 'collapse')
+        .attr('data-target', '#' + id)
+        .attr('aria-expanded', show)
+        .attr('aria-controls', id);
+
+    var buttonRow = $('<div class="row"></div>');
+    var buttonCol = $('<div class="col-md-12"></div>');
+
+    buttonCol.append(showCodeButton);
+    buttonRow.append(buttonCol);
+
+    div.before(buttonRow);
+
+    // update state of button on show/hide
+    div.on('hidden.bs.collapse', function () {
+      showCodeText.text('Code');
+    });
+    div.on('show.bs.collapse', function () {
+      showCodeText.text('Hide');
+    });
+  });
+
+}
+</script>
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+.row { display: flex; }
+.collapse { display: none; }
+.in { display:block }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "hide");
+});
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Loss Data Analytics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="1.1" data-path="prerequisites.html"><a href="prerequisites.html#basic-programming-tools"><i class="fa fa-check"></i><b>1.1</b> Basic Programming Tools</a></li>
+<li class="chapter" data-level="1.2" data-path="prerequisites.html"><a href="prerequisites.html#further-programming-tools"><i class="fa fa-check"></i><b>1.2</b> Further Programming Tools</a></li>
+<li class="chapter" data-level="1.3" data-path="prerequisites.html"><a href="prerequisites.html#r-markdown"><i class="fa fa-check"></i><b>1.3</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html"><i class="fa fa-check"></i><b>2</b> Introduction to Loss Data Analytics</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#case-study-wisconsin-property-fund"><i class="fa fa-check"></i><b>2.1</b> Case Study: Wisconsin Property Fund</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#fund-claims-variables"><i class="fa fa-check"></i><b>2.1.1</b> Fund Claims Variables</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#rating-variables"><i class="fa fa-check"></i><b>2.1.2</b> Rating Variables</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="frequency-distributions.html"><a href="frequency-distributions.html"><i class="fa fa-check"></i><b>3</b> Frequency Distributions</a><ul>
+<li class="chapter" data-level="3.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#basic-distributions"><i class="fa fa-check"></i><b>3.1</b> Basic Distributions</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#poisson-distribution"><i class="fa fa-check"></i><b>3.1.1</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.1.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#negative-binomial-distribution"><i class="fa fa-check"></i><b>3.1.2</b> Negative Binomial Distribution</a></li>
+<li class="chapter" data-level="3.1.3" data-path="frequency-distributions.html"><a href="frequency-distributions.html#binomial-distribution"><i class="fa fa-check"></i><b>3.1.3</b> Binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#ab0-class-of-distributions"><i class="fa fa-check"></i><b>3.2</b> (<em>a</em>,<em>b</em>,0) Class of Distributions</a></li>
+<li class="chapter" data-level="3.3" data-path="frequency-distributions.html"><a href="frequency-distributions.html#estimating-frequency-distributions"><i class="fa fa-check"></i><b>3.3</b> Estimating Frequency Distributions</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#singapore-data"><i class="fa fa-check"></i><b>3.3.1</b> Singapore Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#claim-frequency-distribution-1"><i class="fa fa-check"></i><b>3.3.2</b> Claim Frequency Distribution</a></li>
+<li class="chapter" data-level="3.3.3" data-path="frequency-distributions.html"><a href="frequency-distributions.html#visualize-the-loglikelihood-function"><i class="fa fa-check"></i><b>3.3.3</b> Visualize The Loglikelihood Function</a></li>
+<li class="chapter" data-level="3.3.4" data-path="frequency-distributions.html"><a href="frequency-distributions.html#the-maximum-likelihood-estimate-of-poisson-distribution"><i class="fa fa-check"></i><b>3.3.4</b> The Maximum Likelihood Estimate of Poisson Distribution</a></li>
+<li class="chapter" data-level="3.3.5" data-path="frequency-distributions.html"><a href="frequency-distributions.html#the-maximum-likelihood-estimate-of-the-negative-binomial-distribution"><i class="fa fa-check"></i><b>3.3.5</b> The Maximum Likelihood Estimate of The Negative Binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="frequency-distributions.html"><a href="frequency-distributions.html#goodness-of-fit"><i class="fa fa-check"></i><b>3.4</b> Goodness of Fit</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#pearson-goodness-of-fit-statistic"><i class="fa fa-check"></i><b>3.4.1</b> Pearson Goodness-of-Fit Statistic</a></li>
+<li class="chapter" data-level="3.4.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#negative-binomial-goodness-of-fit-statistic"><i class="fa fa-check"></i><b>3.4.2</b> Negative Binomial Goodness-of-Fit Statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="frequency-distributions.html"><a href="frequency-distributions.html#singapore-data-1"><i class="fa fa-check"></i><b>3.5</b> Singapore Data</a></li>
+<li class="chapter" data-level="3.6" data-path="frequency-distributions.html"><a href="frequency-distributions.html#goodness-of-fit-for-poisson-distribution"><i class="fa fa-check"></i><b>3.6</b> Goodness of Fit for Poisson Distribution</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="frequency-distributions.html"><a href="frequency-distributions.html#claim-frequency-distribution-2"><i class="fa fa-check"></i><b>3.6.1</b> Claim Frequency Distribution</a></li>
+<li class="chapter" data-level="3.6.2" data-path="frequency-distributions.html"><a href="frequency-distributions.html#the-maximum-likelihood-estimate-of-lambda"><i class="fa fa-check"></i><b>3.6.2</b> The Maximum Likelihood Estimate of <span class="math inline">\(\lambda\)</span></a></li>
+<li class="chapter" data-level="3.6.3" data-path="frequency-distributions.html"><a href="frequency-distributions.html#pearson-goodness-of-fit-statistic-1"><i class="fa fa-check"></i><b>3.6.3</b> Pearson Goodness-of-Fit Statistic</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html"><i class="fa fa-check"></i><b>4</b> Modeling Loss Severities</a><ul>
+<li class="chapter" data-level="4.1" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#required-packages"><i class="fa fa-check"></i><b>4.1</b> Required packages</a></li>
+<li class="chapter" data-level="4.2" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#gamma-distribution"><i class="fa fa-check"></i><b>4.2</b> Gamma Distribution</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#varying-the-shape-parameter"><i class="fa fa-check"></i><b>4.2.1</b> Varying The Shape Parameter</a></li>
+<li class="chapter" data-level="4.2.2" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#varying-the-scale-parameter"><i class="fa fa-check"></i><b>4.2.2</b> Varying The Scale Parameter</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#pareto-distribution"><i class="fa fa-check"></i><b>4.3</b> Pareto Distribution</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#varying-the-shape-parameter-1"><i class="fa fa-check"></i><b>4.3.1</b> Varying The Shape Parameter</a></li>
+<li class="chapter" data-level="4.3.2" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#varying-the-scale-parameter-1"><i class="fa fa-check"></i><b>4.3.2</b> Varying The Scale Parameter</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#weibull-distribution"><i class="fa fa-check"></i><b>4.4</b> Weibull Distribution</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#varying-the-shape-parameter-2"><i class="fa fa-check"></i><b>4.4.1</b> Varying The Shape Parameter</a></li>
+<li class="chapter" data-level="4.4.2" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#varying-the-scale-parameter-2"><i class="fa fa-check"></i><b>4.4.2</b> Varying The Scale Parameter</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#generalized-beta-distribution-of-the-second-kind-gb2"><i class="fa fa-check"></i><b>4.5</b> Generalized Beta Distribution of The Second Kind (GB2)</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#varying-the-scale-parameter-3"><i class="fa fa-check"></i><b>4.5.1</b> Varying The Scale Parameter</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#methods-of-creating-new-distributions"><i class="fa fa-check"></i><b>4.6</b> Methods of Creating New Distributions</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#mixture-distributions"><i class="fa fa-check"></i><b>4.6.1</b> Mixture Distributions</a></li>
+<li class="chapter" data-level="4.6.2" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#density-obtained-through-splicing"><i class="fa fa-check"></i><b>4.6.2</b> Density Obtained Through Splicing</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#coverage-modifications"><i class="fa fa-check"></i><b>4.7</b> Coverage Modifications</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#load-required-package"><i class="fa fa-check"></i><b>4.7.1</b> Load Required Package</a></li>
+<li class="chapter" data-level="4.7.2" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#ordinary-deductible"><i class="fa fa-check"></i><b>4.7.2</b> Ordinary Deductible</a></li>
+<li class="chapter" data-level="4.7.3" data-path="modeling-loss-severities.html"><a href="modeling-loss-severities.html#franchise-deductible"><i class="fa fa-check"></i><b>4.7.3</b> Franchise Deductible</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>5</b> Model Selection</a><ul>
+<li class="chapter" data-level="5.1" data-path="model-selection.html"><a href="model-selection.html#claim-level-data-of-property-fund"><i class="fa fa-check"></i><b>5.1</b> Claim Level Data of Property Fund</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="model-selection.html"><a href="model-selection.html#claims-data"><i class="fa fa-check"></i><b>5.1.1</b> Claims Data</a></li>
+<li class="chapter" data-level="5.1.2" data-path="model-selection.html"><a href="model-selection.html#summary-of-claims"><i class="fa fa-check"></i><b>5.1.2</b> Summary of Claims</a></li>
+<li class="chapter" data-level="5.1.3" data-path="model-selection.html"><a href="model-selection.html#plot-of-claims"><i class="fa fa-check"></i><b>5.1.3</b> Plot of Claims</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="model-selection.html"><a href="model-selection.html#fitting-distributions"><i class="fa fa-check"></i><b>5.2</b> Fitting Distributions</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="model-selection.html"><a href="model-selection.html#inference-assuming-a-lognormal-distribution"><i class="fa fa-check"></i><b>5.2.1</b> Inference Assuming a Lognormal Distribution</a></li>
+<li class="chapter" data-level="5.2.2" data-path="model-selection.html"><a href="model-selection.html#inference-assuming-a-gamma-distribution"><i class="fa fa-check"></i><b>5.2.2</b> Inference Assuming a Gamma Distribution</a></li>
+<li class="chapter" data-level="5.2.3" data-path="model-selection.html"><a href="model-selection.html#inference-assuming-a-pareto-distribution"><i class="fa fa-check"></i><b>5.2.3</b> Inference Assuming a Pareto Distribution</a></li>
+<li class="chapter" data-level="5.2.4" data-path="model-selection.html"><a href="model-selection.html#inference-assuming-an-exponential-distribution"><i class="fa fa-check"></i><b>5.2.4</b> Inference Assuming an Exponential Distribution</a></li>
+<li class="chapter" data-level="5.2.5" data-path="model-selection.html"><a href="model-selection.html#inference-assuming-a-generalized-beta-distribution-of-the-second-kind-gb2-distribution"><i class="fa fa-check"></i><b>5.2.5</b> Inference Assuming a Generalized Beta Distribution of the Second Kind (GB2) Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="model-selection.html"><a href="model-selection.html#plotting-the-fit-using-densities-on-a-logarithmic-scale"><i class="fa fa-check"></i><b>5.3</b> Plotting the Fit Using Densities (on a Logarithmic Scale)</a></li>
+<li class="chapter" data-level="5.4" data-path="model-selection.html"><a href="model-selection.html#nonparametric-inference"><i class="fa fa-check"></i><b>5.4</b> Nonparametric Inference</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="model-selection.html"><a href="model-selection.html#nonparametric-estimation-tools"><i class="fa fa-check"></i><b>5.4.1</b> Nonparametric Estimation Tools</a></li>
+<li class="chapter" data-level="5.4.2" data-path="model-selection.html"><a href="model-selection.html#property-fund-data"><i class="fa fa-check"></i><b>5.4.2</b> Property Fund Data</a></li>
+<li class="chapter" data-level="5.4.3" data-path="model-selection.html"><a href="model-selection.html#nonparametric-estimation-tools-for-model-selection"><i class="fa fa-check"></i><b>5.4.3</b> Nonparametric Estimation Tools For Model Selection</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="model-selection.html"><a href="model-selection.html#mle-for-grouped-data"><i class="fa fa-check"></i><b>5.5</b> MLE for Grouped Data</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="model-selection.html"><a href="model-selection.html#mle-for-grouped-data--soa-exam-c-276"><i class="fa fa-check"></i><b>5.5.1</b> MLE for Grouped Data- SOA Exam C # 276</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>6</b> Simulation</a><ul>
+<li class="chapter" data-level="6.1" data-path="simulation.html"><a href="simulation.html#simulation---inversion-method"><i class="fa fa-check"></i><b>6.1</b> Simulation - Inversion Method</a></li>
+<li class="chapter" data-level="6.2" data-path="simulation.html"><a href="simulation.html#comparing-moments-from-the-simulated-data-to-theoretical-moments"><i class="fa fa-check"></i><b>6.2</b> Comparing Moments from The Simulated Data to Theoretical Moments</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="aggregate-claim-simulation.html"><a href="aggregate-claim-simulation.html"><i class="fa fa-check"></i><b>7</b> Aggregate Claim Simulation</a><ul>
+<li class="chapter" data-level="7.1" data-path="aggregate-claim-simulation.html"><a href="aggregate-claim-simulation.html#collective-risk-model-without-coverage-modifications"><i class="fa fa-check"></i><b>7.1</b> Collective Risk Model: without coverage modifications</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="aggregate-claim-simulation.html"><a href="aggregate-claim-simulation.html#set-parameters"><i class="fa fa-check"></i><b>7.1.1</b> Set Parameters</a></li>
+<li class="chapter" data-level="7.1.2" data-path="aggregate-claim-simulation.html"><a href="aggregate-claim-simulation.html#show-frequency-and-severity-distributions"><i class="fa fa-check"></i><b>7.1.2</b> Show frequency and severity distributions</a></li>
+<li class="chapter" data-level="7.1.3" data-path="aggregate-claim-simulation.html"><a href="aggregate-claim-simulation.html#set-sample-size-for-the-simulation"><i class="fa fa-check"></i><b>7.1.3</b> Set sample size for the simulation</a></li>
+<li class="chapter" data-level="7.1.4" data-path="aggregate-claim-simulation.html"><a href="aggregate-claim-simulation.html#show-distribution-of-aggregate-loss-s"><i class="fa fa-check"></i><b>7.1.4</b> Show distribution of aggregate loss S</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="aggregate-claim-simulation.html"><a href="aggregate-claim-simulation.html#applications"><i class="fa fa-check"></i><b>7.2</b> Applications</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="aggregate-claim-simulation.html"><a href="aggregate-claim-simulation.html#find-descriptive-statistics"><i class="fa fa-check"></i><b>7.2.1</b> Find descriptive statistics</a></li>
+<li class="chapter" data-level="7.2.2" data-path="aggregate-claim-simulation.html"><a href="aggregate-claim-simulation.html#calculate-cdf"><i class="fa fa-check"></i><b>7.2.2</b> Calculate cdf</a></li>
+<li class="chapter" data-level="7.2.3" data-path="aggregate-claim-simulation.html"><a href="aggregate-claim-simulation.html#calculate-risk-measures"><i class="fa fa-check"></i><b>7.2.3</b> Calculate risk measures</a></li>
+<li class="chapter" data-level="7.2.4" data-path="aggregate-claim-simulation.html"><a href="aggregate-claim-simulation.html#pricing-stop-loss-insurance---set-deductible"><i class="fa fa-check"></i><b>7.2.4</b> Pricing stop-loss insurance - Set deductible</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="freqsev.html"><a href="freqsev.html"><i class="fa fa-check"></i><b>8</b> FreqSev</a><ul>
+<li class="chapter" data-level="8.1" data-path="freqsev.html"><a href="freqsev.html#getting-the-data"><i class="fa fa-check"></i><b>8.1</b> Getting the Data</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="freqsev.html"><a href="freqsev.html#read-data-massauto.csv"><i class="fa fa-check"></i><b>8.1.1</b> read data “MassAuto.csv”</a></li>
+<li class="chapter" data-level="8.1.2" data-path="freqsev.html"><a href="freqsev.html#check-variable-names"><i class="fa fa-check"></i><b>8.1.2</b> Check Variable Names</a></li>
+<li class="chapter" data-level="8.1.3" data-path="freqsev.html"><a href="freqsev.html#calculate-total-losses-in-dat"><i class="fa fa-check"></i><b>8.1.3</b> Calculate Total Losses in “dat”</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="freqsev.html"><a href="freqsev.html#fit-frequency-models"><i class="fa fa-check"></i><b>8.2</b> Fit Frequency Models</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="freqsev.html"><a href="freqsev.html#prepare-data-for-frequency-models"><i class="fa fa-check"></i><b>8.2.1</b> Prepare Data for Frequency Models</a></li>
+<li class="chapter" data-level="8.2.2" data-path="freqsev.html"><a href="freqsev.html#fit-poisson-distribution"><i class="fa fa-check"></i><b>8.2.2</b> Fit Poisson distribution</a></li>
+<li class="chapter" data-level="8.2.3" data-path="freqsev.html"><a href="freqsev.html#fit-negative-binomial-distribution"><i class="fa fa-check"></i><b>8.2.3</b> Fit Negative Binomial Distribution</a></li>
+<li class="chapter" data-level="8.2.4" data-path="freqsev.html"><a href="freqsev.html#goodness-of-fit-1"><i class="fa fa-check"></i><b>8.2.4</b> Goodness-of-Fit</a></li>
+<li class="chapter" data-level="8.2.5" data-path="freqsev.html"><a href="freqsev.html#chi-square-statistics"><i class="fa fa-check"></i><b>8.2.5</b> Chi Square Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="freqsev.html"><a href="freqsev.html#fit-severity-models"><i class="fa fa-check"></i><b>8.3</b> Fit Severity Models</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="freqsev.html"><a href="freqsev.html#prepare-data-for-severity-models"><i class="fa fa-check"></i><b>8.3.1</b> Prepare Data for Severity Models</a></li>
+<li class="chapter" data-level="8.3.2" data-path="freqsev.html"><a href="freqsev.html#log-normal-distribution"><i class="fa fa-check"></i><b>8.3.2</b> Log-normal distribution</a></li>
+<li class="chapter" data-level="8.3.3" data-path="freqsev.html"><a href="freqsev.html#pareto-distribution-1"><i class="fa fa-check"></i><b>8.3.3</b> Pareto Distribution</a></li>
+<li class="chapter" data-level="8.3.4" data-path="freqsev.html"><a href="freqsev.html#histogram"><i class="fa fa-check"></i><b>8.3.4</b> Histogram</a></li>
+<li class="chapter" data-level="8.3.5" data-path="freqsev.html"><a href="freqsev.html#qq-plots"><i class="fa fa-check"></i><b>8.3.5</b> qq Plots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="tweedie.html"><a href="tweedie.html"><i class="fa fa-check"></i><b>9</b> Tweedie</a><ul>
+<li class="chapter" data-level="9.1" data-path="tweedie.html"><a href="tweedie.html#tweedie-distribution"><i class="fa fa-check"></i><b>9.1</b> Tweedie distribution</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="tweedie.html"><a href="tweedie.html#load-tweedie-package"><i class="fa fa-check"></i><b>9.1.1</b> Load Tweedie Package</a></li>
+<li class="chapter" data-level="9.1.2" data-path="tweedie.html"><a href="tweedie.html#set-paramteres-for-tweediepmuphi"><i class="fa fa-check"></i><b>9.1.2</b> Set Paramteres for Tweedie(p,mu,phi)</a></li>
+<li class="chapter" data-level="9.1.3" data-path="tweedie.html"><a href="tweedie.html#set-sample-size"><i class="fa fa-check"></i><b>9.1.3</b> Set Sample Size</a></li>
+<li class="chapter" data-level="9.1.4" data-path="tweedie.html"><a href="tweedie.html#show-summary-statistics"><i class="fa fa-check"></i><b>9.1.4</b> Show Summary Statistics</a></li>
+<li class="chapter" data-level="9.1.5" data-path="tweedie.html"><a href="tweedie.html#show-histogram"><i class="fa fa-check"></i><b>9.1.5</b> Show Histogram</a></li>
+<li class="chapter" data-level="9.1.6" data-path="tweedie.html"><a href="tweedie.html#qq-plots-for-different-p-values"><i class="fa fa-check"></i><b>9.1.6</b> QQ Plots for Different p Values</a></li>
+<li class="chapter" data-level="9.1.7" data-path="tweedie.html"><a href="tweedie.html#fit-tweedie-distribution"><i class="fa fa-check"></i><b>9.1.7</b> Fit Tweedie Distribution</a></li>
+<li class="chapter" data-level="9.1.8" data-path="tweedie.html"><a href="tweedie.html#show-parameter-estimates"><i class="fa fa-check"></i><b>9.1.8</b> Show Parameter Estimates</a></li>
+<li class="chapter" data-level="9.1.9" data-path="tweedie.html"><a href="tweedie.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>9.1.9</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="9.1.10" data-path="tweedie.html"><a href="tweedie.html#obtain-standard-error-4"><i class="fa fa-check"></i><b>9.1.10</b> Obtain Standard Error</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html"><i class="fa fa-check"></i><b>10</b> Bootstrap Estimation</a><ul>
+<li class="chapter" data-level="10.1" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html#empirical-bootstrap"><i class="fa fa-check"></i><b>10.1</b> Empirical Bootstrap</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html#random-sample"><i class="fa fa-check"></i><b>10.1.1</b> Random sample</a></li>
+<li class="chapter" data-level="10.1.2" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html#sample-mean"><i class="fa fa-check"></i><b>10.1.2</b> Sample mean</a></li>
+<li class="chapter" data-level="10.1.3" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html#random-resamples-from-y"><i class="fa fa-check"></i><b>10.1.3</b> Random resamples from y</a></li>
+<li class="chapter" data-level="10.1.4" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html#confidence-interval"><i class="fa fa-check"></i><b>10.1.4</b> 90% confidence interval</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html#parametric-bootstrap"><i class="fa fa-check"></i><b>10.2</b> Parametric Bootstrap</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html#random-sample-of-size-250"><i class="fa fa-check"></i><b>10.2.1</b> random sample of size 250</a></li>
+<li class="chapter" data-level="10.2.2" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html#the-mle-for-lambda-1xbar"><i class="fa fa-check"></i><b>10.2.2</b> The MLE for lambda: 1/xbar</a></li>
+<li class="chapter" data-level="10.2.3" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html#generate-bootstrap-samples"><i class="fa fa-check"></i><b>10.2.3</b> Generate bootstrap samples</a></li>
+<li class="chapter" data-level="10.2.4" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html#compute-botstrap-statistics"><i class="fa fa-check"></i><b>10.2.4</b> compute botstrap statistics</a></li>
+<li class="chapter" data-level="10.2.5" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html#calculate-deviation-from-sample-statistics"><i class="fa fa-check"></i><b>10.2.5</b> calculate deviation from sample statistics</a></li>
+<li class="chapter" data-level="10.2.6" data-path="bootstrap-estimation.html"><a href="bootstrap-estimation.html#confidence-intervel"><i class="fa fa-check"></i><b>10.2.6</b> 90% confidence intervel</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Loss Data Analytics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-to-loss-data-analytics" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Introduction to Loss Data Analytics</h1>
+<p><em>This file contains illustrative <strong>R</strong> code for computing analysis on the Property Fund data. When reviewing this code, you should open an <strong>R</strong> session, copy-and-paste the code, and see it perform. Then, you will be able to change parameters, look up commands, and so forth, as you go. This code uses the dataset <code>PropertyFundInsample.csv</code></em></p>
+<div id="case-study-wisconsin-property-fund" class="section level2">
+<h2><span class="header-section-number">2.1</span> Case Study: Wisconsin Property Fund</h2>
+<p>Read in Property Fund data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Insample &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/PropertyFundInsample.csv&quot;</span>, <span class="dt">header=</span>T, <span class="dt">na.strings=</span><span class="kw">c</span>(<span class="st">&quot;.&quot;</span>), <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
+Insample2010 &lt;-<span class="st"> </span><span class="kw">subset</span>(Insample, Year<span class="op">==</span><span class="dv">2010</span>)</code></pre></div>
+<p>A few quick notes on these commands:</p>
+<ul>
+<li><p><code>read.csv</code> reads a csv file and creates data frame from it, with cases corresponding to rows and variables to columns in the file.</p></li>
+<li><p>The assignment operator <code>&lt;-</code> is analogous to an equal sign in mathematics. The command <code>Insample &lt;- read.csv(&quot;PropertyFundInsample.csv&quot;, header=T, na.strings=c(&quot;.&quot;), stringsAsFactors=FALSE)</code> means we give the name <code>Insample</code> to the data read.</p></li>
+<li><p><code>The subset()</code> function is used to select variables and observations. In this illustration, we selected observations from year 2010.</p></li>
+</ul>
+<div id="fund-claims-variables" class="section level3 tabset">
+<h3><span class="header-section-number">2.1.1</span> Fund Claims Variables</h3>
+<div id="claim-frequency-distribution" class="section level4 tabset">
+<h4><span class="header-section-number">2.1.1.1</span> Claim Frequency Distribution</h4>
+<p>In 2010 there were 1,110 policyholders in the property fund.</p>
+<div id="property-fund-distribution-for-2010" class="section level5">
+<h5><span class="header-section-number">2.1.1.1.1</span> Property Fund Distribution for 2010</h5>
+<p>Table 1.1 shows the distribution of the 1,377 claims.</p>
+<p>Table 1.1</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pander)
+Table&lt;-<span class="kw">as.data.frame</span>(<span class="kw">table</span>(Insample2010<span class="op">$</span>Freq))
+<span class="kw">names</span>(Table)&lt;-<span class="kw">c</span>(<span class="st">&quot;Number of Claims&quot;</span>, <span class="st">&quot;Frequncy&quot;</span>)
+<span class="kw">pander</span>(<span class="kw">t</span>(Table))</code></pre></div>
+<table style="width:100%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="28%" />
+<col width="7%" />
+<col width="7%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Number of Claims</strong></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">7</td>
+<td align="center">8</td>
+<td align="center">9</td>
+<td align="center">10</td>
+<td align="center">11</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Frequncy</strong></td>
+<td align="center">707</td>
+<td align="center">209</td>
+<td align="center">86</td>
+<td align="center">40</td>
+<td align="center">18</td>
+<td align="center">12</td>
+<td align="center">9</td>
+<td align="center">4</td>
+<td align="center">6</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">2</td>
+</tr>
+</tbody>
+</table>
+<table style="width:100%;">
+<colgroup>
+<col width="28%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="7%" />
+<col width="7%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Number of Claims</strong></td>
+<td align="center">13</td>
+<td align="center">14</td>
+<td align="center">15</td>
+<td align="center">16</td>
+<td align="center">17</td>
+<td align="center">18</td>
+<td align="center">19</td>
+<td align="center">30</td>
+<td align="center">39</td>
+<td align="center">103</td>
+<td align="center">239</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Frequncy</strong></td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<p><br><br />
+The average number of claims for this sample was 1.24 (=1377/1110). See table 1.2 below.</p>
+<p>Table 1.2</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(<span class="kw">summary</span>(Insample2010<span class="op">$</span>Freq))</code></pre></div>
+<table style="width:69%;">
+<colgroup>
+<col width="9%" />
+<col width="13%" />
+<col width="12%" />
+<col width="11%" />
+<col width="13%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Min.</th>
+<th align="center">1st Qu.</th>
+<th align="center">Median</th>
+<th align="center">Mean</th>
+<th align="center">3rd Qu.</th>
+<th align="center">Max.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1.241</td>
+<td align="center">1</td>
+<td align="center">239</td>
+</tr>
+</tbody>
+</table>
+<p>A few quick notes on these commands:</p>
+<ul>
+<li><p>Many useful <strong>R</strong> functions come in packages and to use these functions you have to install them. One way to install a package is by using the command line <code>install.packages(&quot;&lt;the package's name&gt;&quot;)</code>. In addition, to read more about a function you use the command <code>help(&quot;function name&quot;)</code>.</p></li>
+<li><p>The <code>pander</code> function is used here to create nicer tables than regular <strong>R</strong> output. To use this function you need to download the <code>pander</code> package. For the normal <strong>R</strong> output in the illustration above, use the command line <code>summary(Insample2010$Freq)</code>.</p></li>
+<li>The <code>names()</code> function is used to to get or assign names of an object . In this illustration, we assigned <code>Number of Claims</code> and <code>Frequency</code> to the two columns in the data frame.</li>
+<li><p>The <code>t()</code> function is used to transpose a dataframe or a matrix.</p></li>
+</ul>
+</div>
+</div>
+<div id="average-severity-distribution-for-2010" class="section level4 tabset">
+<h4><span class="header-section-number">2.1.1.2</span> Average Severity Distribution for 2010</h4>
+<p>Table 1.3 summarizes the sample distribution of average severity from the 403 policyholders; Figure 1.2 provides further information about the distribution of sample claims, showing a distribution that is dominated by this single large claim so that the histogram is not very helpful. Even when removing the large claim, you will find a distribution that is skewed to the right. A generally accepted technique is to work with claims in logarithmic units especially for graphical purposes; the corresponding figure in the right-hand panel is much easier to interpret.</p>
+<p>Table 1.3</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">InsamplePos2010 &lt;-<span class="st"> </span><span class="kw">subset</span>(Insample2010, yAvg<span class="op">&gt;</span><span class="dv">0</span>)
+<span class="kw">pander</span>(<span class="kw">summary</span>(InsamplePos2010<span class="op">$</span>yAvg))</code></pre></div>
+<table style="width:76%;">
+<colgroup>
+<col width="11%" />
+<col width="13%" />
+<col width="12%" />
+<col width="11%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Min.</th>
+<th align="center">1st Qu.</th>
+<th align="center">Median</th>
+<th align="center">Mean</th>
+<th align="center">3rd Qu.</th>
+<th align="center">Max.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">166.7</td>
+<td align="center">2226</td>
+<td align="center">4951</td>
+<td align="center">56332</td>
+<td align="center">11900</td>
+<td align="center">12922218</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(InsamplePos2010<span class="op">$</span>yAvg)</code></pre></div>
+<pre><code>[1] 403</code></pre>
+<p>Note: The <code>length()</code> function sets the length of a vector (list) or other objects.</p>
+<div id="plot-of-average-claims" class="section level5">
+<h5><span class="header-section-number">2.1.1.2.1</span> Plot of Average Claims</h5>
+<p>Figure 1.2</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">hist</span>(InsamplePos2010<span class="op">$</span>yAvg, <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Average Claims&quot;</span>)
+<span class="kw">hist</span>(<span class="kw">log</span>(InsamplePos2010<span class="op">$</span>yAvg), <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Logarithmic Average Claims&quot;</span>)</code></pre></div>
+<p><img src="R_for_Loss_Data_Analytics_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>A few quick notes on these commands:</p>
+<ul>
+<li><p>The <code>par(mfrow)</code> function is handy for creating a simple multi-paneled plot. <code>mfrow</code> is a vector of length 2, where the first argument specifies the number of rows and the second the number of columns of plots.</p></li>
+<li><p>The <code>hist()</code> computes a histogram of the given data values. You put the name of your dataset in between the parentheses of this function.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="rating-variables" class="section level3 tabset">
+<h3><span class="header-section-number">2.1.2</span> Rating Variables</h3>
+<p>Earlier we considered a sample of 1,110 observations which may seem like a lot. However, as we will seen in our forthcoming applications, because of the preponderance of zeros and the skewed nature of claims, actuaries typically yearn for more data. One common approach that we adopt here is to examine outcomes from multiple years, thus increasing the sample size.</p>
+<div id="average-claims-over-time" class="section level4">
+<h4><span class="header-section-number">2.1.2.1</span> Average Claims Over Time</h4>
+<p>Table 1.4 shows that the average claim varies over time.</p>
+<p>Table 1.4</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(doBy)
+T1A &lt;-<span class="st"> </span><span class="kw">summaryBy</span>(Freq <span class="op">~</span><span class="st"> </span>Year, <span class="dt">data =</span> Insample,   
+                 <span class="dt">FUN =</span> <span class="cf">function</span>(x) { <span class="kw">c</span>(<span class="dt">m =</span> <span class="kw">mean</span>(x), <span class="dt">num=</span><span class="kw">length</span>(x)) } )
+T1B &lt;-<span class="st"> </span><span class="kw">summaryBy</span>(yAvg    <span class="op">~</span><span class="st"> </span>Year, <span class="dt">data =</span> Insample,   
+                 <span class="dt">FUN =</span> <span class="cf">function</span>(x) { <span class="kw">c</span>(<span class="dt">m =</span> <span class="kw">mean</span>(x), <span class="dt">num=</span><span class="kw">length</span>(x)) } )
+T1C &lt;-<span class="st"> </span><span class="kw">summaryBy</span>(BCcov    <span class="op">~</span><span class="st"> </span>Year, <span class="dt">data =</span> Insample,   
+                 <span class="dt">FUN =</span> <span class="cf">function</span>(x) { <span class="kw">c</span>(<span class="dt">m =</span> <span class="kw">mean</span>(x), <span class="dt">num=</span><span class="kw">length</span>(x)) } )
+Table1In &lt;-<span class="st"> </span><span class="kw">cbind</span>(T1A[<span class="dv">1</span>],T1A[<span class="dv">2</span>],T1B[<span class="dv">2</span>],T1C[<span class="dv">2</span>],T1A[<span class="dv">3</span>])
+<span class="kw">names</span>(Table1In) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;Average Freq&quot;</span>,<span class="st">&quot;Average Sev&quot;</span>, <span class="st">&quot;Average Coverage&quot;</span>,<span class="st">&quot;No. of Policyholders&quot;</span>)
+<span class="kw">pander</span>(Table1In)</code></pre></div>
+<table>
+<colgroup>
+<col width="9%" />
+<col width="19%" />
+<col width="18%" />
+<col width="24%" />
+<col width="28%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Year</th>
+<th align="center">Average Freq</th>
+<th align="center">Average Sev</th>
+<th align="center">Average Coverage</th>
+<th align="center">No. of Policyholders</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">2006</td>
+<td align="center">0.9515</td>
+<td align="center">9695</td>
+<td align="center">32498186</td>
+<td align="center">1154</td>
+</tr>
+<tr class="even">
+<td align="center">2007</td>
+<td align="center">1.167</td>
+<td align="center">6544</td>
+<td align="center">35275949</td>
+<td align="center">1138</td>
+</tr>
+<tr class="odd">
+<td align="center">2008</td>
+<td align="center">0.9742</td>
+<td align="center">5311</td>
+<td align="center">37267485</td>
+<td align="center">1125</td>
+</tr>
+<tr class="even">
+<td align="center">2009</td>
+<td align="center">1.219</td>
+<td align="center">4572</td>
+<td align="center">40355382</td>
+<td align="center">1112</td>
+</tr>
+<tr class="odd">
+<td align="center">2010</td>
+<td align="center">1.241</td>
+<td align="center">20452</td>
+<td align="center">41242070</td>
+<td align="center">1110</td>
+</tr>
+</tbody>
+</table>
+<p>A few quick notes on these commands:</p>
+<ul>
+<li><p>The <code>summaryBy()</code> function provides summary statistics of a variable across different groups. You need to install the <code>doBy</code> package to use the command.</p></li>
+<li><p>The <code>cbind()</code> combines vector, matrix or data frame by columns. The row number of the two datasets must be equal.</p></li>
+<li><p>The <code>c()</code> function combines its arguments to form a vector.</p></li>
+</ul>
+</div>
+<div id="frequency-and-claims-statistics-of-full-data" class="section level4">
+<h4><span class="header-section-number">2.1.2.2</span> Frequency and Claims Statistics of Full Data</h4>
+<p>For a different look at this five-year sample, Table 1.5 summarizes the distribution of our two outcomes, frequency and claims amount. In each case, the average exceeds the median, suggesting that the distributions are right-skewed.</p>
+<p>Table 1.5</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BCcov.div1000 &lt;-<span class="st"> </span>(Insample<span class="op">$</span>BCcov)<span class="op">/</span><span class="dv">1000</span>
+
+t1&lt;-<span class="st"> </span><span class="kw">summaryBy</span>(Freq <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> Insample,
+               <span class="dt">FUN =</span> <span class="cf">function</span>(x) { <span class="kw">c</span>(<span class="dt">ma=</span><span class="kw">min</span>(x), <span class="dt">m1=</span><span class="kw">median</span>(x),<span class="dt">m=</span><span class="kw">mean</span>(x),<span class="dt">mb=</span><span class="kw">max</span>(x)) } )
+<span class="kw">names</span>(t1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Minimum&quot;</span>, <span class="st">&quot;Median&quot;</span>,<span class="st">&quot;Average&quot;</span>, <span class="st">&quot;Maximum&quot;</span>)
+t2 &lt;-<span class="st"> </span><span class="kw">summaryBy</span>(yAvg <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> Insample, 
+                <span class="dt">FUN =</span> <span class="cf">function</span>(x) { <span class="kw">c</span>(<span class="dt">ma=</span><span class="kw">min</span>(x), <span class="dt">m1=</span><span class="kw">median</span>(x), <span class="dt">m=</span><span class="kw">mean</span>(x),<span class="dt">mb=</span><span class="kw">max</span>(x)) } )
+<span class="kw">names</span>(t2) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Minimum&quot;</span>, <span class="st">&quot;Median&quot;</span>,<span class="st">&quot;Average&quot;</span>, <span class="st">&quot;Maximum&quot;</span>)
+t3 &lt;-<span class="st"> </span><span class="kw">summaryBy</span>(Deduct <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> Insample, 
+                <span class="dt">FUN =</span> <span class="cf">function</span>(x) { <span class="kw">c</span>(<span class="dt">ma=</span><span class="kw">min</span>(x), <span class="dt">m1=</span><span class="kw">median</span>(x), <span class="dt">m=</span><span class="kw">mean</span>(x),<span class="dt">mb=</span><span class="kw">max</span>(x)) } )
+<span class="kw">names</span>(t3) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Minimum&quot;</span>, <span class="st">&quot;Median&quot;</span>,<span class="st">&quot;Average&quot;</span>, <span class="st">&quot;Maximum&quot;</span>)
+t4 &lt;-<span class="st"> </span><span class="kw">summaryBy</span>(BCcov.div1000 <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> Insample, 
+                <span class="dt">FUN =</span> <span class="cf">function</span>(x) { <span class="kw">c</span>(<span class="dt">ma=</span><span class="kw">min</span>(x), <span class="dt">m1=</span><span class="kw">median</span>(x), <span class="dt">m=</span><span class="kw">mean</span>(x),<span class="dt">mb=</span><span class="kw">max</span>(x)) } )
+<span class="kw">names</span>(t4) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Minimum&quot;</span>, <span class="st">&quot;Median&quot;</span>,<span class="st">&quot;Average&quot;</span>, <span class="st">&quot;Maximum&quot;</span>)
+Table2 &lt;-<span class="st"> </span><span class="kw">rbind</span>(t1,t2,t3,t4)
+Table2a &lt;-<span class="st"> </span><span class="kw">round</span>(Table2,<span class="dv">3</span>)
+Rowlable &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="st">&quot;Claim Frequency&quot;</span>,<span class="st">&quot;Claim Severity&quot;</span>,<span class="st">&quot;Deductible&quot;</span>,<span class="st">&quot;Coverage (000&#39;s)&quot;</span>)
+Table2aa &lt;-<span class="st"> </span><span class="kw">cbind</span>(Rowlable,<span class="kw">as.matrix</span>(Table2a))
+<span class="kw">pander</span>(Table2aa)</code></pre></div>
+<table style="width:92%;">
+<colgroup>
+<col width="26%" />
+<col width="13%" />
+<col width="16%" />
+<col width="16%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Minimum</th>
+<th align="center">Median</th>
+<th align="center">Average</th>
+<th align="center">Maximum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Claim Frequency</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1.109</td>
+<td align="center">263</td>
+</tr>
+<tr class="even">
+<td align="center">Claim Severity</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">9291.565</td>
+<td align="center">12922217.84</td>
+</tr>
+<tr class="odd">
+<td align="center">Deductible</td>
+<td align="center">500</td>
+<td align="center">1000</td>
+<td align="center">3364.87</td>
+<td align="center">1e+05</td>
+</tr>
+<tr class="even">
+<td align="center">Coverage (000’s)</td>
+<td align="center">8.937</td>
+<td align="center">11353.566</td>
+<td align="center">37280.855</td>
+<td align="center">2444796.98</td>
+</tr>
+</tbody>
+</table>
+<p>A few quick notes on these commands:</p>
+<ul>
+<li><p>The <code>rbind()</code> combines vector, matrix or data frame by rows. The column of the two datasets must be same.</p></li>
+<li><p>The <code>round()</code> function rounds the values in its first argument to the specified number of decimal places (default 0).</p></li>
+</ul>
+</div>
+<div id="rating-variable-description" class="section level4">
+<h4><span class="header-section-number">2.1.2.3</span> Rating Variable Description</h4>
+<p>Table 1.6 describes the rating variables considered in this chapter. To handle the skewness, we henceforth focus on logarithmic transformations of coverage and deductibles. See table 1.6 below for variables and variable description.</p>
+<p>Table 1.6</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">des &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">text=</span><span class="st">&#39;</span>
+<span class="st"> Variable Description</span>
+<span class="st">  &quot;BCcov&quot;  &quot;Total building and content coverage in dollars&quot;</span>
+<span class="st">  &quot;Deduct&quot;  &quot;Deductible in dollars&quot;</span>
+<span class="st">&quot;Entity Type&quot;   &quot;Categorical variable that is one of six types: (Village, City, County, Misc, School, or Town)&quot;</span>
+<span class="st">&quot;AlarmCredit&quot;   &quot;Categorical variable that is one of four types: (0%, 5%, 10%, or 15%), for automatic smoke alarms in main rooms&quot;</span>
+<span class="st">&quot;NoClaimCredit&quot; &quot;Binary variable to indicate no claims in the past two years&quot;</span>
+<span class="st">&quot;Fire5&quot; &quot;Binary variable to indicate the fire class is below 5. (The range of fire class is 0~10)&quot; &#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(des)</code></pre></div>
+<table style="width:67%;">
+<colgroup>
+<col width="22%" />
+<col width="44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Variable</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">BCcov</td>
+<td align="center">Total building and content coverage in dollars</td>
+</tr>
+<tr class="even">
+<td align="center">Deduct</td>
+<td align="center">Deductible in dollars</td>
+</tr>
+<tr class="odd">
+<td align="center">Entity Type</td>
+<td align="center">Categorical variable that is one of six types: (Village, City, County, Misc, School, or Town)</td>
+</tr>
+<tr class="even">
+<td align="center">AlarmCredit</td>
+<td align="center">Categorical variable that is one of four types: (0%, 5%, 10%, or 15%), for automatic smoke alarms in main rooms</td>
+</tr>
+<tr class="odd">
+<td align="center">NoClaimCredit</td>
+<td align="center">Binary variable to indicate no claims in the past two years</td>
+</tr>
+<tr class="even">
+<td align="center">Fire5</td>
+<td align="center">Binary variable to indicate the fire class is below 5. (The range of fire class is 0~10)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="frequency-and-claims-by-rating-variables" class="section level4">
+<h4><span class="header-section-number">2.1.2.4</span> Frequency and Claims by Rating Variables</h4>
+<p>To get a sense of the relationship between the non-continuous rating variables and claims, Table 1.7 relates the claims outcomes to these categorical variables. Table 1.7 shows claims summary by Entity Type, Fire Class, and No Claim Credit.</p>
+<p>Table 1.7</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Table 1.7</span>
+ByVarSumm&lt;-<span class="cf">function</span>(datasub){
+  tempA &lt;-<span class="st"> </span><span class="kw">summaryBy</span>(Freq    <span class="op">~</span><span class="st"> </span><span class="dv">1</span> , <span class="dt">data =</span> datasub,   
+                     <span class="dt">FUN =</span> <span class="cf">function</span>(x) { <span class="kw">c</span>(<span class="dt">m =</span> <span class="kw">mean</span>(x), <span class="dt">num=</span><span class="kw">length</span>(x)) } )
+  datasub1&lt;-<span class="st">  </span><span class="kw">subset</span>(datasub, yAvg<span class="op">&gt;</span><span class="dv">0</span>)
+  tempB &lt;-<span class="st"> </span><span class="kw">summaryBy</span>(yAvg   <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> datasub1,
+                     <span class="dt">FUN =</span> <span class="cf">function</span>(x) { <span class="kw">c</span>(<span class="dt">m =</span> <span class="kw">mean</span>(x)) } )
+  tempC &lt;-<span class="st"> </span><span class="kw">merge</span>(tempA,tempB,<span class="dt">all.x=</span>T)[<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>)]
+  tempC1 &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(tempC)
+  <span class="kw">return</span>(tempC1)
+}
+
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, TypeVillage <span class="op">==</span><span class="st"> </span><span class="dv">1</span>);   
+t1 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, TypeCity <span class="op">==</span><span class="st"> </span><span class="dv">1</span>);      
+t2 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, TypeCounty <span class="op">==</span><span class="st"> </span><span class="dv">1</span>);   
+t3 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, TypeMisc <span class="op">==</span><span class="st"> </span><span class="dv">1</span>);      
+t4 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, TypeSchool <span class="op">==</span><span class="st"> </span><span class="dv">1</span>);    
+t5 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, TypeTown <span class="op">==</span><span class="st"> </span><span class="dv">1</span>);      
+t6 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, Fire5 <span class="op">==</span><span class="st"> </span><span class="dv">0</span>);                      
+t7 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, Fire5 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>);                      
+t8 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, Insample<span class="op">$</span>NoClaimCredit <span class="op">==</span><span class="st"> </span><span class="dv">0</span>);
+t9 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, Insample<span class="op">$</span>NoClaimCredit <span class="op">==</span><span class="st"> </span><span class="dv">1</span>);
+t10 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+t11 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(Insample)
+
+Tablea &lt;-<span class="st"> </span><span class="kw">rbind</span>(t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11)
+Tableaa &lt;-<span class="st"> </span><span class="kw">round</span>(Tablea,<span class="dv">3</span>)
+Rowlable &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="st">&quot;Village&quot;</span>,<span class="st">&quot;City&quot;</span>,<span class="st">&quot;County&quot;</span>,<span class="st">&quot;Misc&quot;</span>,<span class="st">&quot;School&quot;</span>,
+                  <span class="st">&quot;Town&quot;</span>,<span class="st">&quot;Fire5--No&quot;</span>,<span class="st">&quot;Fire5--Yes&quot;</span>,<span class="st">&quot;NoClaimCredit--No&quot;</span>,
+                  <span class="st">&quot;NoClaimCredit--Yes&quot;</span>,<span class="st">&quot;Total&quot;</span>)
+Table4 &lt;-<span class="st"> </span><span class="kw">cbind</span>(Rowlable,<span class="kw">as.matrix</span>(Tableaa))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(Table4)</code></pre></div>
+<table style="width:72%;">
+<colgroup>
+<col width="29%" />
+<col width="15%" />
+<col width="12%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Freq.num</th>
+<th align="center">Freq.m</th>
+<th align="center">yAvg.m</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Village</td>
+<td align="center">1341</td>
+<td align="center">0.452</td>
+<td align="center">10645.206</td>
+</tr>
+<tr class="even">
+<td align="center">City</td>
+<td align="center">793</td>
+<td align="center">1.941</td>
+<td align="center">16924.035</td>
+</tr>
+<tr class="odd">
+<td align="center">County</td>
+<td align="center">328</td>
+<td align="center">4.899</td>
+<td align="center">15453.206</td>
+</tr>
+<tr class="even">
+<td align="center">Misc</td>
+<td align="center">609</td>
+<td align="center">0.186</td>
+<td align="center">43036.076</td>
+</tr>
+<tr class="odd">
+<td align="center">School</td>
+<td align="center">1597</td>
+<td align="center">1.434</td>
+<td align="center">64346.394</td>
+</tr>
+<tr class="even">
+<td align="center">Town</td>
+<td align="center">971</td>
+<td align="center">0.103</td>
+<td align="center">19831.048</td>
+</tr>
+<tr class="odd">
+<td align="center">Fire5–No</td>
+<td align="center">2508</td>
+<td align="center">0.502</td>
+<td align="center">13935.421</td>
+</tr>
+<tr class="even">
+<td align="center">Fire5–Yes</td>
+<td align="center">3131</td>
+<td align="center">1.596</td>
+<td align="center">41421.263</td>
+</tr>
+<tr class="odd">
+<td align="center">NoClaimCredit–No</td>
+<td align="center">3786</td>
+<td align="center">1.501</td>
+<td align="center">31365.085</td>
+</tr>
+<tr class="even">
+<td align="center">NoClaimCredit–Yes</td>
+<td align="center">1853</td>
+<td align="center">0.31</td>
+<td align="center">30498.714</td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center">5639</td>
+<td align="center">1.109</td>
+<td align="center">31206.155</td>
+</tr>
+</tbody>
+</table>
+<p>Table 1.8 shows claims summary by Entity Type and Alarm Credit</p>
+<p>Table 1.8</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ByVarSumm&lt;-<span class="cf">function</span>(datasub){
+  tempA &lt;-<span class="st"> </span><span class="kw">summaryBy</span>(Freq    <span class="op">~</span><span class="st"> </span>AC00 , <span class="dt">data =</span> datasub,   
+                     <span class="dt">FUN =</span> <span class="cf">function</span>(x) { <span class="kw">c</span>(<span class="dt">m =</span> <span class="kw">mean</span>(x), <span class="dt">num=</span><span class="kw">length</span>(x)) } )
+  datasub1 &lt;-<span class="st">  </span><span class="kw">subset</span>(datasub, yAvg<span class="op">&gt;</span><span class="dv">0</span>)
+  <span class="cf">if</span>(<span class="kw">nrow</span>(datasub1)<span class="op">==</span><span class="dv">0</span>) { n&lt;-<span class="kw">nrow</span>(datasub)
+    <span class="kw">return</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,n))
+  } <span class="cf">else</span> 
+  {
+    tempB &lt;-<span class="st"> </span><span class="kw">summaryBy</span>(yAvg   <span class="op">~</span><span class="st"> </span>AC00, <span class="dt">data =</span> datasub1,
+                       <span class="dt">FUN =</span> <span class="cf">function</span>(x) { <span class="kw">c</span>(<span class="dt">m =</span> <span class="kw">mean</span>(x)) } )
+    tempC &lt;-<span class="st"> </span><span class="kw">merge</span>(tempA,tempB,<span class="dt">all.x=</span>T)[<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">3</span>)]
+    tempC1 &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(tempC)
+    <span class="kw">return</span>(tempC1)
+  }
+}
+AlarmC &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">*</span>(Insample<span class="op">$</span>AC00<span class="op">==</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>(Insample<span class="op">$</span>AC05<span class="op">==</span><span class="dv">1</span>)<span class="op">+</span><span class="st"> </span><span class="dv">3</span><span class="op">*</span>(Insample<span class="op">$</span>AC10<span class="op">==</span><span class="dv">1</span>)<span class="op">+</span><span class="st"> </span><span class="dv">4</span><span class="op">*</span>(Insample<span class="op">$</span>AC15<span class="op">==</span><span class="dv">1</span>)
+ByVarCredit&lt;-<span class="cf">function</span>(ACnum){
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, TypeVillage <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>AlarmC <span class="op">==</span><span class="st"> </span>ACnum); 
+  t1 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, TypeCity <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>AlarmC <span class="op">==</span><span class="st"> </span>ACnum);      
+  t2 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, TypeCounty <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>AlarmC <span class="op">==</span><span class="st"> </span>ACnum);   
+  t3 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, TypeMisc <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>AlarmC <span class="op">==</span><span class="st"> </span>ACnum);
+  t4 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, TypeSchool <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>AlarmC <span class="op">==</span><span class="st"> </span>ACnum);    
+  t5 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, TypeTown <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>AlarmC <span class="op">==</span>ACnum);      
+  t6 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+datasub &lt;-<span class="st">  </span><span class="kw">subset</span>(Insample, AlarmC <span class="op">==</span><span class="st"> </span>ACnum);  
+  t7 &lt;-<span class="st"> </span><span class="kw">ByVarSumm</span>(datasub)
+Tablea &lt;-<span class="st"> </span><span class="kw">rbind</span>(t1,t2,t3,t4,t5,t6,t7)
+Tableaa &lt;-<span class="st"> </span><span class="kw">round</span>(Tablea,<span class="dv">3</span>)
+Rowlable &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="st">&quot;Village&quot;</span>,<span class="st">&quot;City&quot;</span>,<span class="st">&quot;County&quot;</span>,<span class="st">&quot;Misc&quot;</span>,<span class="st">&quot;School&quot;</span>,
+                  <span class="st">&quot;Town&quot;</span>,<span class="st">&quot;Total&quot;</span>)
+Table4 &lt;-<span class="st"> </span><span class="kw">cbind</span>(Rowlable,<span class="kw">as.matrix</span>(Tableaa))
+}
+Table4a &lt;-<span class="st"> </span><span class="kw">ByVarCredit</span>(<span class="dv">1</span>)    <span class="co">#Claims Summary by Entity Type and Alarm Credit==00</span>
+Table4b &lt;-<span class="st"> </span><span class="kw">ByVarCredit</span>(<span class="dv">2</span>)    <span class="co">#Claims Summary by Entity Type and Alarm Credit==05 </span>
+Table4c &lt;-<span class="st"> </span><span class="kw">ByVarCredit</span>(<span class="dv">3</span>)    <span class="co">#Claims Summary by Entity Type and Alarm Credit==10</span>
+Table4d &lt;-<span class="st"> </span><span class="kw">ByVarCredit</span>(<span class="dv">4</span>)    <span class="co">#Claims Summary by Entity Type and Alarm Credit==15</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(Table4a) <span class="co">#Claims Summary by Entity Type and Alarm Credit==00</span></code></pre></div>
+<table style="width:60%;">
+<colgroup>
+<col width="13%" />
+<col width="12%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Freq.m</th>
+<th align="center">yAvg.m</th>
+<th align="center">Freq.num</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Village</td>
+<td align="center">0.326</td>
+<td align="center">11077.997</td>
+<td align="center">829</td>
+</tr>
+<tr class="even">
+<td align="center">City</td>
+<td align="center">0.893</td>
+<td align="center">7575.979</td>
+<td align="center">244</td>
+</tr>
+<tr class="odd">
+<td align="center">County</td>
+<td align="center">2.14</td>
+<td align="center">16012.719</td>
+<td align="center">50</td>
+</tr>
+<tr class="even">
+<td align="center">Misc</td>
+<td align="center">0.117</td>
+<td align="center">15122.127</td>
+<td align="center">386</td>
+</tr>
+<tr class="odd">
+<td align="center">School</td>
+<td align="center">0.422</td>
+<td align="center">25522.708</td>
+<td align="center">294</td>
+</tr>
+<tr class="even">
+<td align="center">Town</td>
+<td align="center">0.083</td>
+<td align="center">25257.084</td>
+<td align="center">808</td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center">0.318</td>
+<td align="center">15118.491</td>
+<td align="center">2611</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(Table4b) <span class="co">#Claims Summary by Entity Type and Alarm Credit==05 </span></code></pre></div>
+<table style="width:72%;">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center"> </th>
+<th align="center">Freq.m</th>
+<th align="center">yAvg.m</th>
+<th align="center">Freq.num</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Village</td>
+<td align="center">0.278</td>
+<td align="center">8086.057</td>
+<td align="center">54</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">City</td>
+<td align="center">2.077</td>
+<td align="center">4150.125</td>
+<td align="center">13</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>t3</strong></td>
+<td align="center">County</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">Misc</td>
+<td align="center">0.278</td>
+<td align="center">13063.933</td>
+<td align="center">18</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">School</td>
+<td align="center">0.41</td>
+<td align="center">14575.003</td>
+<td align="center">122</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">Town</td>
+<td align="center">0.194</td>
+<td align="center">3937.29</td>
+<td align="center">31</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Total</td>
+<td align="center">0.431</td>
+<td align="center">10762.112</td>
+<td align="center">239</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(Table4c) <span class="co">#Claims Summary by Entity Type and Alarm Credit==10</span></code></pre></div>
+<table style="width:60%;">
+<colgroup>
+<col width="13%" />
+<col width="12%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Freq.m</th>
+<th align="center">yAvg.m</th>
+<th align="center">Freq.num</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Village</td>
+<td align="center">0.5</td>
+<td align="center">8792.376</td>
+<td align="center">50</td>
+</tr>
+<tr class="even">
+<td align="center">City</td>
+<td align="center">1.258</td>
+<td align="center">8625.169</td>
+<td align="center">31</td>
+</tr>
+<tr class="odd">
+<td align="center">County</td>
+<td align="center">2.125</td>
+<td align="center">11687.969</td>
+<td align="center">8</td>
+</tr>
+<tr class="even">
+<td align="center">Misc</td>
+<td align="center">0.077</td>
+<td align="center">3923.375</td>
+<td align="center">26</td>
+</tr>
+<tr class="odd">
+<td align="center">School</td>
+<td align="center">0.488</td>
+<td align="center">11596.912</td>
+<td align="center">168</td>
+</tr>
+<tr class="even">
+<td align="center">Town</td>
+<td align="center">0.091</td>
+<td align="center">2338.06</td>
+<td align="center">44</td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center">0.517</td>
+<td align="center">10194.094</td>
+<td align="center">327</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(Table4d) <span class="co">#Claims Summary by Entity Type and Alarm Credit==15</span></code></pre></div>
+<table style="width:60%;">
+<colgroup>
+<col width="13%" />
+<col width="12%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Freq.m</th>
+<th align="center">yAvg.m</th>
+<th align="center">Freq.num</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Village</td>
+<td align="center">0.725</td>
+<td align="center">10543.752</td>
+<td align="center">408</td>
+</tr>
+<tr class="even">
+<td align="center">City</td>
+<td align="center">2.485</td>
+<td align="center">20469.514</td>
+<td align="center">505</td>
+</tr>
+<tr class="odd">
+<td align="center">County</td>
+<td align="center">5.513</td>
+<td align="center">15475.74</td>
+<td align="center">269</td>
+</tr>
+<tr class="even">
+<td align="center">Misc</td>
+<td align="center">0.341</td>
+<td align="center">87020.878</td>
+<td align="center">179</td>
+</tr>
+<tr class="odd">
+<td align="center">School</td>
+<td align="center">2.008</td>
+<td align="center">85139.974</td>
+<td align="center">1013</td>
+</tr>
+<tr class="even">
+<td align="center">Town</td>
+<td align="center">0.261</td>
+<td align="center">9489.613</td>
+<td align="center">88</td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center">2.093</td>
+<td align="center">41458.312</td>
+<td align="center">2462</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="prerequisites.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="frequency-distributions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["R for Loss Data Analytics.pdf", "R for Loss Data Analytics.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

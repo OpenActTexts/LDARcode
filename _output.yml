@@ -26,7 +26,10 @@ bookdown::html_document2:
     in_header: header.html
   theme: default
   toc: yes
+  pandoc_args: [
+    "--number-sections",
+    "--number-offset=-1"
+  ]
   toc_float:
     collapsed: true
     smooth_scroll: false
-  number_sections: true
