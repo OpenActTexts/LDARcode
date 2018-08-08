@@ -1,5 +1,5 @@
 ---
-output: 
+output:
   html_document:
     code_folding: hide
     toc: true
@@ -9,7 +9,6 @@ output:
       "--number-offset=4"
     ]
 ---
-
 # Simulation 
 
 *This file contains illustrative **R** code for computing important count distributions. When reviewing this code, you should open an **R** session, copy-and-paste the code, and see it perform. Then, you will be able to change parameters, look up commands, and so forth, as you go. *
@@ -18,36 +17,39 @@ output:
 This section shows how to use the inversion method to simulate claims from a gamma distribution. The results below are summary statistics from the simulated data. 
 
 ```{r}
-##Simulation-gamma
+# Simulation - gamma
 library(moments)
-set.seed(2) #set seed to reproduce work 
-nTot<-20000  #number of simulations
-alpha<-2
-theta<-100
+set.seed(2)  # set seed to reproduce work 
+n_tot <- 20000  # number of simulations
+alpha <- 2
+theta <- 100
          
-Losses<-rgamma(nTot,alpha,scale = theta)  
-summary(Losses)
+losses <- rgamma(n_tot, alpha, scale = theta)  
+summary(losses)
 
-k<-0.95
-PercentileLoss<-quantile(Losses,k)     # Kth percentile of Losses 
-PercentileLoss
+k <- 0.95
+percentile_loss <- quantile(losses,k)  # Kth percentile of losses 
+percentile_loss
 
 #######################################
-#OR you can use this method to simulate losses 
-#Fx<-runif(nTot)
-#Losses<-qgamma(Fx,alpha,scale=theta)
+
+# OR you can use this method to simulate losses 
+# Fx <- runif(n_tot)
+# losses <- qgamma(Fx, alpha, scale = theta)
+
 #######################################
+
 # For the Pareto Distribution, use
-#library(VGAM)
-# nTot<-10000  #number of simulations
-# alpha<-3
-# theta<-25000
-# Losses<-rparetoII(nTot,scale=theta,shape=alpha)
-# rparetoII(nTot,scale=theta,shape=alpha) 
+# library(VGAM)
+# n_tot <- 10000  # number of simulations
+# alpha <- 3
+# theta <- 25000
+# losses <- rparetoII(n_tot, scale = theta, shape = alpha)
+# rparetoII(n_tot, scale = theta, shape = alpha) 
 ```
 A few quick notes on these commands:
 
-* The `rgamma()` function randomly generates data from the Gamma distribution.  In this illustration the data was generated from a gamma distribution with parameters `shape=alpha=2` and `scale=theta=100`. 
+* The `rgamma()` function randomly generates data from the Gamma distribution.  In this illustration the data was generated from a gamma distribution with parameters `shape = alpha = 2` and `scale = theta = 100`. 
 * The `quantile()` function provides sample quantiles corresponding to the given probabilities. Here we wanted the simulated loss data corresponding to the 95th percentile. 
 
 
@@ -56,48 +58,50 @@ A few quick notes on these commands:
 
 ```{r}
 library(pander)
-###Raw moments for k=0.5
+# Raw moments for k = 0.5
 # Theoretical 
-k<-0.5
-T0.5<-round(((theta^k)*gamma(alpha+k))/gamma(alpha),2)
+k <- 0.5
+T_0.5 <- round(((theta^k) * gamma(alpha + k)) / gamma(alpha), 2)
+
+# Simulated data raw moments
+S_0.5 <- round(moment(losses, order = k, central = FALSE), 2)
+
+
+# Raw moments for k = 1
+# Theoretical 
+k <- 1
+T_1 <- ((theta^k) * gamma(alpha + k)) / gamma(alpha)
+
+# Simulated data raw moments
+S_1 <- round(moment(losses, order = k, central = FALSE), 2)
+
+# Raw moments for k = 2
+# Theoretical 
+k <- 2
+T_2 <- ((theta^k) * gamma(alpha + k)) / gamma(alpha)
 
 #Simulated data raw moments
-S0.5<-round(moment(Losses, order = k, central = FALSE),2)
+S_2<-round(moment(losses, order = k, central = FALSE),2)
 
-
-###Raw moments for k=1
+# Raw moments for k = 3
 # Theoretical 
-k<-1
-T1<-((theta^k)*gamma(alpha+k))/gamma(alpha)
+k <- 3
+T_3<-((theta^k) * gamma(alpha + k)) / gamma(alpha)
 
-#Simulated data raw moments
-S1<-round(moment(Losses, order = k, central = FALSE),2)
+# Simulated data raw moments
+S_3 <- round(moment(losses, order = k, central = FALSE), 2)
 
-###Raw moments for k=2
+# Raw moments for k = 3
+
 # Theoretical 
-k<-2
-T2<-((theta^k)*gamma(alpha+k))/gamma(alpha)
+k <- 4
+T_4 <- ((theta^k) * gamma(alpha + k)) / gamma(alpha)
 
-#Simulated data raw moments
-S2<-round(moment(Losses, order = k, central = FALSE),2)
+# Simulated data raw moments
+S_4 <- round(moment(losses, order = k, central = FALSE), 2)
 
-###Raw moments for k=3
-# Theoretical 
-k<-3
-T3<-((theta^k)*gamma(alpha+k))/gamma(alpha)
-
-#Simulated data raw moments
-S3<-round(moment(Losses, order = k, central = FALSE),2)
-
-###Raw moments for k=3
-# Theoretical 
-k<-4
-T4<-((theta^k)*gamma(alpha+k))/gamma(alpha)
-
-#Simulated data raw moments
-S4<-round(moment(Losses, order = k, central = FALSE),2)
-
-pander(rbind(c("k",0.5,1,2,3,4),c("Theoretical",T0.5,T1,T2,T3,T4),c("Simulated",S0.5,S1,S2,S3,S4)))
+pander(rbind(c("k", 0.5, 1, 2, 3, 4), c("Theoretical", T_0.5, T_1, T_2, T_3, T_4), 
+             c("Simulated", S_0.5, S_1, S_2, S_3, S_4)))
 ```
 
 A few quick notes on these commands:
