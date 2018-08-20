@@ -1,9 +1,9 @@
-# Prerequisites
+# Prerequisites {-}
 
 Welcome to R for Loss Data Analytics. This site provides files that generate R codes to support the online text Loss Data Analytics. Within the site, there are explanations available to guide you through the specific R functions used in a certain code chunk so that you can understand what the code is doing and why we need to use such a function. In order to use this site most effectively, it is helpful to learn and understand the following programming tools in R. By having this background knowledge, you can manipulate the given code to suit your application. 
 
 ## Basic Programming Tools
-These are tools that *you should know* as you use this site. **Introduction to R** is a free course available on DataCamp that can help you understand them in detail.
+These are tools that *you should know* as you use this site. **Introduction to R** is a free course available on [DataCamp](https://www.datacamp.com/) that can help you understand them in detail.
 
 * Assign values to variables
 * Construct and select particular elements of
